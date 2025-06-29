@@ -44,7 +44,7 @@ cp .env.example .env
 4. Run the agent:
 
 ```bash
-npm run start
+npm start
 ```
 
 ## Running the agent
