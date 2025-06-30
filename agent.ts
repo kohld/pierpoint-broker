@@ -311,7 +311,6 @@ ${portfolio.history
   },
 };
 
-// --- Helper functions ---
 /**
  * Calculates the current net worth by summing the cash balance and the total value of all holdings in the portfolio.
  * Fetches the latest stock prices for each holding to ensure an up-to-date calculation.
@@ -444,7 +443,6 @@ const saveThread = async (thread: any[]) => {
     log(`❌ Failed to save thread history: ${error}`);
   }
 };
-
 
 /**
  * Updates the README.md file with the latest portfolio value, recent trades, holdings, and annualized return.
