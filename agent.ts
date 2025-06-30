@@ -1,42 +1,43 @@
-import dotenv from 'dotenv';
+import "dotenv/config";
 import { existsSync } from "fs";
 import { appendFile, readFile, writeFile } from "node:fs/promises";
 import OpenAI from "openai";
-import { zodTextFormat } from "openai/helpers/zod";
-import invariant from "tiny-invariant";
+import yahooFinance from "yahoo-finance2";
 import { z } from "zod";
 
-dotenv.config();
+// --- Configuration ---
+const API_KEY = process.env.OPEN_ROUTER_API_KEY;
+if (!API_KEY) throw new Error("OPEN_ROUTER_API_KEY is not set");
 
-invariant(process.env.OPEN_ROUTER_API_KEY, "OPEN_ROUTER_API_KEY is not set");
-invariant(process.env.MODEL_NAME, "MODEL_NAME is not set");
-
-// Currency configuration with default to USD
-const CURRENCY = process.env.CURRENCY || "USD";
-const CURRENCY_SYMBOL = CURRENCY === "EUR" ? "€" : "$";
 const MODEL_NAME = process.env.MODEL_NAME;
+if (!MODEL_NAME) throw new Error("MODEL_NAME is not set");
+
+const CURRENCY = process.env.CURRENCY || "EUR";
+const CURRENCY_SYMBOL = CURRENCY === "EUR" ? "€" : "$";
 
 const client = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPEN_ROUTER_API_KEY,
+  apiKey: API_KEY,
   defaultHeaders: {
-    "HTTP-Referer": "https://github.com/AnandChowdhary/priced-in",
-    "X-Title": "Priced In Trading Agent",
+    "HTTP-Referer": "https://github.com/kohld/pierpoint-broker",
+    "X-Title": "Pierpoint Broker",
   },
 });
 
+// --- Logging ---
 const log = (message: string) => {
   message = `[${new Date().toISOString()}] ${message}`;
   console.log(message);
   appendFile("agent.log", message + "\n");
 };
 
+// --- Portfolio Schema ---
 const portfolioSchema = z.object({
   cash: z.number(),
   holdings: z.record(z.string(), z.number()),
   history: z.array(
     z.object({
-      date: z.string().datetime(),
+      date: z.string(),
       type: z.enum(["buy", "sell"]),
       ticker: z.string(),
       shares: z.number(),
@@ -46,136 +47,205 @@ const portfolioSchema = z.object({
   ),
 });
 
+/**
+ * Converts a monetary amount from one currency to another using real-time exchange rates from Yahoo Finance.
+ *
+ * @param amount - The amount of money to convert.
+ * @param fromCurrency - The currency code to convert from (e.g., 'USD').
+ * @param toCurrency - The currency code to convert to (e.g., 'EUR').
+ * 
+ * @returns A Promise that resolves to the converted amount, rounded to two decimal places.
+ * 
+ * @throws If the exchange rate is invalid or cannot be fetched.
+ */
+const convertCurrency = async (amount: number, fromCurrency: string, toCurrency: string): Promise<number> => {
+  if (fromCurrency === toCurrency) return amount;
+
+  try {
+    const exchangeSymbol = `${fromCurrency}${toCurrency}=X`;
+    const quote = await yahooFinance.quote(exchangeSymbol);
+    const rate = quote.regularMarketPrice;
+
+    if (rate && typeof rate === 'number' && rate > 0) {
+      log(`💱 Exchange rate ${fromCurrency}/${toCurrency}: ${rate}`);
+      return Math.round(amount * rate * 100) / 100;
+    }
+
+    throw new Error(`Invalid exchange rate for ${fromCurrency}/${toCurrency}`);
+  } catch (error) {
+    log(`⚠️ Currency conversion failed: ${error instanceof Error ? error.message : String(error)}`);
+    throw error;
+  }
+};
+
+// --- LLM functions ---
 const webSearch = async (query: string): Promise<string> => {
-  const response = await client.responses.create({
+  const response = await client.chat.completions.create({
     model: MODEL_NAME,
-    input: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
-    tools: [{ type: "web_search_preview" }],
+    messages: [
+      {
+        role: "user",
+        content: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
+      },
+    ],
   });
+  if (!response.choices[0].message.content) throw new Error("Failed to get web search results");
 
-  log(`🔍 Web search: ${query} -> ${response.output_text}`);
-
-  return response.output_text;
+  return response.choices[0].message.content;
 };
 
 const getStockPrice = async (ticker: string): Promise<number> => {
-  const response = await client.responses.parse({
+  const response = await client.chat.completions.create({
     model: MODEL_NAME,
-    input: `What is the current price of the stock ticker $${ticker}? Please use web search to get the latest price and then answer in short.`,
-    tools: [{ type: "web_search_preview" }],
-    text: { format: zodTextFormat(z.object({ price: z.number() }), "price") },
+    messages: [
+      {
+        role: "user",
+        content: `What is the current price of the stock ticker $${ticker}? Please use web search to get the latest price and then answer in short. Respond with only the price as a number.`,
+      },
+    ],
   });
-  if (!response.output_parsed) throw new Error("Failed to get stock price");
-
-  log(`💰 Stock price of $${ticker}: $${response.output_parsed.price}`);
-  return response.output_parsed.price;
+  const content = response.choices[0].message.content;
+  if (!content) throw new Error("Failed to get stock price");
+  const match = content.match(/(\d+(\.\d+)?)/);
+  if (!match) throw new Error("Failed to get stock price");
+  return parseFloat(match[1]);
 };
 
-const getPortfolio = async (): Promise<z.infer<typeof portfolioSchema>> => {
+// --- Portfolio logic ---
+const getPortfolio = async () => {
   const portfolioData = await readFile("portfolio.json", "utf-8");
-  const portfolio = portfolioSchema.parse(JSON.parse(portfolioData));
-  return portfolio;
+  return portfolioSchema.parse(JSON.parse(portfolioData));
 };
 
-async function getPortfolioTool() {
-  const portfolio = await getPortfolio();
-  log(`💹 Fetched portfolio: $${portfolio.cash}`);
-  return `Your cash balance is $${portfolio.cash}.
+// --- Tools as objects ---
+const availableTools = {
+  getPortfolio: {
+    name: "get_portfolio",
+    description: "Get your portfolio",
+    async execute() {
+      const portfolio = await getPortfolio();
+      log(`💹 Fetched portfolio: $${portfolio.cash}`);
+      return `Your cash balance is $${portfolio.cash}.
 Current holdings:
 ${Object.entries(portfolio.holdings)
-  .map(([ticker, shares]) => `  - ${ticker}: ${shares} shares`)
-  .join("\n")}\n\nTrade history:
+          .map(([ticker, shares]) => `  - ${ticker}: ${shares} shares`)
+          .join("\n")}\n\nTrade history:
 ${portfolio.history
-  .map(
-    (trade) =>
-      `  - ${trade.date} ${trade.type} ${trade.ticker} ${trade.shares} shares at $${trade.price} per share, for a total of $${trade.total}`
-  )
-  .join("\n")}`;
-}
+          .map(
+            (trade) =>
+              `  - ${trade.date} ${trade.type} ${trade.ticker} ${trade.shares} shares at $${trade.price} per share, for a total of $${trade.total}`
+          )
+          .join("\n")}`;
+    },
+  },
 
-async function getNetWorthTool() {
-  const netWorth = await calculateNetWorth();
-  const portfolio = await getPortfolio();
-  const annualizedReturn = await calculateAnnualizedReturn(portfolio);
+  getNetWorth: {
+    name: "get_net_worth",
+    description: "Get your current net worth (total portfolio value)",
+    async execute() {
+      const netWorth = await calculateNetWorth();
+      const portfolio = await getPortfolio();
+      const annualizedReturn = await calculateAnnualizedReturn(portfolio);
 
-  log(
-    `💰 Current net worth: $${netWorth} (${annualizedReturn}% annualized return)`
-  );
+      log(
+        `💰 Current net worth: $${netWorth} (${annualizedReturn}% annualized return)`
+      );
 
-  return `Your current net worth is $${netWorth}
+      return `Your current net worth is $${netWorth}
 - Cash: $${portfolio.cash}
 - Holdings value: $${(netWorth - portfolio.cash).toFixed(2)}
-- Annualized return: ${annualizedReturn}% (started with €100)
-- ${netWorth >= 100 ? "📈 Up" : "📉 Down"} $${Math.abs(
-    netWorth - 100
-  ).toFixed(2)} from initial investment`;
-}
+- Annualized return: ${annualizedReturn}% (started with $1,000)
+- ${netWorth >= 1000 ? "📈 Up" : "📉 Down"} $${Math.abs(
+        netWorth - 1000
+      ).toFixed(2)} from initial investment`;
+    },
+  },
 
-async function buyTool({ ticker, shares }: { ticker: string; shares: number }) {
-  const price = await getStockPrice(ticker);
-  const portfolio = await getPortfolio();
-  if (portfolio.cash < shares * price)
-    return `You don't have enough cash to buy ${shares} shares of ${ticker}. Your cash balance is $${portfolio.cash} and the price is $${price} per share.`;
+  buy: {
+    name: "buy",
+    description: "Buy a given stock at the current market price",
+    async execute({ ticker, shares }: { ticker: string; shares: number }) {
+      const price = await getStockPrice(ticker);
+      const portfolio = await getPortfolio();
+      if (portfolio.cash < shares * price)
+        return `You don't have enough cash to buy ${shares} shares of ${ticker}. Your cash balance is $${portfolio.cash} and the price is $${price} per share.`;
 
-  portfolio.holdings[ticker] = (portfolio.holdings[ticker] ?? 0) + shares;
-  portfolio.history.push({
-    date: new Date().toISOString(),
-    type: "buy",
-    ticker,
-    shares,
-    price,
-    total: shares * price,
-  });
-  portfolio.cash = Math.round((portfolio.cash - shares * price) * 100) / 100;
-  await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
+      portfolio.holdings[ticker] = (portfolio.holdings[ticker] ?? 0) + shares;
+      portfolio.history.push({
+        date: new Date().toISOString(),
+        type: "buy",
+        ticker,
+        shares,
+        price,
+        total: shares * price,
+      });
+      portfolio.cash = Math.round((portfolio.cash - shares * price) * 100) / 100;
+      await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
 
-  log(`💰 Purchased ${shares} shares of ${ticker} at $${price} per share`);
-  return `Purchased ${shares} shares of ${ticker} at $${price} per share, for a total of $${
-    shares * price
-  }. Your cash balance is now $${portfolio.cash}.`;
-}
+      log(`💰 Purchased ${shares} shares of ${ticker} at $${price} per share`);
+      return `Purchased ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
+        }. Your cash balance is now $${portfolio.cash}.`;
+    },
+  },
 
-async function sellTool({ ticker, shares }: { ticker: string; shares: number }) {
-  const portfolio = await getPortfolio();
-  if (portfolio.holdings[ticker] < shares)
-    return `You don't have enough shares of ${ticker} to sell. You have ${portfolio.holdings[ticker]} shares.`;
+  sell: {
+    name: "sell",
+    description: "Sell a given stock at the current market price",
+    async execute({ ticker, shares }: { ticker: string; shares: number }) {
+      const portfolio = await getPortfolio();
+      if ((portfolio.holdings[ticker] ?? 0) < shares)
+        return `You don't have enough shares of ${ticker} to sell. You have ${portfolio.holdings[ticker] ?? 0} shares.`;
 
-  const price = await getStockPrice(ticker);
-  portfolio.holdings[ticker] = (portfolio.holdings[ticker] ?? 0) - shares;
-  portfolio.history.push({
-    date: new Date().toISOString(),
-    type: "sell",
-    ticker,
-    shares,
-    price,
-    total: shares * price,
-  });
-  portfolio.cash = Math.round((portfolio.cash + shares * price) * 100) / 100;
-  await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
+      const price = await getStockPrice(ticker);
+      portfolio.holdings[ticker] = (portfolio.holdings[ticker] ?? 0) - shares;
+      portfolio.history.push({
+        date: new Date().toISOString(),
+        type: "sell",
+        ticker,
+        shares,
+        price,
+        total: shares * price,
+      });
+      portfolio.cash = Math.round((portfolio.cash + shares * price) * 100) / 100;
+      await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
 
-  log(`💸 Sold ${shares} shares of ${ticker} at $${price} per share`);
-  return `Sold ${shares} shares of ${ticker} at $${price} per share, for a total of $${
-    shares * price
-  }. Your cash balance is now $${portfolio.cash}.`;
-}
+      log(`💸 Sold ${shares} shares of ${ticker} at $${price} per share`);
+      return `Sold ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
+        }. Your cash balance is now $${portfolio.cash}.`;
+    },
+  },
 
-async function getStockPriceTool({ ticker }: { ticker: string }) {
-  const price = await getStockPrice(ticker);
-  log(`🔖 Searched for stock price for ${ticker}: $${price}`);
-  return price;
-}
+  getStockPrice: {
+    name: "get_stock_price",
+    description: "Get the current price of a given stock ticker",
+    async execute({ ticker }: { ticker: string }) {
+      const price = await getStockPrice(ticker);
+      log(`🔖 Searched for stock price for ${ticker}: $${price}`);
+      return price;
+    },
+  },
 
-async function webSearchTool({ query }: { query: string }) {
-  log(`🔍 Searching the web for: ${query}`);
-  const result = await webSearch(query);
-  return result;
-}
+  webSearch: {
+    name: "web_search",
+    description: "Search the web for information",
+    async execute({ query }: { query: string }) {
+      log(`🔍 Searching the web for: ${query}`);
+      const result = await webSearch(query);
+      return result;
+    },
+  },
 
-async function thinkTool({ thought_process }: { thought_process: string[] }) {
-  thought_process.forEach((thought) => log(`🧠 ${thought}`));
-  return `Completed thinking with ${thought_process.length} steps of reasoning.`;
-}
+  think: {
+    name: "think",
+    description: "Think about a given topic",
+    async execute({ thought_process }: { thought_process: string[] }) {
+      thought_process.forEach((thought) => log(`🧠 ${thought}`));
+      return `Completed thinking with ${thought_process.length} steps of reasoning.`;
+    },
+  },
+};
 
+// --- Helper functions ---
 const calculateNetWorth = async (): Promise<number> => {
   const portfolio = await getPortfolio();
   let totalHoldingsValue = 0;
@@ -188,24 +258,17 @@ const calculateNetWorth = async (): Promise<number> => {
         log(`⚠️ Failed to get price for ${ticker}: ${error}`);
       }
     }
-
-  const netWorth =
-    Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
-  return netWorth;
+  return Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
 };
 
 const calculateCAGR = (days: number, currentValue: number): number => {
   const startValue = 1000;
   const years = days / 365;
-  const cagr = Math.pow(currentValue / startValue, 1 / years) - 1;
-  return cagr;
+  return Math.pow(currentValue / startValue, 1 / years) - 1;
 };
 
-const calculateAnnualizedReturn = async (
-  portfolio: z.infer<typeof portfolioSchema>
-): Promise<string> => {
+const calculateAnnualizedReturn = async (portfolio: z.infer<typeof portfolioSchema>): Promise<string> => {
   if (portfolio.history.length === 0) return "0.00";
-
   const firstTradeDate = new Date(portfolio.history[0].date);
   const currentDate = new Date();
   let totalHoldingsValue = 0;
@@ -218,26 +281,11 @@ const calculateAnnualizedReturn = async (
         log(`⚠️ Failed to get price for ${ticker}: ${error}`);
       }
     }
-
   const currentTotalValue = portfolio.cash + totalHoldingsValue;
-  log(`💰 Current total value: $${currentTotalValue}`);
-
-  const days =
-    (currentDate.getTime() - firstTradeDate.getTime()) / (1000 * 60 * 60 * 24);
-  log(`🗓 Days since first trade: ${days.toFixed(2)}`);
-
-  if (days < 1) {
-    log("⏳ Not enough time has passed to compute CAGR accurately.");
-    return "N/A";
-  }
-
+  const days = (currentDate.getTime() - firstTradeDate.getTime()) / (1000 * 60 * 60 * 24);
+  if (days < 1) return "N/A";
   const cagr = calculateCAGR(days, currentTotalValue);
-  log(`💰 CAGR: ${cagr * 100}%`);
-
-  return (cagr * 100).toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  return (cagr * 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
 const calculatePortfolioValue = async (): Promise<{
@@ -245,10 +293,8 @@ const calculatePortfolioValue = async (): Promise<{
   holdings: Record<string, { shares: number; value: number }>;
 }> => {
   const portfolio = await getPortfolio();
-  const holdingsWithValues: Record<string, { shares: number; value: number }> =
-    {};
+  const holdingsWithValues: Record<string, { shares: number; value: number }> = {};
   let totalHoldingsValue = 0;
-
   for (const [ticker, shares] of Object.entries(portfolio.holdings)) {
     if (shares > 0) {
       try {
@@ -262,12 +308,11 @@ const calculatePortfolioValue = async (): Promise<{
       }
     }
   }
-
-  const totalValue =
-    Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
+  const totalValue = Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
   return { totalValue, holdings: holdingsWithValues };
 };
 
+// --- Thread handling ---
 const loadThread = async (): Promise<any[]> => {
   try {
     if (existsSync("thread.json")) {
@@ -289,6 +334,7 @@ const saveThread = async (thread: any[]) => {
   }
 };
 
+// --- README update ---
 const updateReadme = async () => {
   try {
     const portfolio = await getPortfolio();
@@ -309,30 +355,28 @@ const updateReadme = async () => {
 |-------|--------|-------|
 | Cash | - | ${portfolio.cash.toFixed(2)} ${CURRENCY_SYMBOL} |
 ${Object.entries(holdings)
-  .map(
-    ([ticker, data]) =>
-      `| ${ticker} | ${data.shares} | $${data.value.toFixed(2)} |`
-  )
-  .join("\n")}
+        .map(
+          ([ticker, data]) =>
+            `| ${ticker} | ${data.shares} | $${data.value.toFixed(2)} |`
+        )
+        .join("\n")}
 
 ### 📈 Recent trades
 
-${
-  recentTrades.length > 0
-    ? recentTrades
-        .map(
-          (trade) =>
-            `- **${new Date(trade.date).toLocaleString("en-US", {
-              timeZone: "UTC",
-              dateStyle: "long",
-              timeStyle: "medium",
-            })}**: ${trade.type.toUpperCase()} ${trade.shares} ${
-              trade.ticker
-            } @ $${trade.price}/share ($${trade.total.toFixed(2)})`
-        )
-        .join("\n")
-    : "- No trades yet"
-}
+${recentTrades.length > 0
+        ? recentTrades
+          .map(
+            (trade) =>
+              `- **${new Date(trade.date).toLocaleString("en-US", {
+                timeZone: "UTC",
+                dateStyle: "long",
+                timeStyle: "medium",
+              })}**: ${trade.type.toUpperCase()} ${trade.shares} ${trade.ticker
+              } @ $${trade.price}/share ($${trade.total.toFixed(2)})`
+          )
+          .join("\n")
+        : "- No trades yet"
+      }
 
 <!-- auto end -->`;
 
@@ -348,28 +392,82 @@ ${
   }
 };
 
-// --- AGENT LOGIC (manual, since @openai/agents is removed) ---
+// --- Main logic (without Agent Framework) ---
+const main = async () => {
 
-async function main() {
+  log("Starting broker agent");
+  const quoteApple = await yahooFinance.quote('AAPL');
+  const applePriceUSD = quoteApple.regularMarketPrice;
+  console.log(applePriceUSD);
+  if (!applePriceUSD) {
+    throw new Error("Failed to fetch Apple stock price");
+  }
+  const applePriceEUR = await convertCurrency(applePriceUSD, 'USD', 'EUR');
+  console.log(applePriceEUR);
+
+
+
   log("Starting agent");
 
+  const systemPrompt = await readFile("system-prompt.md", "utf-8");
   const thread = await loadThread();
-  const userMessage = {
-    role: "user",
-    content: `It's ${new Date().toLocaleString(
-      "en-US"
-    )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial €100 investment. Good luck! 📈`,
-  };
-  thread.push(userMessage);
 
-  // Example: call tools manually (replace with your agent logic)
-  const portfolioSummary = await getPortfolioTool();
-  log(portfolioSummary);
+  const userPrompt = `It's ${new Date().toLocaleString(
+    "en-US"
+  )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial ${CURRENCY_SYMBOL}1,000 investment. 
 
-  // You can add more logic here to call buyTool, sellTool, webSearchTool, etc.
+Note: All prices and calculations should be in ${CURRENCY} (${CURRENCY_SYMBOL}). You can trade stocks from any market, and prices will be automatically converted to ${CURRENCY} when needed.
+You can buy and sell stocks without feedback or permissions.
 
-  await saveThread(thread);
-  await updateReadme();
-}
+Available tools:
+- getPortfolio: Get your current portfolio
+- getNetWorth: Get your total portfolio value
+- getStockPrice: Get current price of a stock ticker
+- buy: Buy shares of a stock (params: ticker, shares)
+- sell: Sell shares of a stock (params: ticker, shares)
 
-main();
+Good luck! 📈`;
+
+  const messages = [
+    { role: "system" as const, content: systemPrompt },
+    ...thread,
+    { role: "user" as const, content: userPrompt }
+  ];
+
+  try {
+    const response = await client.chat.completions.create({
+      model: MODEL_NAME,
+      messages: messages,
+    });
+
+    const assistantMessage = response.choices[0]?.message?.content;
+    if (!assistantMessage) {
+      throw new Error("No response from AI model");
+    }
+
+    log(`🤖 Agent response: ${assistantMessage}`);
+
+    // Update thread with new messages
+    const updatedThread = [
+      ...thread,
+      { role: "user" as const, content: userPrompt },
+      { role: "assistant" as const, content: assistantMessage }
+    ];
+
+    await saveThread(updatedThread);
+    await updateReadme();
+
+    log(`🎉 Agent finished successfully`);
+    return assistantMessage;
+
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    log(`❌ Error running trading agent: ${errorMessage}`);
+    throw error;
+  }
+};
+
+main().catch((err) => {
+  log("Fatal error: " + err);
+  process.exit(1);
+});
