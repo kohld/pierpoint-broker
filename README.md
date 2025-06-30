@@ -99,8 +99,11 @@ The agent is configured to run automatically on weekdays during stock market hou
 
 1. Fork this repository
 2. Go to Settings → Secrets and variables → Actions
-3. Add a new repository secret named `XXX_XXX_KEY` with your OpenAI API key
-4. The agent will now run automatically on weekdays during stock market hours
+3. Add a new repository secret named `OPEN_ROUTER_API_KEY` with your OpenRouter API key
+4. Add a new repository secret named `MODEL_NAME` with your OpenRouter model name
+5. Add a new repository secret named `CURRENCY` with your currency (default: `EUR`)
+6. Add a new repository secret named `ORDER_FEE` with your order fee (default: `1.00`)
+7. The agent will now run automatically on weekdays during stock market hours
 
 You can also trigger a manual run from the Actions tab in your GitHub repository.
 
