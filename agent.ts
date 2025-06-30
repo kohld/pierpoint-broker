@@ -1,3 +1,10 @@
+/**
+ * @file agent.ts
+ * @author Dennes Kohl
+ * @description Main logic for the Pierpoint Broker agent.
+ * @license MIT
+ * @copyright 2025 Dennes Kohl
+ */
 import "dotenv/config";
 import { existsSync } from "fs";
 import { appendFile, readFile, writeFile } from "node:fs/promises";
