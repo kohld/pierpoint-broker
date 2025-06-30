@@ -104,7 +104,15 @@ const convertCurrency = async (amount: number, fromCurrency: string, toCurrency:
   }
 };
 
-// --- LLM functions ---
+/**
+ * Performs a web search to answer a user query.
+ * 
+ * @param {string} query - The user query to answer.
+ * 
+ * @returns {Promise<string>} A Promise that resolves to a short summary in markdown of what was found.
+ * 
+ * @throws If the web search fails.
+ */
 const webSearch = async (query: string): Promise<string> => {
   const response = await client.chat.completions.create({
     model: config.MODEL_NAME,
@@ -120,6 +128,15 @@ const webSearch = async (query: string): Promise<string> => {
   return response.choices[0].message.content;
 };
 
+/**
+ * Retrieves the current price of a stock ticker.
+ * 
+ * @param {string} ticker - The stock ticker symbol.
+ * 
+ * @returns {Promise<number>} A Promise that resolves to the current price of the stock.
+ * 
+ * @throws If the stock price cannot be retrieved.
+ */
 const getStockPrice = async (ticker: string): Promise<number> => {
   const response = await client.chat.completions.create({
     model: config.MODEL_NAME,
