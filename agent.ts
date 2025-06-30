@@ -168,7 +168,7 @@ const getStockPrice = async (ticker: string): Promise<number> => {
  *
  * @returns {Promise<Portfolio>} The current portfolio object.
  */
-const getPortfolio = async () => {
+const getPortfolio = async (): Promise<z.infer<typeof portfolioSchema>> => {
   const portfolioData = await readFile("portfolio.json", "utf-8");
   return portfolioSchema.parse(JSON.parse(portfolioData));
 };
@@ -191,7 +191,7 @@ const getPortfolio = async () => {
  *   await availableTools.buy.execute({ ticker: 'AAPL', shares: 10 });
  */
 const availableTools = {
-  getPortfolio: {
+  getPortfolioTool: {
     name: "get_portfolio",
     description: "Get your portfolio",
     async execute() {
@@ -210,8 +210,7 @@ ${portfolio.history
           .join("\n")}`;
     },
   },
-
-  getNetWorth: {
+  getNetWorthTool: {
     name: "get_net_worth",
     description: "Get your current net worth (total portfolio value)",
     async execute() {
@@ -232,8 +231,7 @@ ${portfolio.history
       ).toFixed(2)} from initial investment`;
     },
   },
-
-  buy: {
+  buyTool: {
     name: "buy",
     description: "Buy a given stock at the current market price",
     async execute({ ticker, shares }: { ticker: string; shares: number }) {
@@ -259,8 +257,7 @@ ${portfolio.history
         }. Your cash balance is now $${portfolio.cash}.`;
     },
   },
-
-  sell: {
+  sellTool: {
     name: "sell",
     description: "Sell a given stock at the current market price",
     async execute({ ticker, shares }: { ticker: string; shares: number }) {
@@ -286,8 +283,7 @@ ${portfolio.history
         }. Your cash balance is now $${portfolio.cash}.`;
     },
   },
-
-  getStockPrice: {
+  getStockPriceTool: {
     name: "get_stock_price",
     description: "Get the current price of a given stock ticker",
     async execute({ ticker }: { ticker: string }) {
@@ -296,8 +292,7 @@ ${portfolio.history
       return price;
     },
   },
-
-  webSearch: {
+  webSearchTool: {
     name: "web_search",
     description: "Search the web for information",
     async execute({ query }: { query: string }) {
@@ -306,8 +301,7 @@ ${portfolio.history
       return result;
     },
   },
-
-  think: {
+  thinkTool: {
     name: "think",
     description: "Think about a given topic",
     async execute({ thought_process }: { thought_process: string[] }) {
@@ -546,11 +540,13 @@ Note: All prices and calculations should be in ${config.CURRENCY} (${CURRENCY_SY
 You can buy and sell stocks without feedback or permissions.
 
 Available tools:
-- getPortfolio: Get your current portfolio
-- getNetWorth: Get your total portfolio value
-- getStockPrice: Get current price of a stock ticker
+- get_portfolio: Get your current portfolio
+- get_net_worth: Get your total portfolio value
+- get_stock_price: Get current price of a stock ticker
 - buy: Buy shares of a stock (params: ticker, shares)
 - sell: Sell shares of a stock (params: ticker, shares)
+- web_search: Search the web for information
+- think: Think about a given topic
 
 Good luck! 📈`;
 
