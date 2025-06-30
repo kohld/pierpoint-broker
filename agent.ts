@@ -5,33 +5,59 @@ import OpenAI from "openai";
 import yahooFinance from "yahoo-finance2";
 import { z } from "zod";
 
-// --- Configuration ---
-const API_KEY = process.env.OPEN_ROUTER_API_KEY;
-if (!API_KEY) throw new Error("OPEN_ROUTER_API_KEY is not set");
+/**
+ * Configuration variables for the broker agent.
+ * These variables are required to be set in the .env file.
+ *
+ * @property {string} API_KEY - The API key for OpenRouter.
+ * @property {string} MODEL_NAME - The model name to use for the LLM.
+ * @property {string} CURRENCY - The currency to use for the portfolio.
+ * @property {string} CURRENCY_SYMBOL - The currency symbol to use for the portfolio.
+ */
+const config = {
+  API_KEY: process.env.OPEN_ROUTER_API_KEY,
+  MODEL_NAME: process.env.MODEL_NAME || "gpt-3.5-turbo",
+  CURRENCY: process.env.CURRENCY || "EUR",
+};
 
-const MODEL_NAME = process.env.MODEL_NAME;
-if (!MODEL_NAME) throw new Error("MODEL_NAME is not set");
+if (!config.API_KEY) throw new Error("OPEN_ROUTER_API_KEY is not set");
+if (!config.MODEL_NAME) throw new Error("MODEL_NAME is not set");
 
-const CURRENCY = process.env.CURRENCY || "EUR";
-const CURRENCY_SYMBOL = CURRENCY === "EUR" ? "€" : "$";
+const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
 
+/**
+ * OpenRouter client instance.
+ * Used to make API calls to OpenRouter.
+ */
 const client = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
-  apiKey: API_KEY,
+  apiKey: config.API_KEY,
   defaultHeaders: {
     "HTTP-Referer": "https://github.com/kohld/pierpoint-broker",
     "X-Title": "Pierpoint Broker",
   },
 });
 
-// --- Logging ---
+/**
+ * Logs a message to the console and appends it to the agent.log file.
+ * The message is prefixed with a timestamp.
+ *
+ * @param {string} message - The message to log.
+ */
 const log = (message: string) => {
   message = `[${new Date().toISOString()}] ${message}`;
   console.log(message);
   appendFile("agent.log", message + "\n");
 };
 
-// --- Portfolio Schema ---
+/**
+ * Zod schema for validating the portfolio object.
+ * Defines the expected structure of the portfolio data.
+ *
+ * @property {number} cash - The amount of cash in the portfolio.
+ * @property {Record<string, number>} holdings - A record of stock holdings, where keys are ticker symbols and values are the number of shares.
+ * @property {Array<Trade>} history - An array of trade history objects.
+ */
 const portfolioSchema = z.object({
   cash: z.number(),
   holdings: z.record(z.string(), z.number()),
@@ -81,7 +107,7 @@ const convertCurrency = async (amount: number, fromCurrency: string, toCurrency:
 // --- LLM functions ---
 const webSearch = async (query: string): Promise<string> => {
   const response = await client.chat.completions.create({
-    model: MODEL_NAME,
+    model: config.MODEL_NAME,
     messages: [
       {
         role: "user",
@@ -96,7 +122,7 @@ const webSearch = async (query: string): Promise<string> => {
 
 const getStockPrice = async (ticker: string): Promise<number> => {
   const response = await client.chat.completions.create({
-    model: MODEL_NAME,
+    model: config.MODEL_NAME,
     messages: [
       {
         role: "user",
@@ -111,13 +137,35 @@ const getStockPrice = async (ticker: string): Promise<number> => {
   return parseFloat(match[1]);
 };
 
-// --- Portfolio logic ---
+/**
+ * Retrieves the current portfolio data from the portfolio.json file.
+ * Parses the JSON content and validates it against the portfolio schema.
+ * Returns the parsed portfolio object.
+ *
+ * @returns {Promise<Portfolio>} The current portfolio object.
+ */
 const getPortfolio = async () => {
   const portfolioData = await readFile("portfolio.json", "utf-8");
   return portfolioSchema.parse(JSON.parse(portfolioData));
 };
 
-// --- Tools as objects ---
+/**
+ * An object containing all available tools (actions) the broker agent can perform.
+ * Each tool is represented as an object with a name, description, and an execute function.
+ * Tools include portfolio management, trading actions, information retrieval, and reasoning steps.
+ *
+ * Structure:
+ * {
+ *   [toolKey: string]: {
+ *     name: string; // The name of the tool (for API or UI use)
+ *     description: string; // A short description of what the tool does
+ *     execute: Function; // The function to call to perform the tool's action
+ *   }
+ * }
+ *
+ * Example usage:
+ *   await availableTools.buy.execute({ ticker: 'AAPL', shares: 10 });
+ */
 const availableTools = {
   getPortfolio: {
     name: "get_portfolio",
@@ -246,6 +294,13 @@ ${portfolio.history
 };
 
 // --- Helper functions ---
+/**
+ * Calculates the current net worth by summing the cash balance and the total value of all holdings in the portfolio.
+ * Fetches the latest stock prices for each holding to ensure an up-to-date calculation.
+ * Logs a warning if a stock price cannot be fetched.
+ *
+ * @returns {Promise<number>} The total net worth, rounded to two decimal places.
+ */
 const calculateNetWorth = async (): Promise<number> => {
   const portfolio = await getPortfolio();
   let totalHoldingsValue = 0;
@@ -261,12 +316,27 @@ const calculateNetWorth = async (): Promise<number> => {
   return Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
 };
 
+/**
+ * Calculates the Compound Annual Growth Rate (CAGR) based on the number of days and the current value.
+ * 
+ * @param {number} days - The number of days since the initial investment.
+ * @param {number} currentValue - The current value of the investment.
+ * 
+ * @returns {number} The CAGR as a percentage.
+ */
 const calculateCAGR = (days: number, currentValue: number): number => {
   const startValue = 1000;
   const years = days / 365;
   return Math.pow(currentValue / startValue, 1 / years) - 1;
 };
 
+/**
+ * Calculates the annualized return based on the portfolio's history.
+ * 
+ * @param {z.infer<typeof portfolioSchema>} portfolio - The portfolio object containing the history of trades.
+ * 
+ * @returns {Promise<string>} The annualized return as a formatted string.
+ */
 const calculateAnnualizedReturn = async (portfolio: z.infer<typeof portfolioSchema>): Promise<string> => {
   if (portfolio.history.length === 0) return "0.00";
   const firstTradeDate = new Date(portfolio.history[0].date);
@@ -288,6 +358,15 @@ const calculateAnnualizedReturn = async (portfolio: z.infer<typeof portfolioSche
   return (cagr * 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
+/**
+ * Calculates the current portfolio value by summing the cash balance and the total value of all holdings.
+ * Fetches the latest stock prices for each holding to ensure an up-to-date calculation.
+ * Logs a warning if a stock price cannot be fetched.
+ *
+ * @returns {Promise<{ totalValue: number; holdings: Record<string, { shares: number; value: number }> }>}
+ * - totalValue: The total portfolio value, rounded to two decimal places.
+ * - holdings: An object mapping stock tickers to their current holdings (shares and value).
+ */
 const calculatePortfolioValue = async (): Promise<{
   totalValue: number;
   holdings: Record<string, { shares: number; value: number }>;
@@ -312,7 +391,14 @@ const calculatePortfolioValue = async (): Promise<{
   return { totalValue, holdings: holdingsWithValues };
 };
 
-// --- Thread handling ---
+/**
+ * Loads the chat thread from the thread.json file.
+ * If the file exists, it reads the JSON content and returns the last 1000 messages.
+ * If the file does not exist, it returns an empty array.
+ * Logs a warning if the file cannot be read.
+ *
+ * @returns {Promise<any[]>} The chat thread messages.
+ */
 const loadThread = async (): Promise<any[]> => {
   try {
     if (existsSync("thread.json")) {
@@ -325,6 +411,13 @@ const loadThread = async (): Promise<any[]> => {
   return [];
 };
 
+/**
+ * Saves the chat thread to the thread.json file.
+ * Overwrites the existing file with the new thread data.
+ * Logs a message when the thread is saved.
+ *
+ * @param {any[]} thread - The chat thread messages to save.
+ */
 const saveThread = async (thread: any[]) => {
   try {
     await writeFile("thread.json", JSON.stringify(thread, null, 2));
@@ -334,7 +427,12 @@ const saveThread = async (thread: any[]) => {
   }
 };
 
-// --- README update ---
+
+/**
+ * Updates the README.md file with the latest portfolio value, recent trades, holdings, and annualized return.
+ * Fetches the current portfolio and calculates up-to-date statistics, then rewrites the relevant section in the README.
+ * Logs an error if the update process fails at any step.
+ */
 const updateReadme = async () => {
   try {
     const portfolio = await getPortfolio();
@@ -392,7 +490,11 @@ ${recentTrades.length > 0
   }
 };
 
-// --- Main logic (without Agent Framework) ---
+/**
+ * Main function that runs the broker agent.
+ * Fetches the current portfolio, updates the README with the portfolio value,
+ * and logs the starting message.
+ */
 const main = async () => {
 
   log("Starting broker agent");
@@ -416,7 +518,7 @@ const main = async () => {
     "en-US"
   )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial ${CURRENCY_SYMBOL}1,000 investment. 
 
-Note: All prices and calculations should be in ${CURRENCY} (${CURRENCY_SYMBOL}). You can trade stocks from any market, and prices will be automatically converted to ${CURRENCY} when needed.
+Note: All prices and calculations should be in ${config.CURRENCY} (${CURRENCY_SYMBOL}). You can trade stocks from any market, and prices will be automatically converted to ${config.CURRENCY} when needed.
 You can buy and sell stocks without feedback or permissions.
 
 Available tools:
@@ -436,7 +538,7 @@ Good luck! 📈`;
 
   try {
     const response = await client.chat.completions.create({
-      model: MODEL_NAME,
+      model: config.MODEL_NAME,
       messages: messages,
     });
 
