@@ -512,7 +512,7 @@ ${recentTrades.length > 0
  * and logs the starting message.
  */
 const main = async () => {
-
+  /*
   log("Starting broker agent");
   const quoteApple = await yahooFinance.quote('AAPL');
   const applePriceUSD = quoteApple.regularMarketPrice;
@@ -522,8 +522,7 @@ const main = async () => {
   }
   const applePriceEUR = await convertCurrency(applePriceUSD, 'USD', 'EUR');
   console.log(applePriceEUR);
-
-
+  */
 
   log("Starting agent");
 
@@ -536,15 +535,6 @@ const main = async () => {
 
 Note: All prices and calculations should be in ${config.CURRENCY} (${CURRENCY_SYMBOL}). You can trade stocks from any market, and prices will be automatically converted to ${config.CURRENCY} when needed.
 You can buy and sell stocks without feedback or permissions.
-
-Available tools:
-- get_portfolio: Get your current portfolio
-- get_net_worth: Get your total portfolio value
-- get_stock_price: Get current price of a stock ticker
-- buy: Buy shares of a stock (params: ticker, shares)
-- sell: Sell shares of a stock (params: ticker, shares)
-- web_search: Search the web for information
-- think: Think about a given topic
 
 Good luck! 📈`;
 
