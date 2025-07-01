@@ -145,20 +145,15 @@ const webSearch = async (query: string): Promise<string> => {
  * @throws If the stock price cannot be retrieved.
  */
 const getStockPrice = async (ticker: string): Promise<number> => {
-  const response = await client.chat.completions.create({
-    model: config.MODEL_NAME,
-    messages: [
-      {
-        role: "user",
-        content: `What is the current price of the stock ticker $${ticker}? Please use web search to get the latest price and then answer in short. Respond with only the price as a number.`,
-      },
-    ],
-  });
-  const content = response.choices[0].message.content;
-  if (!content) throw new Error("Failed to get stock price");
-  const match = content.match(/(\d+(\.\d+)?)/);
-  if (!match) throw new Error("Failed to get stock price");
-  return parseFloat(match[1]);
+  const quote = await yahooFinance.quote(ticker);
+  const priceUSD = quote.regularMarketPrice;
+  console.log(priceUSD);
+  if (!priceUSD) {
+    throw new Error("Failed to fetch stock price");
+  }
+  const priceEUR = await convertCurrency(priceUSD, 'USD', 'EUR');
+
+  return priceEUR;
 };
 
 /**
@@ -512,18 +507,6 @@ ${recentTrades.length > 0
  * and logs the starting message.
  */
 const main = async () => {
-  /*
-  log("Starting broker agent");
-  const quoteApple = await yahooFinance.quote('AAPL');
-  const applePriceUSD = quoteApple.regularMarketPrice;
-  console.log(applePriceUSD);
-  if (!applePriceUSD) {
-    throw new Error("Failed to fetch Apple stock price");
-  }
-  const applePriceEUR = await convertCurrency(applePriceUSD, 'USD', 'EUR');
-  console.log(applePriceEUR);
-  */
-
   log("Starting agent");
 
   const systemPrompt = await readFile("system-prompt.md", "utf-8");
