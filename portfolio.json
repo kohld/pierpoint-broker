@@ -1,5 +1,16 @@
 {
-    "cash": 1000,
-    "holdings": {},
-    "history": []
+  "cash": 16,
+  "holdings": {
+    "AAPL": 3
+  },
+  "history": [
+    {
+      "date": "2025-06-29T11:59:26.547Z",
+      "type": "buy",
+      "ticker": "AAPL",
+      "shares": 3,
+      "price": 42,
+      "total": 126
+    }
+  ]
 }
