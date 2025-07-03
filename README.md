@@ -3,19 +3,19 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 <!-- auto start -->
-
-## 💰 Portfolio value: 1,000.00 € | (0.00% CAGR)
+        
+## 💰 Portfolio value: 556.39 € | (-100.00% CAGR)
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 1000.00 € |
-
+| Cash | - | 16.00 € |
+| AAPL | 3 | $540.39 |
 
 ### 📈 Recent trades
 
-- No trades yet
+- **June 29, 2025 at 11:59:26 AM**: BUY 3 AAPL @ $42/share ($126.00)
 
 <!-- auto end -->
 
