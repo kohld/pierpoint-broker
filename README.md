@@ -2,6 +2,19 @@
 
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
+## Table of Contents
+
+- [💰 Portfolio value](#-portfolio-value)
+  - [📊 Holdings](#-holdings)
+  - [📈 Recent trades](#-recent-trades)
+- [🛠️ Installation](#️-installation)
+- [Running the agent](#running-the-agent)
+  - [Local execution](#local-execution)
+  - [Automated execution via GitHub Actions](#automated-execution-via-github-actions)
+    - [⚠️ IMPORTANT: Model Selection for OpenRouter](#️-important-model-selection-for-openrouter-️)
+- [⚠️ Disclaimer](#️-disclaimer)
+- [License](#license)
+
 <!-- auto start -->
         
 ## 💰 Portfolio value: 558.37 € | (-100.00% CAGR)
@@ -107,11 +120,25 @@ The agent is configured to run automatically on weekdays during stock market hou
 
 You can also trigger a manual run from the Actions tab in your GitHub repository.
 
+---
+
+#### ⚠️ **IMPORTANT: Model Selection for OpenRouter** ⚠️
+
+> **WARNING:**
+> To use this project with OpenRouter, you **must** select a model that supports tools! If you choose a model that does **not** support tools, your API requests will fail with a `404` error.
+>
+> **Please check the list of supported models here:**
+> [https://openrouter.ai/models/?supported_parameters=tools](https://openrouter.ai/models/?supported_parameters=tools)
+>
+> Ensure your `MODEL_NAME` matches one of these models.
+
+---
+
 ## ⚠️ Disclaimer
 
 This is an experimental AI trading agent for educational purposes. Real trading involves significant risk. Never invest money you cannot afford to lose.
 
-## 📄 License
+## License
 
 The idea and foundational components of this project are based on work by [Anand Chowdhary](https://anandchowdhary.com) and the [priced-in](https://github.com/AnandChowdhary/priced-in) project. The original project is also distributed under the MIT License. This project continues to honor the terms and spirit of the MIT License as applied to both the original and derivative works.
 
