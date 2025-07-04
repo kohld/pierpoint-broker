@@ -125,6 +125,7 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 #### **IMPORTANT: Model Selection for OpenRouter**
 
 > **WARNING:**
+>
 > To use this project with OpenRouter, you **must** select a model that supports tools! If you choose a model that does **not** support tools, your API requests will fail with a `404` error.
 >
 > **Please check the list of supported models here:**
