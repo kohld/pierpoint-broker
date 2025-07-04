@@ -4,15 +4,15 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 ## Table of Contents
 
-- [💰 Portfolio value](#-portfolio-value)
-  - [📊 Holdings](#-holdings)
-  - [📈 Recent trades](#-recent-trades)
-- [🛠️ Installation](#️-installation)
+- [Portfolio value](#-portfolio-value)
+  - [Holdings](#-holdings)
+  - [Recent trades](#-recent-trades)
+- [Installation](#installation)
 - [Running the agent](#running-the-agent)
   - [Local execution](#local-execution)
   - [Automated execution via GitHub Actions](#automated-execution-via-github-actions)
-    - [⚠️ IMPORTANT: Model Selection for OpenRouter](#️-important-model-selection-for-openrouter-️)
-- [⚠️ Disclaimer](#️-disclaimer)
+    - [IMPORTANT: Model Selection for OpenRouter](#important-model-selection-for-openrouter)
+- [Disclaimer](#disclaimer)
 - [License](#license)
 
 <!-- auto start -->
@@ -36,7 +36,7 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - [🧑‍💻 System prompt](./system-prompt.md)
 - [📁 Source code](./agent.ts)
 
-## 🛠️ Installation
+## Installation
 
 1. Clone the repository:
 
@@ -122,7 +122,7 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 
 ---
 
-#### ⚠️ **IMPORTANT: Model Selection for OpenRouter** ⚠️
+#### **IMPORTANT: Model Selection for OpenRouter**
 
 > **WARNING:**
 > To use this project with OpenRouter, you **must** select a model that supports tools! If you choose a model that does **not** support tools, your API requests will fail with a `404` error.
@@ -134,7 +134,7 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This is an experimental AI trading agent for educational purposes. Real trading involves significant risk. Never invest money you cannot afford to lose.
 
