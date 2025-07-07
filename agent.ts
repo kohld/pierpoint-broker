@@ -193,7 +193,7 @@ const getPortfolio = async (): Promise<z.infer<typeof portfolioSchema>> => {
  * await availableTools.buy.execute({ ticker: 'AAPL', shares: 10 });
  */
 const availableTools = {
-    getPortfolioTool: {
+    "get_portfolio": {
         name: "get_portfolio",
         description: "Get your portfolio",
         async execute() {
@@ -212,7 +212,7 @@ ${portfolio.history
                     .join("\n")}`;
         },
     },
-    getNetWorthTool: {
+    "get_net_worth": {
         name: "get_net_worth",
         description: "Get your current net worth (total portfolio value)",
         async execute() {
@@ -233,7 +233,7 @@ ${portfolio.history
             ).toFixed(2)} from initial investment`;
         },
     },
-    buyTool: {
+    "buy": {
         name: "buy",
         description: "Buy a given stock at the current market price",
         async execute({ ticker, shares }: { ticker: string; shares: number }) {
@@ -259,7 +259,7 @@ ${portfolio.history
                 }. Your cash balance is now $${portfolio.cash}.`;
         },
     },
-    sellTool: {
+    "sell": {
         name: "sell",
         description: "Sell a given stock at the current market price",
         async execute({ ticker, shares }: { ticker: string; shares: number }) {
@@ -285,7 +285,7 @@ ${portfolio.history
                 }. Your cash balance is now $${portfolio.cash}.`;
         },
     },
-    getStockPriceTool: {
+    "get_stock_price": {
         name: "get_stock_price",
         description: "Get the current price of a given stock ticker",
         async execute({ ticker }: { ticker: string }) {
@@ -294,7 +294,7 @@ ${portfolio.history
             return price;
         },
     },
-    webSearchTool: {
+    "web_search": {
         name: "web_search",
         description: "Search the web for information",
         async execute({ query }: { query: string }) {
@@ -303,7 +303,7 @@ ${portfolio.history
             return result;
         },
     },
-    thinkTool: {
+    "think": {
         name: "think",
         description: "Think about a given topic",
         async execute({ thought_process }: { thought_process: string[] }) {
