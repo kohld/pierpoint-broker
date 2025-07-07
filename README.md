@@ -17,14 +17,14 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
         
-## 💰 Portfolio value: 560.23 € | (-100.00% CAGR)
+## 💰 Portfolio value: 562.15 € | (-100.00% CAGR)
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
 | Cash | - | 16.00 € |
-| AAPL | 3 | $544.23 |
+| AAPL | 3 | $546.15 |
 
 ### 📈 Recent trades
 
