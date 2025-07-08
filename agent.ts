@@ -633,7 +633,18 @@ Good luck! 📈`;
                 const toolMessages: any[] = [];
                 for (const toolCall of toolCalls) {
                     const toolName = toolCall.function.name;
-                    const toolArgs = JSON.parse(toolCall.function.arguments);
+                    let toolArgs;
+                    try {
+                        toolArgs = JSON.parse(toolCall.function.arguments);
+                    } catch (parseError) {
+                        log(`❌ Failed to parse tool arguments for tool '${toolName}': ${parseError instanceof Error ? parseError.message : String(parseError)}`);
+                        log(`❌ Raw arguments string: ${toolCall.function.arguments}`);
+                        thread.push({
+                            role: "user" as const,
+                            content: `Failed to parse tool arguments for tool '${toolName}'. Raw arguments: ${toolCall.function.arguments}`
+                        });
+                        continue; // Skip this tool call and continue with the next
+                    }
 
                     if (availableTools[toolName as keyof typeof availableTools]) {
                         try {
@@ -691,7 +702,7 @@ Good luck! 📈`;
     return finalAgentResponse || "Agent finished. No specific final message provided.";
 };
 
-main(1).catch((err) => {
+main(50).catch((err) => {
     log("Fatal error: " + err);
     process.exit(1);
 });
