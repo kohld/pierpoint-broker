@@ -482,7 +482,7 @@ const updateReadme = async () => {
 ${Object.entries(holdings)
                 .map(
                     ([ticker, data]) =>
-                        `| ${ticker} | ${data.shares} | $${data.value.toFixed(2)} |`
+                        `| ${ticker} | ${data.shares} | ${data.value.toFixed(2)} ${CURRENCY_SYMBOL} |`
                 )
                 .join("\n")}
 
@@ -521,14 +521,16 @@ ${recentTrades.length > 0
  * Main function that runs the broker agent.
  * Fetches the current portfolio, updates the README with the portfolio value,
  * and logs the starting message.
+ *
+ * @param {number} [maxTurns=10] - The maximum number of turns (API calls + tool executions) the agent can perform.
  */
-const main = async () => {
+const main = async (maxTurns: number = 10) => {
     log("Starting agent");
 
     const systemPrompt = await readFile("system-prompt.md", "utf-8");
-    const thread = await loadThread();
+    let thread = await loadThread();
 
-    const userPrompt = `It's ${new Date().toLocaleString(
+    const initialUserPrompt = `It's ${new Date().toLocaleString(
         "en-US"
     )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial ${CURRENCY_SYMBOL}1,000 investment. 
 
@@ -536,20 +538,16 @@ Note: All prices and calculations should be in ${config.CURRENCY} (${CURRENCY_SY
 You can buy and sell stocks without feedback or permissions.
 
 Good luck! 📈`;
+    const userPromptExists = thread.some((msg: any) => msg.role === "user" && msg.content === initialUserPrompt);
+    if (!userPromptExists) {
+        thread.push({ role: "user" as const, content: initialUserPrompt });
+    }
 
-    const messages = [
-        { role: "system" as const, content: systemPrompt },
-        ...thread,
-        { role: "user" as const, content: userPrompt }
-    ];
-
-    // Map the availableTools to the format expected by the OpenAI API
     const tools = Object.values(availableTools).map(tool => ({
         type: "function" as const,
         function: {
             name: tool.name,
             description: tool.description,
-            // Define parameters based on the tool's execute function
             parameters: (() => {
                 if (tool.name === "buy" || tool.name === "sell") {
                     return {
@@ -561,6 +559,7 @@ Good luck! 📈`;
                         required: ["ticker", "shares"],
                     };
                 } else if (tool.name === "get_stock_price" || tool.name === "web_search") {
+                    // ToDo: split into two tools and get_stock_price should get ticker (like buy or sell)
                     return {
                         type: "object",
                         properties: {
@@ -582,99 +581,110 @@ Good luck! 📈`;
                         properties: {},
                     };
                 }
-                // Fallback for any other tools that might not have specific parameter definitions
                 return { type: "object", properties: {} };
             })(),
         },
     }));
 
-    try {
-        const response = await client.chat.completions.create({
-            model: config.MODEL_NAME,
-            messages: messages,
-            tools: tools,
-        });
+    let currentTurn = 0;
+    let finalAgentResponse: string | null = null;
 
-        const assistantMessage = response.choices[0]?.message?.content;
-        const toolCalls = response.choices[0]?.message?.tool_calls;
+    while (currentTurn < maxTurns && finalAgentResponse === null) {
+        log(`🔄 Agent Turn ${currentTurn + 1}/${maxTurns}`);
 
-        if (assistantMessage) {
-            log(`🤖 Agent response: ${assistantMessage}`);
-            // Handle the case where the assistant directly responds with text
-            const updatedThread = [
-                ...thread,
-                { role: "user" as const, content: userPrompt },
-                { role: "assistant" as const, content: assistantMessage }
-            ];
-            await saveThread(updatedThread);
-            await updateReadme();
-            log(`🎉 Agent finished successfully`);
-            return assistantMessage;
-        } else if (toolCalls && toolCalls.length > 0) {
-            log(`🛠️ Agent requested tool calls: ${JSON.stringify(toolCalls)}`);
-            const toolMessages: any[] = [];
-            for (const toolCall of toolCalls) {
-                const toolName = toolCall.function.name;
-                const toolArgs = JSON.parse(toolCall.function.arguments);
-
-                if (availableTools[toolName as keyof typeof availableTools]) {
-                    const toolResult = await availableTools[toolName as keyof typeof availableTools].execute(toolArgs);
-                    log(`✅ Tool ${toolName} executed. Result: ${toolResult}`);
-                    toolMessages.push({
-                        tool_call_id: toolCall.id,
-                        role: "tool" as const,
-                        name: toolName,
-                        content: String(toolResult),
-                    });
-                } else {
-                    log(`❌ Unknown tool: ${toolName}`);
-                    toolMessages.push({
-                        tool_call_id: toolCall.id,
-                        role: "tool" as const,
-                        name: toolName,
-                        content: `Error: Unknown tool ${toolName}`,
-                    });
-                }
-            }
-
-            // Add the tool calls and their results to the messages and make another API call
-            const updatedThread = [
-                ...thread,
-                { role: "user" as const, content: userPrompt },
-                { role: "assistant" as const, tool_calls: toolCalls },
-                ...toolMessages
+        try {
+            const messagesForCurrentTurn = [
+                { role: "system" as const, content: systemPrompt },
+                ...thread
             ];
 
-            // Make a second call to the model to get a final response based on tool results
-            const secondResponse = await client.chat.completions.create({
+            const response = await client.chat.completions.create({
                 model: config.MODEL_NAME,
-                messages: updatedThread,
+                messages: messagesForCurrentTurn,
+                tools: tools,
+                tool_choice: "auto",
             });
 
-            const finalAssistantMessage = secondResponse.choices[0]?.message?.content;
-            if (!finalAssistantMessage) {
-                throw new Error("No final response from AI model after tool execution.");
+            console.log("----------");
+            console.log("Response:");
+            console.log(response);
+            console.log("----------");
+
+            const assistantMessage = response.choices[0]?.message;
+            const content = assistantMessage?.content;
+            const toolCalls = assistantMessage?.tool_calls;
+
+            if (content && !toolCalls) {
+                log(`🤖 Agent response (final): ${content}`);
+                thread.push({ role: "assistant" as const, content: content });
+                finalAgentResponse = content;
+            } else if (toolCalls && toolCalls.length > 0) {
+                log(`🛠️ Agent requested tool calls: ${JSON.stringify(toolCalls)}`);
+
+                thread.push({ role: "assistant" as const, tool_calls: toolCalls });
+
+                const toolMessages: any[] = [];
+                for (const toolCall of toolCalls) {
+                    const toolName = toolCall.function.name;
+                    const toolArgs = JSON.parse(toolCall.function.arguments);
+
+                    if (availableTools[toolName as keyof typeof availableTools]) {
+                        try {
+                            const toolResult = await availableTools[toolName as keyof typeof availableTools].execute(toolArgs);
+                            log(`✅ Tool ${toolName} executed. Result: ${String(toolResult).substring(0, 100)}...`); // Loggt nur einen Teil des Ergebnisses
+                            toolMessages.push({
+                                tool_call_id: toolCall.id,
+                                role: "tool" as const,
+                                name: toolName,
+                                content: String(toolResult),
+                            });
+                        } catch (toolError) {
+                            log(`❌ Error executing tool ${toolName}: ${toolError instanceof Error ? toolError.message : String(toolError)}`);
+                            toolMessages.push({
+                                tool_call_id: toolCall.id,
+                                role: "tool" as const,
+                                name: toolName,
+                                content: `Error: ${toolError instanceof Error ? toolError.message : String(toolError)}`,
+                            });
+                        }
+                    } else {
+                        log(`❌ Unknown tool: ${toolName}`);
+                        toolMessages.push({
+                            tool_call_id: toolCall.id,
+                            role: "tool" as const,
+                            name: toolName,
+                            content: `Error: Unknown tool ${toolName}`,
+                        });
+                    }
+                }
+                thread.push(...toolMessages);
+            } else {
+                log("⚠️ Agent returned no content and no tool calls. Ending turn and assuming completion or error.");
+                finalAgentResponse = "Agent finished without a clear response or tool calls.";
             }
 
-            log(`🤖 Agent final response (after tools): ${finalAssistantMessage}`);
-            // Add the final assistant message to the thread
-            updatedThread.push({ role: "assistant" as const, content: finalAssistantMessage });
-            await saveThread(updatedThread);
-            await updateReadme();
-            log(`🎉 Agent finished successfully`);
-            return finalAssistantMessage;
+            currentTurn++;
 
-        } else {
-            throw new Error("No response or tool calls from AI model");
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            log(`❌ Error during agent turn: ${errorMessage}`);
+            thread.push({ role: "user" as const, content: `An error occurred: ${errorMessage}. Please review.` });
+            throw error;
         }
-    } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        log(`❌ Error running trading agent: ${errorMessage}`);
-        throw error;
     }
+
+    if (currentTurn >= maxTurns && finalAgentResponse === null) {
+        log(`⚠️ Max turns (${maxTurns}) reached without a final answer. Saving current thread and exiting.`);
+        thread.push({ role: "assistant" as const, content: `Max turns (${maxTurns}) reached. I could not provide a final answer.` });
+    }
+
+    await saveThread(thread);
+    await updateReadme();
+    log(`🎉 Agent finished successfully`);
+    return finalAgentResponse || "Agent finished. No specific final message provided.";
 };
 
-main().catch((err) => {
+main(1).catch((err) => {
     log("Fatal error: " + err);
     process.exit(1);
 });
