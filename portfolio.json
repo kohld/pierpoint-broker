@@ -1,7 +1,8 @@
 {
-  "cash": 16,
+  "cash": 13.16,
   "holdings": {
-    "AAPL": 3
+    "AAPL": 0,
+    "NVDA": 4
   },
   "history": [
     {
@@ -11,6 +12,22 @@
       "shares": 3,
       "price": 42,
       "total": 126
+    },
+    {
+      "date": "2025-07-08T13:24:07.736Z",
+      "type": "sell",
+      "ticker": "AAPL",
+      "shares": 3,
+      "price": 179.28,
+      "total": 537.84
+    },
+    {
+      "date": "2025-07-08T13:25:18.777Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 4,
+      "price": 135.17,
+      "total": 540.68
     }
   ]
 }

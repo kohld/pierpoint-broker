@@ -21,17 +21,19 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
         
-## 💰 Portfolio value: 562.15 € | (-100.00% CAGR)
+## 💰 Portfolio value: 553.84 € | (-100.00% CAGR)
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 16.00 € |
-| AAPL | 3 | $546.15 |
+| Cash | - | 13.16 € |
+| NVDA | 4 | 540.68 € |
 
 ### 📈 Recent trades
 
+- **July 8, 2025 at 1:25:18 PM**: BUY 4 NVDA @ $135.17/share ($540.68)
+- **July 8, 2025 at 1:24:07 PM**: SELL 3 AAPL @ $179.28/share ($537.84)
 - **June 29, 2025 at 11:59:26 AM**: BUY 3 AAPL @ $42/share ($126.00)
 
 <!-- auto end -->
