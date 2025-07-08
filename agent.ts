@@ -168,6 +168,7 @@ const getStockPrice = async (ticker: string): Promise<number> => {
 const getPortfolio = async (): Promise<z.infer<typeof portfolioSchema>> => {
     try {
         const portfolioData = await readFile("portfolio.json", "utf-8");
+
         return portfolioSchema.parse(JSON.parse(portfolioData));
     } catch (error) {
         log(`❌ Error reading or parsing portfolio.json: ${error instanceof Error ? error.message : String(error)}`);
@@ -199,6 +200,7 @@ const availableTools = {
         async execute() {
             const portfolio = await getPortfolio();
             log(`💹 Fetched portfolio: $${portfolio.cash}`);
+
             return `Your cash balance is $${portfolio.cash}.
 Current holdings:
 ${Object.entries(portfolio.holdings)
@@ -253,8 +255,8 @@ ${portfolio.history
             });
             portfolio.cash = Math.round((portfolio.cash - shares * price) * 100) / 100;
             await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
-
             log(`💰 Purchased ${shares} shares of ${ticker} at $${price} per share`);
+
             return `Purchased ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
                 }. Your cash balance is now $${portfolio.cash}.`;
         },
@@ -279,8 +281,8 @@ ${portfolio.history
             });
             portfolio.cash = Math.round((portfolio.cash + shares * price) * 100) / 100;
             await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
-
             log(`💸 Sold ${shares} shares of ${ticker} at $${price} per share`);
+
             return `Sold ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
                 }. Your cash balance is now $${portfolio.cash}.`;
         },
@@ -291,6 +293,7 @@ ${portfolio.history
         async execute({ ticker }: { ticker: string }) {
             const price = await getStockPrice(ticker);
             log(`🔖 Searched for stock price for ${ticker}: $${price}`);
+
             return price;
         },
     },
@@ -300,6 +303,7 @@ ${portfolio.history
         async execute({ query }: { query: string }) {
             log(`🔍 Searching the web for: ${query}`);
             const result = await webSearch(query);
+
             return result;
         },
     },
@@ -308,6 +312,7 @@ ${portfolio.history
         description: "Think about a given topic",
         async execute({ thought_process }: { thought_process: string[] }) {
             thought_process.forEach((thought) => log(`🧠 ${thought}`));
+
             return `Completed thinking with ${thought_process.length} steps of reasoning.`;
         },
     },
@@ -346,6 +351,7 @@ const calculateNetWorth = async (): Promise<number> => {
 const calculateCAGR = (days: number, currentValue: number): number => {
     const startValue = 1000;
     const years = days / 365;
+
     return Math.pow(currentValue / startValue, 1 / years) - 1;
 };
 
@@ -374,6 +380,7 @@ const calculateAnnualizedReturn = async (portfolio: z.infer<typeof portfolioSche
     const days = (currentDate.getTime() - firstTradeDate.getTime()) / (1000 * 60 * 60 * 24);
     if (days < 1) return "N/A";
     const cagr = calculateCAGR(days, currentTotalValue);
+
     return (cagr * 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
@@ -407,6 +414,7 @@ const calculatePortfolioValue = async (): Promise<{
         }
     }
     const totalValue = Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
+
     return { totalValue, holdings: holdingsWithValues };
 };
 
@@ -427,6 +435,7 @@ const loadThread = async (): Promise<any[]> => {
     } catch (error) {
         log(`⚠️ Failed to load thread history: ${error}`);
     }
+
     return [];
 };
 
@@ -658,7 +667,6 @@ Good luck! 📈`;
         } else {
             throw new Error("No response or tool calls from AI model");
         }
-
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         log(`❌ Error running trading agent: ${errorMessage}`);
