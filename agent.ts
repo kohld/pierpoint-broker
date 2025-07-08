@@ -558,12 +558,19 @@ Good luck! 📈`;
                         },
                         required: ["ticker", "shares"],
                     };
-                } else if (tool.name === "get_stock_price" || tool.name === "web_search") {
-                    // ToDo: split into two tools and get_stock_price should get ticker (like buy or sell)
+                } else if (tool.name === "get_stock_price") {
                     return {
                         type: "object",
                         properties: {
-                            query: { type: "string", description: "The query for the web search or ticker for stock price" },
+                            ticker: { type: "string", description: "The stock ticker symbol (e.g., 'AAPL')" },
+                        },
+                        required: ["ticker"],
+                    };
+                } else if (tool.name === "web_search") {
+                    return {
+                        type: "object",
+                        properties: {
+                            query: { type: "string", description: "The query for the web search" },
                         },
                         required: ["query"],
                     };
