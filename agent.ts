@@ -612,11 +612,6 @@ Good luck! 📈`;
                 tool_choice: "auto",
             });
 
-            console.log("----------");
-            console.log("Response:");
-            console.log(response);
-            console.log("----------");
-
             const assistantMessage = response.choices[0]?.message;
             const content = assistantMessage?.content;
             const toolCalls = assistantMessage?.tool_calls;
