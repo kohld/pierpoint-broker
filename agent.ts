@@ -697,7 +697,7 @@ Good luck! 📈`;
     return finalAgentResponse || "Agent finished. No specific final message provided.";
 };
 
-main(50).catch((err) => {
+main(25).catch((err) => {
     log("Fatal error: " + err);
     process.exit(1);
 });
