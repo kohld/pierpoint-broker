@@ -1,8 +1,9 @@
 {
-  "cash": 13.16,
+  "cash": 32.1,
   "holdings": {
     "AAPL": 0,
-    "NVDA": 4
+    "NVDA": 2,
+    "TSLA": 1
   },
   "history": [
     {
@@ -28,6 +29,22 @@
       "shares": 4,
       "price": 135.17,
       "total": 540.68
+    },
+    {
+      "date": "2025-07-09T13:07:09.877Z",
+      "type": "sell",
+      "ticker": "NVDA",
+      "shares": 2,
+      "price": 136.56,
+      "total": 273.12
+    },
+    {
+      "date": "2025-07-09T13:07:10.960Z",
+      "type": "buy",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 254.18,
+      "total": 254.18
     }
   ]
 }
