@@ -111,6 +111,4 @@ describe("Portfolio type definition", () => {
         expect(validPortfolio.holdings["AAPL"]).toBe(10);
         expect(validPortfolio.history[0].type).toBe("buy");
     });
-
-
 });
