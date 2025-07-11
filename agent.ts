@@ -401,20 +401,20 @@ const updateReadme = async () => {
         const recentTrades = portfolio.history.slice(-20).reverse();
         const portfolioSection = `<!-- auto start -->
 
-## 💰 Portfolio value: $${totalValue.toLocaleString("en-US", {
+## 💰 Portfolio value: ${totalValue.toLocaleString("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-        })} (${(((totalValue - 1000) / 1000) * 100).toFixed(2)}% return)
+        })} ${CURRENCY_SYMBOL} | ${(((totalValue - 1000) / 1000) * 100).toFixed(2)}% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | $${portfolio.cash.toFixed(2)} |
+| Cash | - | ${portfolio.cash.toFixed(2)} ${CURRENCY_SYMBOL} |
 ${Object.entries(holdings)
                 .map(
                     ([ticker, data]) =>
-                        `| ${ticker} | ${data.shares} | $${data.value.toFixed(2)} |`
+                        `| ${ticker} | ${data.shares} | ${data.value.toFixed(2)} ${CURRENCY_SYMBOL} |`
                 )
                 .join("\n")}
 
@@ -429,7 +429,7 @@ ${recentTrades.length > 0
                                 dateStyle: "long",
                                 timeStyle: "medium",
                             })}**: ${trade.type.toUpperCase()} ${trade.shares} ${trade.ticker
-                            } @ $${trade.price}/share ($${trade.total.toFixed(2)})`
+                            } @ ${trade.price}${CURRENCY_SYMBOL}/share (${trade.total.toFixed(2)}${CURRENCY_SYMBOL})`
                     )
                     .join("\n")
                 : "- No trades yet"
