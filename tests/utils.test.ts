@@ -1,5 +1,8 @@
 import { convertCurrency } from "../lib/utils";
 
+/**
+ * Tests the convertCurrency function.
+ */
 describe("convertCurrency", () => {
   const mockLog = jest.fn();
 

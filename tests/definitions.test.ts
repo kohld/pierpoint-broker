@@ -1,5 +1,8 @@
 import { Portfolio } from "../lib/definitions";
 
+/**
+ * Tests the Portfolio type definition.
+ */
 describe("Portfolio type definition", () => {
     it("should allow an empty portfolio", () => {
         const emptyPortfolio: Portfolio = {
