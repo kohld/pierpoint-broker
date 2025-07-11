@@ -15,7 +15,7 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - [Running the agent](#running-the-agent)
   - [Local execution](#local-execution)
   - [Automated execution via GitHub Actions](#automated-execution-via-github-actions)
-    - [IMPORTANT: Model Selection for OpenRouter](#important-model-selection-for-openrouter)
+    - [IMPORTANT: Free model selection for OpenRouter](#important-free-model-selection-for-openrouter)
 - [Disclaimer](#disclaimer)
 - [License](#license)
 
@@ -121,8 +121,8 @@ The agent is configured to run automatically on weekdays during stock market hou
 
 1. Fork this repository
 2. Go to Settings → Secrets and variables → Actions
-3. Add a new repository secret named `OPEN_ROUTER_API_KEY` with your OpenRouter API key
-4. Add a new repository secret named `MODEL_NAME` with your OpenRouter model name
+3. Add a new repository secret named `OPEN_ROUTER_API_KEY` with your OpenRouter API key or OpenAI API key `OPENAI_API_KEY` (e.g. `sk-...`)
+4. Add a new repository secret named `MODEL_NAME` with your model name (e.g. `openai/gpt-4.1`)
 5. Add a new repository secret named `CURRENCY` with your currency (default: `EUR`)
 6. Add a new repository secret named `ORDER_FEE` with your order fee (default: `1.00`)
 7. The agent will now run automatically on weekdays during stock market hours
@@ -131,7 +131,7 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 
 ---
 
-#### **IMPORTANT: Model Selection for OpenRouter**
+#### **IMPORTANT: Free model selection for OpenRouter**
 
 > **WARNING:**
 >
