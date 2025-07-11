@@ -1,10 +1,11 @@
 {
-  "cash": 878.9,
+  "cash": 992.04,
   "holdings": {
     "AAPL": 0,
     "NVDA": 0,
     "TSLA": 1,
-    "MP": 11
+    "MP": 0,
+    "KLG": 16
   },
   "history": [
     {
@@ -70,6 +71,38 @@
       "shares": 11,
       "price": 38.69,
       "total": 425.59
+    },
+    {
+      "date": "2025-07-11T09:12:53.423Z",
+      "type": "sell",
+      "ticker": "MP",
+      "shares": 11,
+      "price": 38.69,
+      "total": 425.59
+    },
+    {
+      "date": "2025-07-11T09:25:31.251Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 7,
+      "price": 140.37,
+      "total": 982.59
+    },
+    {
+      "date": "2025-07-11T09:25:36.977Z",
+      "type": "buy",
+      "ticker": "KLG",
+      "shares": 16,
+      "price": 19.55,
+      "total": 312.8
+    },
+    {
+      "date": "2025-07-11T09:29:06.831Z",
+      "type": "sell",
+      "ticker": "NVDA",
+      "shares": 7,
+      "price": 140.42,
+      "total": 982.9399999999999
     }
   ]
 }

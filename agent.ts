@@ -117,8 +117,8 @@ const getPortfolioTool = tool({
     parameters: z.object({}),
     async execute() {
         const portfolio = await getPortfolio();
-        log(`💹 Fetched portfolio: $${portfolio.cash}`);
-        return `Your cash balance is $${portfolio.cash}.
+        log(`💹 Fetched portfolio: ${portfolio.cash.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}`);
+        return `Your cash balance is ${portfolio.cash.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}.
 Current holdings:
 ${Object.entries(portfolio.holdings)
                 .map(([ticker, shares]) => `  - ${ticker}: ${shares} shares`)
@@ -179,7 +179,7 @@ const buyTool = tool({
         const price = await getStockPrice(ticker);
         const portfolio = await getPortfolio();
         if (portfolio.cash < shares * price)
-            return `You don't have enough cash to buy ${shares} shares of ${ticker}. Your cash balance is $${portfolio.cash} and the price is $${price} per share.`;
+            return `You don't have enough cash to buy ${shares} shares of ${ticker}. Your cash balance is ${portfolio.cash.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} and the price is ${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} per share.`;
 
         portfolio.holdings[ticker] = (portfolio.holdings[ticker] ?? 0) + shares;
         portfolio.history.push({
@@ -193,8 +193,8 @@ const buyTool = tool({
         portfolio.cash = Math.round((portfolio.cash - shares * price) * 100) / 100;
         await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
 
-        log(`💰 Purchased ${shares} shares of ${ticker} at $${price} per share`);
-        return `Purchased ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
+        log(`💰 Purchased ${shares} shares of ${ticker} at ${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} per share`);
+        return `Purchased ${shares} shares of ${ticker} at $${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} per share, for a total of $${shares * price
             }. Your cash balance is now $${portfolio.cash}.`;
     },
 });
@@ -234,9 +234,9 @@ const sellTool = tool({
         portfolio.cash = Math.round((portfolio.cash + shares * price) * 100) / 100;
         await writeFile("portfolio.json", JSON.stringify(portfolio, null, 2));
 
-        log(`💸 Sold ${shares} shares of ${ticker} at $${price} per share`);
-        return `Sold ${shares} shares of ${ticker} at $${price} per share, for a total of $${shares * price
-            }. Your cash balance is now $${portfolio.cash}.`;
+        log(`💸 Sold ${shares} shares of ${ticker} at ${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} per share`);
+        return `Sold ${shares} shares of ${ticker} at ${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL} per share, for a total of ${shares * price
+            }. Your cash balance is now ${portfolio.cash.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}.`;
     },
 });
 
@@ -257,7 +257,7 @@ const getStockPriceTool = tool({
     }),
     async execute({ ticker }) {
         const price = await getStockPrice(ticker);
-        log(`🔖 Searched for stock price for ${ticker}: $${price}`);
+        log(`🔖 Searched for stock price for ${ticker}: ${price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}`);
         return price;
     },
 });
@@ -401,20 +401,23 @@ const updateReadme = async () => {
         const recentTrades = portfolio.history.slice(-20).reverse();
         const portfolioSection = `<!-- auto start -->
 
-## 💰 Portfolio value: ${totalValue.toLocaleString("en-US", {
+## 💰 Portfolio value: ${totalValue.toLocaleString("de-DE", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-        })} ${CURRENCY_SYMBOL} | ${(((totalValue - 1000) / 1000) * 100).toFixed(2)}% return
+        })} ${CURRENCY_SYMBOL} | ${(((totalValue - 1000) / 1000) * 100).toLocaleString("de-DE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        })}% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | ${portfolio.cash.toFixed(2)} ${CURRENCY_SYMBOL} |
+| Cash | - | ${portfolio.cash.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${CURRENCY_SYMBOL} |
 ${Object.entries(holdings)
                 .map(
                     ([ticker, data]) =>
-                        `| ${ticker} | ${data.shares} | ${data.value.toFixed(2)} ${CURRENCY_SYMBOL} |`
+                        `| ${ticker} | ${data.shares} | ${data.value.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${CURRENCY_SYMBOL} |`
                 )
                 .join("\n")}
 
@@ -429,7 +432,7 @@ ${recentTrades.length > 0
                                 dateStyle: "long",
                                 timeStyle: "medium",
                             })}**: ${trade.type.toUpperCase()} ${trade.shares} ${trade.ticker
-                            } @ ${trade.price}${CURRENCY_SYMBOL}/share (${trade.total.toFixed(2)}${CURRENCY_SYMBOL})`
+                            } @ ${trade.price.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}/share (${trade.total.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL})`
                     )
                     .join("\n")
                 : "- No trades yet"
@@ -443,7 +446,7 @@ ${recentTrades.length > 0
         );
 
         await writeFile("README.md", updatedReadme);
-        log(`📝 Updated README with portfolio value: $${totalValue}`);
+        log(`📝 Updated README with portfolio value: ${totalValue.toLocaleString("de-DE", {minimumFractionDigits: 2, maximumFractionDigits: 2})}${CURRENCY_SYMBOL}}`);
     } catch (error) {
         log(`❌ Failed to update README: ${error}`);
     }
