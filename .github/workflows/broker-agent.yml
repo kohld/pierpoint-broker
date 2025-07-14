@@ -27,6 +27,7 @@ jobs:
       - name: Run broker agent
         env:
           OPEN_ROUTER_API_KEY: ${{ secrets.OPEN_ROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODEL_NAME: ${{ secrets.MODEL_NAME }}
           CURRENCY: ${{ secrets.CURRENCY }}
           ORDER_FEE: ${{ secrets.ORDER_FEE }}
