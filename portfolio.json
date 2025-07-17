@@ -1,10 +1,10 @@
 {
-  "cash": 701.65,
+  "cash": 79.17,
   "holdings": {
-    "NVDA": 1,
+    "NVDA": 2,
     "AAPL": 1,
-    "TSLA": 1,
-    "KLG": 8,
+    "TSLA": 3,
+    "KLG": 4,
     "DAL": 10
   },
   "history": [
@@ -127,6 +127,30 @@
       "shares": 10,
       "price": 48.54,
       "total": 485.4
+    },
+    {
+      "date": "2025-07-17T13:11:28.981Z",
+      "type": "sell",
+      "ticker": "KLG",
+      "shares": 4,
+      "price": 19.99,
+      "total": 79.96
+    },
+    {
+      "date": "2025-07-17T13:11:28.985Z",
+      "type": "buy",
+      "ticker": "TSLA",
+      "shares": 2,
+      "price": 277.34,
+      "total": 554.68
+    },
+    {
+      "date": "2025-07-17T13:11:29.016Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 147.76,
+      "total": 147.76
     }
   ]
 }
