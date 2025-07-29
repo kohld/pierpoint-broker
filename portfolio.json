@@ -1,9 +1,9 @@
 {
-  "cash": 79.17,
+  "cash": 361.42,
   "holdings": {
     "NVDA": 2,
     "AAPL": 1,
-    "TSLA": 3,
+    "TSLA": 2,
     "KLG": 4,
     "DAL": 10
   },
@@ -151,6 +151,14 @@
       "shares": 1,
       "price": 147.76,
       "total": 147.76
+    },
+    {
+      "date": "2025-07-29T12:44:26.143Z",
+      "type": "sell",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 282.25,
+      "total": 282.25
     }
   ]
 }

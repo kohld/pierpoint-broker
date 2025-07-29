@@ -21,21 +21,22 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.922,55 € | 92,26% return
+## 💰 Portfolio value: 1.980,18 € | 98,02% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 79,17 € |
-| NVDA | 2 | 297,48 € |
-| AAPL | 1 | 183,36 € |
-| TSLA | 3 | 812,88 € |
-| KLG | 4 | 79,36 € |
-| DAL | 10 | 470,30 € |
+| Cash | - | 361,42 € |
+| NVDA | 2 | 306,44 € |
+| AAPL | 1 | 185,56 € |
+| TSLA | 2 | 564,50 € |
+| KLG | 4 | 80,16 € |
+| DAL | 10 | 482,10 € |
 
 ### 📈 Recent trades
 
+- **July 29, 2025 at 12:44:26 PM**: SELL 1 TSLA @ 282,25€/share (282,25€)
 - **July 17, 2025 at 1:11:29 PM**: BUY 1 NVDA @ 147,76€/share (147,76€)
 - **July 17, 2025 at 1:11:28 PM**: BUY 2 TSLA @ 277,34€/share (554,68€)
 - **July 17, 2025 at 1:11:28 PM**: SELL 4 KLG @ 19,99€/share (79,96€)
