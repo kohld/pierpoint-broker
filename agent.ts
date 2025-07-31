@@ -14,6 +14,7 @@ import { z } from "zod";
 // Node-Builtins
 import { existsSync } from "fs";
 import { appendFile, readFile, writeFile } from "node:fs/promises";
+import { pathToFileURL } from "url";
 // Custom codebase
 import { convertCurrency } from "./lib/utils";
 import { portfolioSchema, type Portfolio } from "./lib/definitions";
@@ -27,7 +28,7 @@ import { portfolioSchema, type Portfolio } from "./lib/definitions";
  * @property {string} CURRENCY - The currency to use for the portfolio.
  * @property {string} CURRENCY_SYMBOL - The currency symbol to use for the portfolio.
  */
-const config = {
+export const config = {
     API_KEY: process.env.OPENAI_API_KEY,
     MODEL_NAME: process.env.MODEL_NAME || "gpt-4.1",
     CURRENCY: process.env.CURRENCY || "EUR",
@@ -36,9 +37,9 @@ const config = {
 
 if (!config.API_KEY) throw new Error("OPENAI_API_KEY is not set");
 if (!config.MODEL_NAME) throw new Error("MODEL_NAME is not set");
-const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
+export const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
 
-const client = new OpenAI();
+export const client = new OpenAI();
 
 /**
  * Logs a message to the console and appends it to the agent.log file.
@@ -46,7 +47,7 @@ const client = new OpenAI();
  *
  * @param {string} message - The message to log.
  */
-const log = (message: string) => {
+export const log = (message: string) => {
     message = `[${new Date().toISOString()}] ${message}`;
     console.log(message);
     appendFile("agent.log", message + "\n");
@@ -61,7 +62,7 @@ const log = (message: string) => {
  * 
  * @throws If the web search fails.
  */
-const webSearch = async (query: string): Promise<string> => {
+export const webSearch = async (query: string): Promise<string> => {
     const response = await client.responses.create({
         model: config.MODEL_NAME,
         input: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
@@ -79,7 +80,7 @@ const webSearch = async (query: string): Promise<string> => {
  * 
  * @throws If the stock price cannot be retrieved.
  */
-const getStockPrice = async (ticker: string): Promise<number> => {
+export const getStockPrice = async (ticker: string): Promise<number> => {
     const quote = await yahooFinance.quote(ticker);
     const priceUSD = quote.regularMarketPrice;
 
@@ -100,7 +101,7 @@ const getStockPrice = async (ticker: string): Promise<number> => {
  * 
  * @throws If the portfolio file cannot be read or parsed.
  */
-const getPortfolio = async (): Promise<Portfolio> => {
+export const getPortfolio = async (): Promise<Portfolio> => {
     const portfolioData = await readFile("portfolio.json", "utf-8");
     const portfolio = portfolioSchema.parse(JSON.parse(portfolioData));
     return portfolio;
@@ -111,7 +112,7 @@ const getPortfolio = async (): Promise<Portfolio> => {
  * 
  * @returns {Promise<string>} A Promise that resolves to a formatted string containing the current portfolio data.
  */
-const getPortfolioTool = tool({
+export const getPortfolioTool = tool({
     name: "get_portfolio",
     description: "Get your portfolio",
     parameters: z.object({}),
@@ -137,7 +138,7 @@ ${portfolio.history
  * 
  * @returns {Promise<string>} A Promise that resolves to a formatted string containing the current net worth.
  */
-const getNetWorthTool = tool({
+export const getNetWorthTool = tool({
     name: "get_net_worth",
     description: "Get your current net worth (total portfolio value)",
     parameters: z.object({}),
@@ -168,7 +169,7 @@ const getNetWorthTool = tool({
  * 
  * @throws If the user does not have enough cash to buy the specified number of shares.
  */
-const buyTool = tool({
+export const buyTool = tool({
     name: "buy",
     description: "Buy a given stock at the current market price",
     parameters: z.object({
@@ -209,7 +210,7 @@ const buyTool = tool({
  * 
  * @throws If the user does not have enough shares of the specified stock to sell.
  */
-const sellTool = tool({
+export const sellTool = tool({
     name: "sell",
     description: "Sell a given stock at the current market price",
     parameters: z.object({
@@ -252,7 +253,7 @@ const sellTool = tool({
  * 
  * @throws If the stock price cannot be retrieved.
  */
-const getStockPriceTool = tool({
+export const getStockPriceTool = tool({
     name: "get_stock_price",
     description: "Get the current price of a given stock ticker",
     parameters: z.object({
@@ -274,7 +275,7 @@ const getStockPriceTool = tool({
  * 
  * @throws If the web search fails.
  */
-const webSearchTool = tool({
+export const webSearchTool = tool({
     name: "web_search",
     description: "Search the web for information",
     parameters: z.object({
@@ -294,7 +295,7 @@ const webSearchTool = tool({
  * 
  * @returns {Promise<string>} A Promise that resolves to a message indicating the completion of the thought process.
  */
-const thinkTool = tool({
+export const thinkTool = tool({
     name: "think",
     description: "Think about a given topic",
     parameters: z.object({
@@ -311,7 +312,7 @@ const thinkTool = tool({
  * 
  * @returns {Promise<number>} A Promise that resolves to the current net worth.
  */
-const calculateNetWorth = async (): Promise<number> => {
+export const calculateNetWorth = async (): Promise<number> => {
     const portfolio = await getPortfolio();
     let totalHoldingsValue = 0;
     for (const [ticker, shares] of Object.entries(portfolio.holdings))
@@ -334,7 +335,7 @@ const calculateNetWorth = async (): Promise<number> => {
  * 
  * @returns {Promise<string>} A Promise that resolves to a formatted string containing the current portfolio value.
  */
-const calculatePortfolioValue = async (): Promise<{
+export const calculatePortfolioValue = async (): Promise<{
     totalValue: number;
     holdings: Record<string, { shares: number; value: number }>;
 }> => {
@@ -367,7 +368,7 @@ const calculatePortfolioValue = async (): Promise<{
  * 
  * @returns {Promise<AgentInputItem[]>} A Promise that resolves to the conversation history.
  */
-const loadThread = async (): Promise<AgentInputItem[]> => {
+export const loadThread = async (): Promise<AgentInputItem[]> => {
     try {
         if (existsSync("thread.json")) {
             const threadData = await readFile("thread.json", "utf-8");
@@ -384,7 +385,7 @@ const loadThread = async (): Promise<AgentInputItem[]> => {
  * 
  * @param {AgentInputItem[]} thread - The conversation history to save.
  */
-const saveThread = async (thread: AgentInputItem[]) => {
+export const saveThread = async (thread: AgentInputItem[]) => {
     try {
         await writeFile("thread.json", JSON.stringify(thread, null, 2));
         log(`💾 Saved thread history (${thread.length} items)`);
@@ -396,7 +397,7 @@ const saveThread = async (thread: AgentInputItem[]) => {
 /**
  * Updates the README.md file with the current portfolio value and recent trades.
  */
-const updateReadme = async () => {
+export const updateReadme = async () => {
     try {
         const portfolio = await getPortfolio();
         const { totalValue, holdings } = await calculatePortfolioValue();
@@ -458,37 +459,44 @@ ${recentTrades.length > 0
 /**
  * Creates a new agent instance.
  * 
- * @returns {Agent} A new agent instance.
+ * @returns {Promise<Agent>} A new agent instance.
  */
-const agent = new Agent({
-    name: "Assistant",
-    instructions: await readFile("system-prompt.md", "utf-8"),
-    tools: [
-        thinkTool,
-        webSearchTool,
-        buyTool,
-        sellTool,
-        getStockPriceTool,
-        getPortfolioTool,
-        getNetWorthTool,
-    ],
-});
+export const createAgent = async (): Promise<Agent> => {
+    const instructions = await readFile("system-prompt.md", "utf-8");
+    return new Agent({
+        name: "Assistant",
+        instructions,
+        tools: [
+            thinkTool,
+            webSearchTool,
+            buyTool,
+            sellTool,
+            getStockPriceTool,
+            getPortfolioTool,
+            getNetWorthTool,
+        ],
+    });
+};
 
-log("Starting agent");
+export const runAgent = async () => {
+    log("Starting agent");
 
-const thread = await loadThread();
-const result = await run(
-    agent,
-    thread.concat({
-        role: "user",
-        content: `It's ${new Date().toLocaleString(
-            "en-US"
-        )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial $1,000 investment. Good luck! 📈`,
-    }),
-    { maxTurns: config.MAX_TURNS }
-);
+    const agent = await createAgent();
+    const thread = await loadThread();
+    const result = await run(
+        agent,
+        thread.concat({
+            role: "user",
+            content: `It's ${new Date().toLocaleString(
+                "en-US"
+            )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial $1,000 investment. Good luck! 📈`,
+        }),
+        { maxTurns: config.MAX_TURNS }
+    );
 
-log(`🎉 Agent finished: ${result.finalOutput}`);
+    log(`🎉 Agent finished: ${result.finalOutput}`);
 
-await saveThread(result.history);
-await updateReadme();
+    await saveThread(result.history);
+    await updateReadme();
+}
+
