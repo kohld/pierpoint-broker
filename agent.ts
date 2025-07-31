@@ -364,15 +364,17 @@ export const calculatePortfolioValue = async (): Promise<{
 };
 
 /**
- * Loads the conversation history from the thread.json file.
- * 
- * @returns {Promise<AgentInputItem[]>} A Promise that resolves to the conversation history.
+ * Checks for the existence of 'thread.json' and, if found, resets its content to an empty JSON array.
+ * This function primarily prepares or cleans up the thread file rather than loading its content.
+ *
+ * @returns {Promise<AgentInputItem[]>} A Promise that always resolves to an empty array,
+ *                                      as this function does not currently load data.
  */
 export const loadThread = async (): Promise<AgentInputItem[]> => {
     try {
         if (existsSync("thread.json")) {
-            const threadData = await readFile("thread.json", "utf-8");
-            return JSON.parse(threadData).slice(-100);
+            await writeFile("thread.json", "[\n\n]");
+            log("🧹 thread.json was resetted during loading.");
         }
     } catch (error) {
         log(`⚠️ Failed to load thread history: ${error}`);
