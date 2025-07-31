@@ -1,11 +1,12 @@
 {
-  "cash": 361.42,
+  "cash": 79.27,
   "holdings": {
     "NVDA": 2,
     "AAPL": 1,
     "TSLA": 2,
     "KLG": 4,
-    "DAL": 10
+    "DAL": 10,
+    "TER": 3
   },
   "history": [
     {
@@ -159,6 +160,14 @@
       "shares": 1,
       "price": 282.25,
       "total": 282.25
+    },
+    {
+      "date": "2025-07-31T07:26:33.201Z",
+      "type": "buy",
+      "ticker": "TER",
+      "shares": 3,
+      "price": 94.05,
+      "total": 282.15
     }
   ]
 }
