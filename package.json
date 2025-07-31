@@ -4,7 +4,7 @@
     "description": "",
     "main": "agent.ts",
     "scripts": {
-        "start": "tsx agent.ts",
+        "start": "tsx run.ts",
         "test": "jest --passWithNoTests --runInBand"
     },
     "repository": {
