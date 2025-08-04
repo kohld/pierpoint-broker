@@ -1,8 +1,7 @@
 {
-  "cash": 65.5,
+  "cash": 240.15,
   "holdings": {
     "NVDA": 2,
-    "AAPL": 1,
     "TSLA": 2,
     "DAL": 10,
     "TER": 4
@@ -183,6 +182,14 @@
       "shares": 1,
       "price": 94.17,
       "total": 94.17
+    },
+    {
+      "date": "2025-08-04T12:44:45.781Z",
+      "type": "sell",
+      "ticker": "AAPL",
+      "shares": 1,
+      "price": 174.65,
+      "total": 174.65
     }
   ]
 }
