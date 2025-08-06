@@ -1,10 +1,11 @@
 {
-  "cash": 240.15,
+  "cash": 243.55,
   "holdings": {
-    "NVDA": 2,
+    "NVDA": 1,
     "TSLA": 2,
     "DAL": 10,
-    "TER": 4
+    "TER": 4,
+    "AMD": 1
   },
   "history": [
     {
@@ -190,6 +191,22 @@
       "shares": 1,
       "price": 174.65,
       "total": 174.65
+    },
+    {
+      "date": "2025-08-06T12:44:46.350Z",
+      "type": "sell",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 153.52,
+      "total": 153.52
+    },
+    {
+      "date": "2025-08-06T12:44:59.812Z",
+      "type": "buy",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 150.12,
+      "total": 150.12
     }
   ]
 }
