@@ -1,7 +1,7 @@
 {
-  "cash": 243.55,
+  "cash": 88.4,
   "holdings": {
-    "NVDA": 1,
+    "NVDA": 2,
     "TSLA": 2,
     "DAL": 10,
     "TER": 4,
@@ -207,6 +207,14 @@
       "shares": 1,
       "price": 150.12,
       "total": 150.12
+    },
+    {
+      "date": "2025-08-08T12:44:39.906Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 155.15,
+      "total": 155.15
     }
   ]
 }
