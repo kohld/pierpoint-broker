@@ -1,11 +1,11 @@
 {
-  "cash": 88.4,
+  "cash": 41,
   "holdings": {
     "NVDA": 2,
     "TSLA": 2,
-    "DAL": 10,
     "TER": 4,
-    "AMD": 1
+    "AMD": 1,
+    "GILD": 5
   },
   "history": [
     {
@@ -215,6 +215,22 @@
       "shares": 1,
       "price": 155.15,
       "total": 155.15
+    },
+    {
+      "date": "2025-08-08T15:40:45.920Z",
+      "type": "sell",
+      "ticker": "DAL",
+      "shares": 10,
+      "price": 46.41,
+      "total": 464.09999999999997
+    },
+    {
+      "date": "2025-08-08T15:40:45.960Z",
+      "type": "buy",
+      "ticker": "GILD",
+      "shares": 5,
+      "price": 102.3,
+      "total": 511.5
     }
   ]
 }
