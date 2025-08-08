@@ -21,20 +21,24 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.863,29 € | 86,33% return
+## 💰 Portfolio value: 1.925,65 € | 92,57% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 240,15 € |
-| NVDA | 2 | 299,84 € |
-| TSLA | 2 | 522,34 € |
-| DAL | 10 | 441,40 € |
-| TER | 4 | 359,56 € |
+| Cash | - | 88,40 € |
+| NVDA | 2 | 310,30 € |
+| TSLA | 2 | 553,20 € |
+| DAL | 10 | 460,30 € |
+| TER | 4 | 365,48 € |
+| AMD | 1 | 147,97 € |
 
 ### 📈 Recent trades
 
+- **August 8, 2025 at 12:44:39 PM**: BUY 1 NVDA @ 155,15€/share (155,15€)
+- **August 6, 2025 at 12:44:59 PM**: BUY 1 AMD @ 150,12€/share (150,12€)
+- **August 6, 2025 at 12:44:46 PM**: SELL 1 NVDA @ 153,52€/share (153,52€)
 - **August 4, 2025 at 12:44:45 PM**: SELL 1 AAPL @ 174,65€/share (174,65€)
 - **July 31, 2025 at 1:00:08 PM**: BUY 1 TER @ 94,17€/share (94,17€)
 - **July 31, 2025 at 12:59:50 PM**: SELL 4 KLG @ 20,10€/share (80,40€)
@@ -52,9 +56,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **July 11, 2025 at 9:12:53 AM**: SELL 11 MP @ 38,69€/share (425,59€)
 - **July 11, 2025 at 8:38:57 AM**: BUY 11 MP @ 38,69€/share (425,59€)
 - **July 11, 2025 at 8:38:57 AM**: SELL 1 NVDA @ 140,39€/share (140,39€)
-- **July 11, 2025 at 8:24:09 AM**: SELL 1 NVDA @ 164,10€/share (164,10€)
-- **July 9, 2025 at 1:07:10 PM**: BUY 1 TSLA @ 254,18€/share (254,18€)
-- **July 9, 2025 at 1:07:09 PM**: SELL 2 NVDA @ 136,56€/share (273,12€)
 
 <!-- auto end -->
 
