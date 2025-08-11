@@ -1,9 +1,8 @@
 {
-  "cash": 41,
+  "cash": 253.73,
   "holdings": {
-    "NVDA": 2,
+    "NVDA": 3,
     "TSLA": 2,
-    "TER": 4,
     "AMD": 1,
     "GILD": 5
   },
@@ -231,6 +230,22 @@
       "shares": 5,
       "price": 102.3,
       "total": 511.5
+    },
+    {
+      "date": "2025-08-11T12:44:39.463Z",
+      "type": "sell",
+      "ticker": "TER",
+      "shares": 4,
+      "price": 92.49,
+      "total": 369.96
+    },
+    {
+      "date": "2025-08-11T12:44:57.301Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 157.23,
+      "total": 157.23
     }
   ]
 }
