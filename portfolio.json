@@ -1,8 +1,8 @@
 {
-  "cash": 253.73,
+  "cash": 540.58,
   "holdings": {
     "NVDA": 3,
-    "TSLA": 2,
+    "TSLA": 1,
     "AMD": 1,
     "GILD": 5
   },
@@ -246,6 +246,14 @@
       "shares": 1,
       "price": 157.23,
       "total": 157.23
+    },
+    {
+      "date": "2025-08-15T12:43:57.278Z",
+      "type": "sell",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 286.85,
+      "total": 286.85
     }
   ]
 }
