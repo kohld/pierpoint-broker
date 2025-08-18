@@ -1,9 +1,8 @@
 {
-  "cash": 540.58,
+  "cash": 692.64,
   "holdings": {
     "NVDA": 3,
     "TSLA": 1,
-    "AMD": 1,
     "GILD": 5
   },
   "history": [
@@ -254,6 +253,14 @@
       "shares": 1,
       "price": 286.85,
       "total": 286.85
+    },
+    {
+      "date": "2025-08-18T12:44:37.158Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 152.06,
+      "total": 152.06
     }
   ]
 }
