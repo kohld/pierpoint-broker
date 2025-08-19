@@ -1,9 +1,10 @@
 {
-  "cash": 692.64,
+  "cash": 198.63,
   "holdings": {
     "NVDA": 3,
     "TSLA": 1,
-    "GILD": 5
+    "GILD": 5,
+    "QQQ": 1
   },
   "history": [
     {
@@ -261,6 +262,14 @@
       "shares": 1,
       "price": 152.06,
       "total": 152.06
+    },
+    {
+      "date": "2025-08-19T12:45:04.973Z",
+      "type": "buy",
+      "ticker": "QQQ",
+      "shares": 1,
+      "price": 494.01,
+      "total": 494.01
     }
   ]
 }
