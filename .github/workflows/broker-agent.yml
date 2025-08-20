@@ -2,7 +2,7 @@ name: Broker agent
 
 on:
   schedule:
-    - cron: "30 12 * * 1-5" # 14:30 Uhr MEZ/MESZ (UTC+2/UTC+1) an jedem Werktag (Mo-Fr)
+    - cron: "30 13 * * 1-5" # 14:30 Uhr (Winter) | 15:30 Uhr (Sommer) MEZ/MESZ (UTC+2/UTC+1) an jedem Werktag (Mo-Fr)
 
 permissions:
   contents: write
