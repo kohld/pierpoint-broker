@@ -21,20 +21,22 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.926,03 € | 92,60% return
+## 💰 Portfolio value: 1.915,07 € | 91,51% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 198,63 € |
-| NVDA | 3 | 451,62 € |
-| TSLA | 1 | 282,25 € |
-| GILD | 5 | 505,60 € |
-| QQQ | 1 | 487,93 € |
+| Cash | - | 56,86 € |
+| NVDA | 3 | 455,13 € |
+| TSLA | 1 | 278,56 € |
+| GILD | 5 | 497,90 € |
+| QQQ | 1 | 484,83 € |
+| AMD | 1 | 141,79 € |
 
 ### 📈 Recent trades
 
+- **August 21, 2025 at 1:39:33 PM**: BUY 1 AMD @ 141,77€/share (141,77€)
 - **August 19, 2025 at 12:45:04 PM**: BUY 1 QQQ @ 494,01€/share (494,01€)
 - **August 18, 2025 at 12:44:37 PM**: SELL 1 AMD @ 152,06€/share (152,06€)
 - **August 15, 2025 at 12:43:57 PM**: SELL 1 TSLA @ 286,85€/share (286,85€)
@@ -54,7 +56,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **July 17, 2025 at 1:11:28 PM**: BUY 2 TSLA @ 277,34€/share (554,68€)
 - **July 17, 2025 at 1:11:28 PM**: SELL 4 KLG @ 19,99€/share (79,96€)
 - **July 11, 2025 at 10:04:25 AM**: BUY 10 DAL @ 48,54€/share (485,40€)
-- **July 11, 2025 at 10:04:25 AM**: SELL 8 KLG @ 19,54€/share (156,32€)
 
 <!-- auto end -->
 
