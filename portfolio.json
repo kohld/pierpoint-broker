@@ -1,8 +1,7 @@
 {
-  "cash": 201.27,
+  "cash": 246.49,
   "holdings": {
-    "NVDA": 3,
-    "GILD": 5,
+    "NVDA": 6,
     "QQQ": 1,
     "AMD": 2
   },
@@ -294,6 +293,22 @@
       "shares": 1,
       "price": 145.15,
       "total": 145.15
+    },
+    {
+      "date": "2025-09-03T13:36:46.771Z",
+      "type": "sell",
+      "ticker": "GILD",
+      "shares": 5,
+      "price": 96.53,
+      "total": 482.65
+    },
+    {
+      "date": "2025-09-03T13:36:57.846Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 3,
+      "price": 145.81,
+      "total": 437.43
     }
   ]
 }
