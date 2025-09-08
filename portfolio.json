@@ -1,9 +1,8 @@
 {
-  "cash": 378.08,
+  "cash": 506.16,
   "holdings": {
     "NVDA": 6,
-    "QQQ": 1,
-    "AMD": 1
+    "QQQ": 1
   },
   "history": [
     {
@@ -317,6 +316,14 @@
       "shares": 1,
       "price": 131.59,
       "total": 131.59
+    },
+    {
+      "date": "2025-09-08T13:38:53.948Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 128.08,
+      "total": 128.08
     }
   ]
 }
