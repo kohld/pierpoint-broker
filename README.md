@@ -21,18 +21,21 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.862,08 € | 86,21% return
+## 💰 Portfolio value: 1.857,51 € | 85,75% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 506,16 € |
-| NVDA | 6 | 863,46 € |
-| QQQ | 1 | 492,46 € |
+| Cash | - | 551,40 € |
+| NVDA | 4 | 572,64 € |
+| QQQ | 1 | 492,39 € |
+| PEP | 2 | 241,08 € |
 
 ### 📈 Recent trades
 
+- **September 9, 2025 at 7:57:58 AM**: BUY 2 PEP @ 120,54€/share (241,08€)
+- **September 9, 2025 at 7:57:58 AM**: SELL 2 NVDA @ 143,16€/share (286,32€)
 - **September 8, 2025 at 1:38:53 PM**: SELL 1 AMD @ 128,08€/share (128,08€)
 - **September 5, 2025 at 1:36:22 PM**: SELL 1 AMD @ 131,59€/share (131,59€)
 - **September 3, 2025 at 1:36:57 PM**: BUY 3 NVDA @ 145,81€/share (437,43€)
@@ -51,8 +54,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **August 6, 2025 at 12:44:59 PM**: BUY 1 AMD @ 150,12€/share (150,12€)
 - **August 6, 2025 at 12:44:46 PM**: SELL 1 NVDA @ 153,52€/share (153,52€)
 - **August 4, 2025 at 12:44:45 PM**: SELL 1 AAPL @ 174,65€/share (174,65€)
-- **July 31, 2025 at 1:00:08 PM**: BUY 1 TER @ 94,17€/share (94,17€)
-- **July 31, 2025 at 12:59:50 PM**: SELL 4 KLG @ 20,10€/share (80,40€)
 
 <!-- auto end -->
 

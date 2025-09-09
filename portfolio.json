@@ -1,8 +1,9 @@
 {
-  "cash": 506.16,
+  "cash": 551.4,
   "holdings": {
-    "NVDA": 6,
-    "QQQ": 1
+    "NVDA": 4,
+    "QQQ": 1,
+    "PEP": 2
   },
   "history": [
     {
@@ -324,6 +325,22 @@
       "shares": 1,
       "price": 128.08,
       "total": 128.08
+    },
+    {
+      "date": "2025-09-09T07:57:58.167Z",
+      "type": "sell",
+      "ticker": "NVDA",
+      "shares": 2,
+      "price": 143.16,
+      "total": 286.32
+    },
+    {
+      "date": "2025-09-09T07:57:58.194Z",
+      "type": "buy",
+      "ticker": "PEP",
+      "shares": 2,
+      "price": 120.54,
+      "total": 241.08
     }
   ]
 }
