@@ -1,10 +1,10 @@
 {
-  "cash": 292.61,
+  "cash": 124,
   "holdings": {
-    "NVDA": 3,
+    "NVDA": 5,
     "QQQ": 1,
     "PEP": 2,
-    "AMD": 3
+    "AMD": 2
   },
   "history": [
     {
@@ -358,6 +358,22 @@
       "shares": 1,
       "price": 152.39,
       "total": 152.39
+    },
+    {
+      "date": "2025-09-12T13:36:19.245Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 133.67,
+      "total": 133.67
+    },
+    {
+      "date": "2025-09-12T13:36:30.082Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 2,
+      "price": 151.14,
+      "total": 302.28
     }
   ]
 }
