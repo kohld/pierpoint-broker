@@ -1,8 +1,8 @@
 {
-  "cash": 535.63,
+  "cash": 27.64,
   "holdings": {
     "NVDA": 4,
-    "QQQ": 1,
+    "QQQ": 2,
     "PEP": 2
   },
   "history": [
@@ -397,6 +397,14 @@
       "shares": 3,
       "price": 150.17,
       "total": 450.51
+    },
+    {
+      "date": "2025-09-22T13:38:44.900Z",
+      "type": "buy",
+      "ticker": "QQQ",
+      "shares": 1,
+      "price": 507.99,
+      "total": 507.99
     }
   ]
 }
