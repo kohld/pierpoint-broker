@@ -21,19 +21,20 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.965,94 € | 96,59% return
+## 💰 Portfolio value: 1.992,56 € | 99,26% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 538,87 € |
-| NVDA | 4 | 660,92 € |
-| QQQ | 1 | 526,13 € |
-| PEP | 2 | 240,02 € |
+| Cash | - | 705,43 € |
+| NVDA | 3 | 500,01 € |
+| QQQ | 1 | 529,76 € |
+| PEP | 2 | 257,36 € |
 
 ### 📈 Recent trades
 
+- **October 10, 2025 at 1:38:10 PM**: SELL 1 NVDA @ 166,56€/share (166,56€)
 - **October 9, 2025 at 1:39:29 PM**: BUY 1 NVDA @ 164,96€/share (164,96€)
 - **October 9, 2025 at 1:39:14 PM**: SELL 1 QQQ @ 525,98€/share (525,98€)
 - **October 8, 2025 at 1:38:57 PM**: BUY 1 QQQ @ 521,07€/share (521,07€)
@@ -53,7 +54,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **September 9, 2025 at 7:57:58 AM**: BUY 2 PEP @ 120,54€/share (241,08€)
 - **September 9, 2025 at 7:57:58 AM**: SELL 2 NVDA @ 143,16€/share (286,32€)
 - **September 8, 2025 at 1:38:53 PM**: SELL 1 AMD @ 128,08€/share (128,08€)
-- **September 5, 2025 at 1:36:22 PM**: SELL 1 AMD @ 131,59€/share (131,59€)
 
 <!-- auto end -->
 
