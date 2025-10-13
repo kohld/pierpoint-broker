@@ -161,12 +161,52 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 
 ---
 
-## Disclaimer
-
-This is an experimental AI trading agent for educational purposes. Real trading involves significant risk. Never invest money you cannot afford to lose.
-
 ## License
 
 The idea and foundational components of this project are based on work by [Anand Chowdhary](https://anandchowdhary.com) and the [priced-in](https://github.com/AnandChowdhary/priced-in) project. The original project is also distributed under the MIT License. This project continues to honor the terms and spirit of the MIT License as applied to both the original and derivative works.
 
 [MIT](./LICENSE) © [Dennes Kohl](https://kohld.github.io/)
+
+---
+
+## Legal Notice / Rechtlicher Hinweis
+
+**No Investment Advice or Trading Recommendation**
+
+This project is for educational, research, and experimental purposes only. The software, content, analyses, and automated trading decisions provided here do **not constitute investment advice, financial advice, trading recommendations, or solicitation to buy or sell securities**.
+
+**Important Notes:**
+
+- The author assumes no liability for financial losses resulting from the use of this software
+- The software is provided "as is" without any warranty
+- Any investment decision is made at your own risk
+- No guarantee is given for the accuracy, completeness, or timeliness of the data
+- Automated trading of securities can lead to significant losses
+- This tool does not replace professional financial advice from licensed advisors
+
+**Regulatory Notice:**
+
+This project does not constitute a financial service within the meaning of the German Banking Act (KWG) or the Securities Trading Act (WpHG) and is not subject to supervision by the German Federal Financial Supervisory Authority (BaFin).
+
+Users should seek independent professional advice before making any investment decisions and inform themselves about the applicable legal framework in their jurisdiction.
+
+---
+
+**Keine Anlageberatung oder Handelsempfehlung**
+
+Dieses Projekt dient ausschließlich zu Bildungs-, Forschungs- und Experimentierzwecken. Die hier bereitgestellte Software, alle Inhalte, Analysen und automatisierten Handelsentscheidungen stellen **keine Anlageberatung, Finanzberatung, Handelsempfehlung oder Aufforderung zum Kauf oder Verkauf von Wertpapieren** dar.
+
+**Wichtige Hinweise:**
+
+- Der Autor übernimmt keine Haftung für finanzielle Verluste, die durch die Nutzung dieser Software entstehen
+- Die Software wird "wie besehen" ohne jegliche Gewährleistung bereitgestellt
+- Jede Investitionsentscheidung erfolgt auf eigenes Risiko
+- Es wird keine Garantie für die Richtigkeit, Vollständigkeit oder Aktualität der Daten gegeben
+- Der automatisierte Handel mit Wertpapieren kann zu erheblichen Verlusten führen
+- Dieses Tool ersetzt keine professionelle Finanzberatung durch zugelassene Berater
+
+**Regulatorischer Hinweis:**
+
+Dieses Projekt stellt keine Finanzdienstleistung im Sinne des Kreditwesengesetzes (KWG) oder des Wertpapierhandelsgesetzes (WpHG) dar und unterliegt nicht der Aufsicht durch die Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin).
+
+Nutzer sollten vor jeder Investitionsentscheidung unabhängigen, professionellen Rat einholen und sich über die geltenden rechtlichen Rahmenbedingungen in ihrer Jurisdiktion informieren.
