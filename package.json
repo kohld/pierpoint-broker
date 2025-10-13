@@ -4,8 +4,16 @@
     "description": "",
     "main": "agent.ts",
     "scripts": {
+        "prepare": "husky install",
         "start": "tsx run.ts",
-        "test": "jest --passWithNoTests --runInBand"
+        "test": "jest --passWithNoTests --runInBand",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint --fix"
+        ]
     },
     "repository": {
         "type": "git",
@@ -27,11 +35,18 @@
         "yahoo-finance2": "^2.13.3"
     },
     "devDependencies": {
+        "@types/jest": "^30.0.0",
         "@types/node": "^24.7.0",
-        "tsx": "^4.20.6",
-        "typescript": "^5.9.3",
+        "@typescript-eslint/eslint-plugin": "^8.46.0",
+        "@typescript-eslint/parser": "^8.46.0",
+        "eslint": "^9.37.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
+        "husky": "^9.1.7",
         "jest": "^30.2.0",
+        "lint-staged": "^16.2.4",
         "ts-jest": "^29.4.4",
-        "@types/jest": "^30.0.0"
+        "tsx": "^4.20.6",
+        "typescript": "^5.9.3"
     }
 }

@@ -15,8 +15,8 @@ export const convertCurrency = async (
   amount: number,
   fromCurrency: string,
   toCurrency: string,
-  yahooFinance: any,
-  log: (msg: string) => void
+  yahooFinance: typeof import("yahoo-finance2").default,
+  log: (msg: string) => void,
 ): Promise<number> => {
   if (fromCurrency === toCurrency) return amount;
 
@@ -25,14 +25,16 @@ export const convertCurrency = async (
     const quote = await yahooFinance.quote(exchangeSymbol);
     const rate = quote.regularMarketPrice;
 
-    if (rate && typeof rate === 'number' && rate > 0) {
+    if (rate && typeof rate === "number" && rate > 0) {
       log(`💱 Exchange rate ${fromCurrency}/${toCurrency}: ${rate}`);
       return Math.round(amount * rate * 100) / 100;
     }
 
     throw new Error(`Invalid exchange rate for ${fromCurrency}/${toCurrency}`);
   } catch (error) {
-    log(`⚠️ Currency conversion failed: ${error instanceof Error ? error.message : String(error)}`);
+    log(
+      `⚠️ Currency conversion failed: ${error instanceof Error ? error.message : String(error)}`,
+    );
     throw error;
   }
 };
