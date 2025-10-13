@@ -2,13 +2,8 @@ import { jest } from "@jest/globals";
 
 process.env.OPENAI_API_KEY = "test_key";
 
-import {
-  getStockPrice,
-  getPortfolio,
-  calculateNetWorth,
-  buyTool,
-  sellTool,
-} from "../agent";
+import { getStockPrice, getPortfolio, calculateNetWorth } from "../lib/core";
+import { buyTool, sellTool } from "../lib/tools";
 import { Portfolio } from "../lib/definitions";
 import yahooFinance from "yahoo-finance2";
 import * as fs from "fs/promises";
@@ -19,16 +14,6 @@ type MockQuote = {
 
 const mockedFs = fs as jest.Mocked<typeof fs>;
 const mockedYahooFinance = yahooFinance as jest.Mocked<typeof yahooFinance>;
-
-jest.mock("../agent", () => {
-  const originalModule = jest.requireActual(
-    "../agent",
-  ) as typeof import("../agent");
-  return {
-    ...originalModule,
-    runAgent: jest.fn(),
-  };
-});
 
 jest.mock("fs/promises");
 jest.mock("fs", () => ({
@@ -127,7 +112,7 @@ describe("Agent Tests", () => {
       } as MockQuote);
 
       const result = await (
-        buyTool as {
+        buyTool as unknown as {
           execute: (args: {
             ticker: string;
             shares: number;
@@ -159,7 +144,7 @@ describe("Agent Tests", () => {
       } as MockQuote);
 
       const result = await (
-        buyTool as {
+        buyTool as unknown as {
           execute: (args: {
             ticker: string;
             shares: number;
@@ -187,7 +172,7 @@ describe("Agent Tests", () => {
       } as MockQuote);
 
       const result = await (
-        sellTool as {
+        sellTool as unknown as {
           execute: (args: {
             ticker: string;
             shares: number;
@@ -216,7 +201,7 @@ describe("Agent Tests", () => {
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
 
       const result = await (
-        sellTool as {
+        sellTool as unknown as {
           execute: (args: {
             ticker: string;
             shares: number;

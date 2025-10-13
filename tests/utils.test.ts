@@ -7,7 +7,13 @@ describe("convertCurrency", () => {
   const mockLog = jest.fn();
 
   it("returns the same amount if fromCurrency equals toCurrency", async () => {
-    const result = await convertCurrency(100, "USD", "USD", {}, mockLog);
+    const result = await convertCurrency(
+      100,
+      "USD",
+      "USD",
+      {} as typeof import("yahoo-finance2").default,
+      mockLog,
+    );
     expect(result).toBe(100);
     expect(mockLog).not.toHaveBeenCalled();
   });
@@ -15,7 +21,7 @@ describe("convertCurrency", () => {
   it("converts amount using valid exchange rate", async () => {
     const mockYahooFinance = {
       quote: jest.fn().mockResolvedValue({ regularMarketPrice: 0.85 }),
-    };
+    } as unknown as typeof import("yahoo-finance2").default;
     const result = await convertCurrency(
       200,
       "USD",
@@ -33,7 +39,7 @@ describe("convertCurrency", () => {
   it("throws if exchange rate is invalid (zero)", async () => {
     const mockYahooFinance = {
       quote: jest.fn().mockResolvedValue({ regularMarketPrice: 0 }),
-    };
+    } as unknown as typeof import("yahoo-finance2").default;
     await expect(
       convertCurrency(50, "USD", "EUR", mockYahooFinance, mockLog),
     ).rejects.toThrow("Invalid exchange rate for USD/EUR");
@@ -45,7 +51,7 @@ describe("convertCurrency", () => {
   it("throws if exchange rate is invalid (negative)", async () => {
     const mockYahooFinance = {
       quote: jest.fn().mockResolvedValue({ regularMarketPrice: -1 }),
-    };
+    } as unknown as typeof import("yahoo-finance2").default;
     await expect(
       convertCurrency(50, "USD", "EUR", mockYahooFinance, mockLog),
     ).rejects.toThrow("Invalid exchange rate for USD/EUR");
@@ -57,7 +63,7 @@ describe("convertCurrency", () => {
   it("throws and logs if yahooFinance.quote throws", async () => {
     const mockYahooFinance = {
       quote: jest.fn().mockRejectedValue(new Error("API error")),
-    };
+    } as unknown as typeof import("yahoo-finance2").default;
     await expect(
       convertCurrency(10, "USD", "EUR", mockYahooFinance, mockLog),
     ).rejects.toThrow("API error");
