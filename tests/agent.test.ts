@@ -2,24 +2,22 @@ import { jest } from "@jest/globals";
 
 process.env.OPENAI_API_KEY = "test_key";
 
-import { getStockPrice, getPortfolio, calculateNetWorth } from "../lib/core";
-import { buyTool, sellTool } from "../lib/tools";
-import { Portfolio } from "../lib/definitions";
-import yahooFinance from "yahoo-finance2";
-import * as fs from "fs/promises";
-
-type MockQuote = {
-  regularMarketPrice?: number;
-};
-
-const mockedFs = fs as jest.Mocked<typeof fs>;
-const mockedYahooFinance = yahooFinance as jest.Mocked<typeof yahooFinance>;
-
+// Mock modules BEFORE importing anything that uses them
 jest.mock("fs/promises");
 jest.mock("fs", () => ({
   existsSync: jest.fn(),
 }));
-jest.mock("yahoo-finance2");
+
+jest.mock("yahoo-finance2", () => {
+  const mockQuote = jest.fn();
+  return {
+    __esModule: true,
+    default: {
+      quote: mockQuote,
+    },
+    quote: mockQuote,
+  };
+});
 
 jest.mock("../lib/utils", () => ({
   convertCurrency: jest.fn((price) => Promise.resolve(price)),
@@ -39,6 +37,17 @@ jest.mock("@openai/agents", () => ({
   tool: jest.fn((t) => t),
 }));
 
+// NOW import the modules that depend on the mocks
+import { getStockPrice, getPortfolio, calculateNetWorth } from "../lib/core";
+import { buyTool, sellTool } from "../lib/tools";
+import { Portfolio } from "../lib/definitions";
+import yahooFinance from "yahoo-finance2";
+import * as fs from "fs/promises";
+
+// Use jest.mocked for proper type inference
+const mockedFs = jest.mocked(fs);
+const mockedYahooFinance = jest.mocked(yahooFinance);
+
 describe("Agent Tests", () => {
   beforeEach(() => {
     // Reset mocks before each test
@@ -49,7 +58,7 @@ describe("Agent Tests", () => {
     it("should return the stock price", async () => {
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: 150.0,
-      } as MockQuote);
+      });
 
       const price = await getStockPrice("AAPL");
       expect(price).toBe(150.0);
@@ -59,7 +68,7 @@ describe("Agent Tests", () => {
     it("should throw an error if fetching fails", async () => {
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: undefined,
-      } as MockQuote);
+      });
 
       await expect(getStockPrice("AAPL")).rejects.toThrow(
         "Failed to fetch stock price",
@@ -92,7 +101,7 @@ describe("Agent Tests", () => {
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: 150.0,
-      } as MockQuote);
+      });
 
       const netWorth = await calculateNetWorth();
       expect(netWorth).toBe(2500); // 1000 (cash) + 10 * 150 (holdings)
@@ -109,7 +118,7 @@ describe("Agent Tests", () => {
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: 150.0,
-      } as MockQuote);
+      });
 
       const result = await (
         buyTool as unknown as {
@@ -141,7 +150,7 @@ describe("Agent Tests", () => {
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: 150.0,
-      } as MockQuote);
+      });
 
       const result = await (
         buyTool as unknown as {
@@ -169,7 +178,7 @@ describe("Agent Tests", () => {
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
       mockedYahooFinance.quote.mockResolvedValue({
         regularMarketPrice: 200.0,
-      } as MockQuote);
+      });
 
       const result = await (
         sellTool as unknown as {
