@@ -1,9 +1,10 @@
 {
-  "cash": 811.84,
+  "cash": 262.54,
   "holdings": {
     "NVDA": 2,
     "QQQ": 1,
-    "PEP": 3
+    "PEP": 3,
+    "RCL": 2
   },
   "history": [
     {
@@ -565,6 +566,14 @@
       "shares": 1,
       "price": 164.24,
       "total": 164.24
+    },
+    {
+      "date": "2025-10-28T07:43:08.026Z",
+      "type": "buy",
+      "ticker": "RCL",
+      "shares": 2,
+      "price": 274.65,
+      "total": 549.3
     }
   ]
 }
