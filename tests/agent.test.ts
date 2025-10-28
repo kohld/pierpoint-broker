@@ -8,14 +8,17 @@ jest.mock("fs", () => ({
   existsSync: jest.fn(),
 }));
 
+// Create shared mock quote function
+const mockQuoteFn = jest.fn() as jest.MockedFunction<
+  (ticker: string) => Promise<{ regularMarketPrice?: number }>
+>;
+
 jest.mock("yahoo-finance2", () => {
-  const mockQuote = jest.fn();
   return {
     __esModule: true,
-    default: {
-      quote: mockQuote,
-    },
-    quote: mockQuote,
+    default: jest.fn().mockImplementation(() => ({
+      quote: mockQuoteFn,
+    })),
   };
 });
 
@@ -41,12 +44,10 @@ jest.mock("@openai/agents", () => ({
 import { getStockPrice, getPortfolio, calculateNetWorth } from "../lib/core";
 import { buyTool, sellTool } from "../lib/tools";
 import { Portfolio } from "../lib/definitions";
-import yahooFinance from "yahoo-finance2";
 import * as fs from "fs/promises";
 
 // Use jest.mocked for proper type inference
 const mockedFs = jest.mocked(fs);
-const mockedYahooFinance = jest.mocked(yahooFinance);
 
 describe("Agent Tests", () => {
   beforeEach(() => {
@@ -56,17 +57,17 @@ describe("Agent Tests", () => {
 
   describe("getStockPrice", () => {
     it("should return the stock price", async () => {
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: 150.0,
       });
 
       const price = await getStockPrice("AAPL");
       expect(price).toBe(150.0);
-      expect(mockedYahooFinance.quote).toHaveBeenCalledWith("AAPL");
+      expect(mockQuoteFn).toHaveBeenCalledWith("AAPL");
     });
 
     it("should throw an error if fetching fails", async () => {
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: undefined,
       });
 
@@ -99,7 +100,7 @@ describe("Agent Tests", () => {
         history: [],
       };
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: 150.0,
       });
 
@@ -116,7 +117,7 @@ describe("Agent Tests", () => {
         history: [],
       };
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: 150.0,
       });
 
@@ -148,7 +149,7 @@ describe("Agent Tests", () => {
         history: [],
       };
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: 150.0,
       });
 
@@ -176,7 +177,7 @@ describe("Agent Tests", () => {
         history: [],
       };
       mockedFs.readFile.mockResolvedValue(JSON.stringify(mockPortfolio));
-      mockedYahooFinance.quote.mockResolvedValue({
+      mockQuoteFn.mockResolvedValue({
         regularMarketPrice: 200.0,
       });
 

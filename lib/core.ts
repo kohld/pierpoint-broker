@@ -9,12 +9,15 @@
 //External dependencies
 import "dotenv/config";
 import OpenAI from "openai";
-import yahooFinance from "yahoo-finance2";
+import YahooFinance from "yahoo-finance2";
 // Node-Builtins
 import { appendFile, readFile } from "node:fs/promises";
 // Custom codebase
 import { convertCurrency } from "./utils";
 import { portfolioSchema, type Portfolio } from "./definitions";
+
+// Create yahoo-finance2 instance
+const yahooFinance = new YahooFinance();
 
 /**
  * Configuration variables for the broker agent.
@@ -78,23 +81,28 @@ export const webSearch = async (query: string): Promise<string> => {
  * @throws If the stock price cannot be retrieved.
  */
 export const getStockPrice = async (ticker: string): Promise<number> => {
-  const quote = await yahooFinance.quote(ticker);
-  const priceUSD = quote.regularMarketPrice;
+  try {
+    const quote = await yahooFinance.quote(ticker);
+    const priceUSD = quote.regularMarketPrice;
 
-  if (!priceUSD) {
-    throw new Error("Failed to fetch stock price");
+    if (!priceUSD) {
+      throw new Error("Failed to fetch stock price");
+    }
+    const priceEUR = await convertCurrency(
+      priceUSD,
+      "USD",
+      "EUR",
+      yahooFinance,
+      log,
+    );
+
+    console.log(`Price of ${ticker}: $${priceUSD} (€${priceEUR})`);
+
+    return priceEUR;
+  } catch (error) {
+    log(`⚠️ Failed to get price for ${ticker}: ${error}`);
+    throw error;
   }
-  const priceEUR = await convertCurrency(
-    priceUSD,
-    "USD",
-    "EUR",
-    yahooFinance,
-    log,
-  );
-
-  console.log(`Price of ${ticker}: $${priceUSD} (€${priceEUR})`);
-
-  return priceEUR;
 };
 
 /**

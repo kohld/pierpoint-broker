@@ -15,7 +15,7 @@ export const convertCurrency = async (
   amount: number,
   fromCurrency: string,
   toCurrency: string,
-  yahooFinance: typeof import("yahoo-finance2").default,
+  yahooFinance: InstanceType<typeof import("yahoo-finance2").default>,
   log: (msg: string) => void,
 ): Promise<number> => {
   if (fromCurrency === toCurrency) return amount;
