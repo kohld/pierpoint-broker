@@ -1,9 +1,9 @@
 {
-  "cash": 442.84,
+  "cash": 570.34,
   "holdings": {
     "NVDA": 1,
     "QQQ": 1,
-    "PEP": 3,
+    "PEP": 2,
     "RCL": 2
   },
   "history": [
@@ -582,6 +582,14 @@
       "shares": 1,
       "price": 180.3,
       "total": 180.3
+    },
+    {
+      "date": "2025-10-30T13:40:20.237Z",
+      "type": "sell",
+      "ticker": "PEP",
+      "shares": 1,
+      "price": 127.5,
+      "total": 127.5
     }
   ]
 }
