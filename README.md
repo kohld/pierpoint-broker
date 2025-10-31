@@ -21,20 +21,24 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 2.031,04 € | 103,10% return
+## 💰 Portfolio value: 2.044,98 € | 104,50% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 570,34 € |
-| NVDA | 1 | 174,55 € |
-| QQQ | 1 | 542,73 € |
-| PEP | 2 | 254,74 € |
-| RCL | 2 | 488,68 € |
+| Cash | - | 209,66 € |
+| NVDA | 1 | 179,68 € |
+| QQQ | 1 | 548,06 € |
+| RCL | 2 | 494,04 € |
+| TSLA | 1 | 388,78 € |
+| AMD | 1 | 224,76 € |
 
 ### 📈 Recent trades
 
+- **October 31, 2025 at 1:39:27 PM**: BUY 1 AMD @ 225,08€/share (225,08€)
+- **October 31, 2025 at 1:39:27 PM**: BUY 1 TSLA @ 388,74€/share (388,74€)
+- **October 31, 2025 at 1:39:08 PM**: SELL 2 PEP @ 126,57€/share (253,14€)
 - **October 30, 2025 at 1:40:20 PM**: SELL 1 PEP @ 127,50€/share (127,50€)
 - **October 29, 2025 at 1:41:38 PM**: SELL 1 NVDA @ 180,30€/share (180,30€)
 - **October 28, 2025 at 7:43:08 AM**: BUY 2 RCL @ 274,65€/share (549,30€)
@@ -52,9 +56,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **October 10, 2025 at 1:38:10 PM**: SELL 1 NVDA @ 166,56€/share (166,56€)
 - **October 9, 2025 at 1:39:29 PM**: BUY 1 NVDA @ 164,96€/share (164,96€)
 - **October 9, 2025 at 1:39:14 PM**: SELL 1 QQQ @ 525,98€/share (525,98€)
-- **October 8, 2025 at 1:38:57 PM**: BUY 1 QQQ @ 521,07€/share (521,07€)
-- **October 7, 2025 at 1:40:03 PM**: SELL 1 NVDA @ 160,19€/share (160,19€)
-- **October 6, 2025 at 1:38:41 PM**: SELL 1 QQQ @ 519,76€/share (519,76€)
 
 <!-- auto end -->
 

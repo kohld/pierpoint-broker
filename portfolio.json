@@ -1,10 +1,11 @@
 {
-  "cash": 570.34,
+  "cash": 209.66,
   "holdings": {
     "NVDA": 1,
     "QQQ": 1,
-    "PEP": 2,
-    "RCL": 2
+    "RCL": 2,
+    "TSLA": 1,
+    "AMD": 1
   },
   "history": [
     {
@@ -590,6 +591,30 @@
       "shares": 1,
       "price": 127.5,
       "total": 127.5
+    },
+    {
+      "date": "2025-10-31T13:39:08.689Z",
+      "type": "sell",
+      "ticker": "PEP",
+      "shares": 2,
+      "price": 126.57,
+      "total": 253.14
+    },
+    {
+      "date": "2025-10-31T13:39:27.349Z",
+      "type": "buy",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 388.74,
+      "total": 388.74
+    },
+    {
+      "date": "2025-10-31T13:39:27.353Z",
+      "type": "buy",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 225.08,
+      "total": 225.08
     }
   ]
 }
