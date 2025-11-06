@@ -1,9 +1,8 @@
 {
-  "cash": 748.78,
+  "cash": 1149.07,
   "holdings": {
     "NVDA": 1,
     "RCL": 2,
-    "TSLA": 1,
     "AMD": 1
   },
   "history": [
@@ -622,6 +621,14 @@
       "shares": 1,
       "price": 539.12,
       "total": 539.12
+    },
+    {
+      "date": "2025-11-06T13:40:14.786Z",
+      "type": "sell",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 400.29,
+      "total": 400.29
     }
   ]
 }
