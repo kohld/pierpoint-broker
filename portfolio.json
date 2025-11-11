@@ -1,9 +1,8 @@
 {
-  "cash": 1370.29,
+  "cash": 1580.63,
   "holdings": {
     "NVDA": 1,
-    "RCL": 1,
-    "AMD": 1
+    "RCL": 1
   },
   "history": [
     {
@@ -637,6 +636,14 @@
       "shares": 1,
       "price": 221.22,
       "total": 221.22
+    },
+    {
+      "date": "2025-11-11T13:39:24.532Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 210.34,
+      "total": 210.34
     }
   ]
 }

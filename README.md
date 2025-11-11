@@ -21,19 +21,19 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.955,89 € | 95,59% return
+## 💰 Portfolio value: 1.980,67 € | 98,07% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 1.370,29 € |
-| NVDA | 1 | 162,58 € |
-| RCL | 1 | 221,22 € |
-| AMD | 1 | 201,80 € |
+| Cash | - | 1.580,63 € |
+| NVDA | 1 | 171,60 € |
+| RCL | 1 | 228,44 € |
 
 ### 📈 Recent trades
 
+- **November 11, 2025 at 1:39:24 PM**: SELL 1 AMD @ 210,34€/share (210,34€)
 - **November 10, 2025 at 1:40:17 PM**: SELL 1 RCL @ 221,22€/share (221,22€)
 - **November 6, 2025 at 1:40:14 PM**: SELL 1 TSLA @ 400,29€/share (400,29€)
 - **November 5, 2025 at 1:40:42 PM**: SELL 1 QQQ @ 539,12€/share (539,12€)
@@ -53,7 +53,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **October 16, 2025 at 1:40:08 PM**: SELL 1 AMD @ 203,52€/share (203,52€)
 - **October 15, 2025 at 1:40:16 PM**: SELL 1 AMD @ 191,98€/share (191,98€)
 - **October 14, 2025 at 1:39:33 PM**: SELL 1 PEP @ 129,06€/share (129,06€)
-- **October 13, 2025 at 8:50:48 AM**: BUY 3 AMD @ 185,34€/share (556,02€)
 
 <!-- auto end -->
 
