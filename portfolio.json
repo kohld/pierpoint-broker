@@ -1,10 +1,10 @@
 {
-  "cash": 301.19,
+  "cash": 292.55,
   "holdings": {
     "NVDA": 1,
-    "RCL": 1,
     "QQQ": 2,
-    "AMD": 1
+    "AMD": 1,
+    "AAPL": 1
   },
   "history": [
     {
@@ -662,6 +662,22 @@
       "shares": 1,
       "price": 205.24,
       "total": 205.24
+    },
+    {
+      "date": "2025-11-13T13:41:10.224Z",
+      "type": "sell",
+      "ticker": "RCL",
+      "shares": 1,
+      "price": 226.79,
+      "total": 226.79
+    },
+    {
+      "date": "2025-11-13T13:41:21.058Z",
+      "type": "buy",
+      "ticker": "AAPL",
+      "shares": 1,
+      "price": 235.43,
+      "total": 235.43
     }
   ]
 }
