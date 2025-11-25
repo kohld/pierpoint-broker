@@ -226,7 +226,7 @@ export const thinkTool = tool({
     thought_process: z.array(z.string()),
   }),
   async execute({ thought_process }) {
-    thought_process.forEach((thought) => log(`🧠 ${thought}`));
+    thought_process.forEach((thought: string) => log(`🧠 ${thought}`));
     return `Completed thinking with ${thought_process.length} steps of reasoning.`;
   },
 });
