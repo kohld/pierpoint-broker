@@ -1,10 +1,10 @@
 {
-  "cash": 427.54,
+  "cash": 274.31,
   "holdings": {
     "NVDA": 1,
     "QQQ": 1,
     "AMD": 3,
-    "AAPL": 1
+    "AMZN": 2
   },
   "history": [
     {
@@ -710,6 +710,22 @@
       "shares": 2,
       "price": 176.55,
       "total": 353.1
+    },
+    {
+      "date": "2025-11-25T07:27:09.174Z",
+      "type": "sell",
+      "ticker": "AAPL",
+      "shares": 1,
+      "price": 239.33,
+      "total": 239.33
+    },
+    {
+      "date": "2025-11-25T07:27:09.192Z",
+      "type": "buy",
+      "ticker": "AMZN",
+      "shares": 2,
+      "price": 196.28,
+      "total": 392.56
     }
   ]
 }
