@@ -1,10 +1,11 @@
 {
-  "cash": 274.31,
+  "cash": 92.07,
   "holdings": {
     "NVDA": 1,
     "QQQ": 1,
-    "AMD": 3,
-    "AMZN": 2
+    "AMZN": 2,
+    "GOOGL": 2,
+    "KSS": 7
   },
   "history": [
     {
@@ -726,6 +727,30 @@
       "shares": 2,
       "price": 196.28,
       "total": 392.56
+    },
+    {
+      "date": "2025-11-25T15:29:46.869Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 3,
+      "price": 169.46,
+      "total": 508.38
+    },
+    {
+      "date": "2025-11-25T15:29:58.088Z",
+      "type": "buy",
+      "ticker": "GOOGL",
+      "shares": 2,
+      "price": 282.59,
+      "total": 565.18
+    },
+    {
+      "date": "2025-11-25T15:30:30.968Z",
+      "type": "buy",
+      "ticker": "KSS",
+      "shares": 7,
+      "price": 17.92,
+      "total": 125.44000000000001
     }
   ]
 }
