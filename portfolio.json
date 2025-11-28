@@ -1,11 +1,10 @@
 {
-  "cash": 92.07,
+  "cash": 82.1,
   "holdings": {
-    "NVDA": 1,
+    "NVDA": 2,
     "QQQ": 1,
     "AMZN": 2,
-    "GOOGL": 2,
-    "KSS": 7
+    "GOOGL": 2
   },
   "history": [
     {
@@ -751,6 +750,22 @@
       "shares": 7,
       "price": 17.92,
       "total": 125.44000000000001
+    },
+    {
+      "date": "2025-11-28T13:39:21.940Z",
+      "type": "sell",
+      "ticker": "KSS",
+      "shares": 7,
+      "price": 20.82,
+      "total": 145.74
+    },
+    {
+      "date": "2025-11-28T13:40:41.157Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 155.71,
+      "total": 155.71
     }
   ]
 }
