@@ -32,7 +32,7 @@ export const config = {
   API_KEY: process.env.OPENAI_API_KEY,
   MODEL_NAME: process.env.MODEL_NAME || "gpt-4.1",
   CURRENCY: process.env.CURRENCY || "EUR",
-  MAX_TURNS: 50,
+  MAX_TURNS: 40,
 };
 
 if (!config.API_KEY) throw new Error("OPENAI_API_KEY is not set");
