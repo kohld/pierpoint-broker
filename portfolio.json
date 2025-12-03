@@ -1,10 +1,11 @@
 {
-  "cash": 82.1,
+  "cash": 60.49,
   "holdings": {
     "NVDA": 2,
-    "QQQ": 1,
     "AMZN": 2,
-    "GOOGL": 2
+    "GOOGL": 2,
+    "INTC": 8,
+    "MRVL": 3
   },
   "history": [
     {
@@ -766,6 +767,30 @@
       "shares": 1,
       "price": 155.71,
       "total": 155.71
+    },
+    {
+      "date": "2025-12-03T14:55:46.254Z",
+      "type": "sell",
+      "ticker": "QQQ",
+      "shares": 1,
+      "price": 531.06,
+      "total": 531.06
+    },
+    {
+      "date": "2025-12-03T14:55:55.147Z",
+      "type": "buy",
+      "ticker": "INTC",
+      "shares": 8,
+      "price": 37.07,
+      "total": 296.56
+    },
+    {
+      "date": "2025-12-03T14:55:55.173Z",
+      "type": "buy",
+      "ticker": "MRVL",
+      "shares": 3,
+      "price": 85.37,
+      "total": 256.11
     }
   ]
 }
