@@ -1,12 +1,19 @@
 {
-  "cash": 60.49,
+  "cash": 316.24,
   "holdings": {
     "NVDA": 2,
     "AMZN": 2,
     "GOOGL": 2,
-    "INTC": 8,
-    "MRVL": 3
+    "INTC": 8
   },
   "history": [
+    {
+      "date": "2025-12-03T15:08:21.649Z",
+      "type": "sell",
+      "ticker": "MRVL",
+      "shares": 3,
+      "price": 85.25,
+      "total": 255.75
+    }
   ]
 }
