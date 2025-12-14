@@ -1,10 +1,10 @@
 {
-  "cash": 316.24,
+  "cash": 98.94,
   "holdings": {
     "NVDA": 2,
     "AMZN": 2,
     "GOOGL": 2,
-    "INTC": 8
+    "RCL": 2
   },
   "history": [
     {
@@ -14,6 +14,22 @@
       "shares": 3,
       "price": 85.25,
       "total": 255.75
+    },
+    {
+      "date": "2025-12-14T13:03:55.989Z",
+      "type": "sell",
+      "ticker": "INTC",
+      "shares": 8,
+      "price": 32.2,
+      "total": 257.6
+    },
+    {
+      "date": "2025-12-14T13:04:00.039Z",
+      "type": "buy",
+      "ticker": "RCL",
+      "shares": 2,
+      "price": 237.45,
+      "total": 474.9
     }
   ]
 }

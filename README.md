@@ -21,20 +21,22 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.818,46 € | 81,85% return
+## 💰 Portfolio value: 1.783,82 € | 78,38% return
 
 ### 📊 Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 316,24 € |
-| NVDA | 2 | 308,26 € |
-| AMZN | 2 | 392,36 € |
-| GOOGL | 2 | 532,32 € |
-| INTC | 8 | 269,28 € |
+| Cash | - | 98,94 € |
+| NVDA | 2 | 298,06 € |
+| AMZN | 2 | 385,20 € |
+| GOOGL | 2 | 526,72 € |
+| RCL | 2 | 474,90 € |
 
 ### 📈 Recent trades
 
+- **December 14, 2025 at 1:04:00 PM**: BUY 2 RCL @ 237,45€/share (474,90€)
+- **December 14, 2025 at 1:03:55 PM**: SELL 8 INTC @ 32,20€/share (257,60€)
 - **December 3, 2025 at 3:08:21 PM**: SELL 3 MRVL @ 85,25€/share (255,75€)
 
 <!-- auto end -->
@@ -55,7 +57,7 @@ cd pierpoint-broker
 2. Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 3. Set up environment variables:
@@ -67,7 +69,7 @@ cp .env.example .env
 4. Run the agent:
 
 ```bash
-npm start
+bun start
 ```
 
 ## Running the agent
@@ -103,7 +105,7 @@ The agent's portfolio is stored in `portfolio.json`:
 Run the trading agent manually:
 
 ```bash
-npm start
+bun start
 ```
 
 This will execute one trading session where the agent will:
