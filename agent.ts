@@ -74,7 +74,7 @@ export const updateReadme = async () => {
     const recentTrades = portfolio.history.slice(-20).reverse();
     const portfolioSection = `<!-- auto start -->
 
-## 💰 Portfolio value: ${totalValue.toLocaleString("de-DE", {
+## Portfolio value: ${totalValue.toLocaleString("de-DE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })} ${CURRENCY_SYMBOL} | ${(
@@ -85,7 +85,7 @@ export const updateReadme = async () => {
       maximumFractionDigits: 2,
     })}% return
 
-### 📊 Holdings
+### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
@@ -97,7 +97,7 @@ ${Object.entries(holdings)
   )
   .join("\n")}
 
-### 📈 Recent trades
+### Recent trades
 
 ${
   recentTrades.length > 0

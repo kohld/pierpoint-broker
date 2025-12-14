@@ -495,12 +495,12 @@ const updateReadme = async () => {
     const annualizedReturn = await calculateAnnualizedReturn(portfolio);
     const portfolioSection = `<!-- auto start -->
         
-## 💰 Portfolio value: ${totalValue.toLocaleString("en-US", {
+## Portfolio value: ${totalValue.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })} ${CURRENCY_SYMBOL} | (${annualizedReturn}% CAGR)
 
-### 📊 Holdings
+### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
@@ -512,7 +512,7 @@ ${Object.entries(holdings)
   )
   .join("\n")}
 
-### 📈 Recent trades
+### Recent trades
 
 ${
   recentTrades.length > 0

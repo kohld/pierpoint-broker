@@ -8,22 +8,22 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 ## Table of Contents
 
-- [Portfolio value](#-portfolio-value)
-  - [Holdings](#-holdings)
-  - [Recent trades](#-recent-trades)
+- [Portfolio value](#portfolio-value)
+  - [Holdings](#holdings)
+  - [Recent trades](#recent-trades)
 - [Installation](#installation)
 - [Running the agent](#running-the-agent)
   - [Local execution](#local-execution)
   - [Automated execution via GitHub Actions](#automated-execution-via-github-actions)
     - [IMPORTANT: Free model selection for OpenRouter](#important-free-model-selection-for-openrouter)
-- [Disclaimer](#disclaimer)
 - [License](#license)
+- [Legal Notice / Rechtlicher Hinweis](#legal-notice--rechtlicher-hinweis)
 
 <!-- auto start -->
 
-## 💰 Portfolio value: 1.783,82 € | 78,38% return
+## Portfolio value: 1.783,82 € | 78,38% return
 
-### 📊 Holdings
+### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
@@ -33,7 +33,7 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 | GOOGL | 2 | 526,72 € |
 | RCL | 2 | 474,90 € |
 
-### 📈 Recent trades
+### Recent trades
 
 - **December 14, 2025 at 1:04:00 PM**: BUY 2 RCL @ 237,45€/share (474,90€)
 - **December 14, 2025 at 1:03:55 PM**: SELL 8 INTC @ 32,20€/share (257,60€)
