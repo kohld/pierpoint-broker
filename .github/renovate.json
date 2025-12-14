@@ -1,0 +1,102 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended"
+    ],
+    "timezone": "Europe/Berlin",
+    "schedule": [
+        "before 6am on monday"
+    ],
+    "labels": [
+        "dependencies"
+    ],
+    "assignees": [
+        "kohld"
+    ],
+    "prConcurrentLimit": 5,
+    "prHourlyLimit": 0,
+    "dependencyDashboard": true,
+    "semanticCommits": "enabled",
+    "rangeStrategy": "bump",
+    "bun": {
+        "enabled": true
+    },
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": [
+            "before 6am on monday"
+        ]
+    },
+    "packageRules": [
+        {
+            "description": "Use Bun as package manager",
+            "matchManagers": [
+                "npm"
+            ],
+            "rangeStrategy": "bump"
+        },
+        {
+            "description": "Auto-merge minor and patch updates",
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "automerge": true,
+            "automergeType": "pr",
+            "matchCurrentVersion": "!/^0/"
+        },
+        {
+            "description": "Group all non-major updates together",
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch"
+        },
+        {
+            "description": "Separate PRs for major updates",
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "automerge": false
+        },
+        {
+            "description": "Group ESLint packages",
+            "matchPackagePatterns": [
+                "^eslint",
+                "^@typescript-eslint"
+            ],
+            "groupName": "eslint packages"
+        },
+        {
+            "description": "Update GitHub Actions monthly",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "extends": [
+                "schedule:monthly"
+            ],
+            "automerge": true
+        },
+        {
+            "description": "Update Bun version in workflows",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "oven-sh/setup-bun"
+            ],
+            "groupName": "bun",
+            "automerge": true
+        }
+    ],
+    "vulnerabilityAlerts": {
+        "labels": [
+            "security"
+        ],
+        "assignees": [
+            "kohld"
+        ]
+    }
+}
