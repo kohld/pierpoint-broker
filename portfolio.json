@@ -1,9 +1,9 @@
 {
-  "cash": 98.94,
+  "cash": 360.32,
   "holdings": {
     "NVDA": 2,
     "AMZN": 2,
-    "GOOGL": 2,
+    "GOOGL": 1,
     "RCL": 2
   },
   "history": [
@@ -30,6 +30,14 @@
       "shares": 2,
       "price": 237.45,
       "total": 474.9
+    },
+    {
+      "date": "2025-12-17T13:41:23.428Z",
+      "type": "sell",
+      "ticker": "GOOGL",
+      "shares": 1,
+      "price": 261.38,
+      "total": 261.38
     }
   ]
 }
