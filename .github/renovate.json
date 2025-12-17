@@ -63,11 +63,11 @@
         },
         {
             "description": "Group ESLint packages",
-            "matchPackagePatterns": [
-                "^eslint",
-                "^@typescript-eslint"
-            ],
-            "groupName": "eslint packages"
+            "groupName": "eslint packages",
+            "matchPackageNames": [
+                "/^eslint/",
+                "/^@typescript-eslint/"
+            ]
         },
         {
             "description": "Update GitHub Actions monthly",
