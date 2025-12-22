@@ -1,7 +1,7 @@
 {
-  "cash": 69.2,
+  "cash": 223.2,
   "holdings": {
-    "NVDA": 4,
+    "NVDA": 3,
     "AMZN": 2,
     "GOOGL": 1,
     "RCL": 2
@@ -46,6 +46,14 @@
       "shares": 2,
       "price": 145.56,
       "total": 291.12
+    },
+    {
+      "date": "2025-12-22T13:41:28.327Z",
+      "type": "sell",
+      "ticker": "NVDA",
+      "shares": 1,
+      "price": 154,
+      "total": 154
     }
   ]
 }

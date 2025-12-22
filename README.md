@@ -21,20 +21,21 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.797,97 € | 79,80% return
+## Portfolio value: 1.833,10 € | 83,31% return
 
 ### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 69,20 € |
-| NVDA | 4 | 594,36 € |
-| AMZN | 2 | 386,98 € |
-| GOOGL | 1 | 258,09 € |
-| RCL | 2 | 489,34 € |
+| Cash | - | 223,20 € |
+| NVDA | 3 | 462,00 € |
+| AMZN | 2 | 386,90 € |
+| GOOGL | 1 | 261,36 € |
+| RCL | 2 | 499,64 € |
 
 ### Recent trades
 
+- **December 22, 2025 at 1:41:28 PM**: SELL 1 NVDA @ 154,00€/share (154,00€)
 - **December 18, 2025 at 1:42:14 PM**: BUY 2 NVDA @ 145,56€/share (291,12€)
 - **December 17, 2025 at 1:41:23 PM**: SELL 1 GOOGL @ 261,38€/share (261,38€)
 - **December 14, 2025 at 1:04:00 PM**: BUY 2 RCL @ 237,45€/share (474,90€)
