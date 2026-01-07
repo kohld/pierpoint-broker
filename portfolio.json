@@ -1,8 +1,8 @@
 {
-  "cash": 860.75,
+  "cash": 1066.75,
   "holdings": {
     "NVDA": 1,
-    "AMZN": 3,
+    "AMZN": 2,
     "RCL": 1
   },
   "history": [
@@ -93,6 +93,14 @@
       "shares": 1,
       "price": 161.92,
       "total": 161.92
+    },
+    {
+      "date": "2026-01-07T13:43:51.727Z",
+      "type": "sell",
+      "ticker": "AMZN",
+      "shares": 1,
+      "price": 206,
+      "total": 206
     }
   ]
 }
