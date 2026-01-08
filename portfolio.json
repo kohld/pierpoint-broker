@@ -1,9 +1,9 @@
 {
-  "cash": 1066.75,
+  "cash": 62.56,
   "holdings": {
-    "NVDA": 1,
+    "NVDA": 4,
     "AMZN": 2,
-    "RCL": 1
+    "RCL": 3
   },
   "history": [
     {
@@ -101,6 +101,22 @@
       "shares": 1,
       "price": 206,
       "total": 206
+    },
+    {
+      "date": "2026-01-08T13:43:42.358Z",
+      "type": "buy",
+      "ticker": "NVDA",
+      "shares": 3,
+      "price": 162.01,
+      "total": 486.03
+    },
+    {
+      "date": "2026-01-08T13:43:42.378Z",
+      "type": "buy",
+      "ticker": "RCL",
+      "shares": 2,
+      "price": 259.08,
+      "total": 518.16
     }
   ]
 }
