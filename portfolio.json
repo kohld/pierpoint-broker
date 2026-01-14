@@ -1,8 +1,9 @@
 {
-  "cash": 751.51,
+  "cash": 79.48,
   "holdings": {
     "NVDA": 4,
-    "RCL": 2
+    "RCL": 2,
+    "AAPL": 3
   },
   "history": [
     {
@@ -140,6 +141,14 @@
       "shares": 1,
       "price": 211.25,
       "total": 211.25
+    },
+    {
+      "date": "2026-01-14T13:43:36.860Z",
+      "type": "buy",
+      "ticker": "AAPL",
+      "shares": 3,
+      "price": 224.01,
+      "total": 672.03
     }
   ]
 }
