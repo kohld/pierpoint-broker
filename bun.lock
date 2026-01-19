@@ -5,14 +5,14 @@
     "": {
       "name": "pierpoint-broker",
       "dependencies": {
-        "@openai/agents": "^0.3.7",
+        "@openai/agents": "^0.4.0",
         "dotenv": "^17.2.3",
         "tiny-invariant": "^1.3.3",
         "yahoo-finance2": "^3.11.2",
       },
       "devDependencies": {
         "@types/jest": "^30.0.0",
-        "@types/node": "^25.0.6",
+        "@types/node": "^25.0.9",
         "@typescript-eslint/eslint-plugin": "^8.53.0",
         "@typescript-eslint/parser": "^8.53.0",
         "eslint": "^9.39.2",
@@ -191,13 +191,13 @@
 
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@0.2.12", "", { "dependencies": { "@emnapi/core": "^1.4.3", "@emnapi/runtime": "^1.4.3", "@tybys/wasm-util": "^0.10.0" } }, "sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ=="],
 
-    "@openai/agents": ["@openai/agents@0.3.7", "", { "dependencies": { "@openai/agents-core": "0.3.7", "@openai/agents-openai": "0.3.7", "@openai/agents-realtime": "0.3.7", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^3.25.40 || ^4.0" } }, "sha512-9QKr6Gqb0yy0VLsyKSjxUoHHxN8j0fqtlZ1YTNmo2j5SqRcFG5LdSVyaQbkeJ3sWsCUugCXvEBEir7yAbxjSRw=="],
+    "@openai/agents": ["@openai/agents@0.4.0", "", { "dependencies": { "@openai/agents-core": "0.4.0", "@openai/agents-openai": "0.4.0", "@openai/agents-realtime": "0.4.0", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-EptbN62T0lLcmd56gdCxLJNc7kKvrbekhl+i9ZCB2USVtJU+sCHBne285lGz8GmM9HfmmeEp9+9THgL+wqBaPQ=="],
 
-    "@openai/agents-core": ["@openai/agents-core@0.3.7", "", { "dependencies": { "debug": "^4.4.0", "openai": "^6" }, "optionalDependencies": { "@modelcontextprotocol/sdk": "^1.24.0" }, "peerDependencies": { "zod": "^3.25.40 || ^4.0" }, "optionalPeers": ["zod"] }, "sha512-Ya1sPc8UyHXxgQjNWN1sn/vFNP4CRdT/0SWd0tIc+kHgYuxrvRjwSfWNBqXc70XOZGS5bWWaRTqJBMwQt6AlYg=="],
+    "@openai/agents-core": ["@openai/agents-core@0.4.0", "", { "dependencies": { "debug": "^4.4.0", "openai": "^6" }, "optionalDependencies": { "@modelcontextprotocol/sdk": "^1.25.2" }, "peerDependencies": { "zod": "^4.0.0" }, "optionalPeers": ["zod"] }, "sha512-5FLkBsgxICjlh875ZoF9TFG3qd5pMiLiGNd65Z2cj2JeWaZhZYkMnF0Aj9HL8N7DjUY0foPikGzLqQEYrakSeA=="],
 
-    "@openai/agents-openai": ["@openai/agents-openai@0.3.7", "", { "dependencies": { "@openai/agents-core": "0.3.7", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^3.25.40 || ^4.0" } }, "sha512-xjFNFeKDt3TkAWfoXhvUG3sdBQJ/R3FWd/s3Dv1rt1fdcFCaS1BUKkXX1fu79oo24H5DV8zZJfuUu6Bgi0ZAHw=="],
+    "@openai/agents-openai": ["@openai/agents-openai@0.4.0", "", { "dependencies": { "@openai/agents-core": "0.4.0", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-qL26rg7xbYbIm3pDxSflRiEuorQmC+vf50dfV6zNZeFsfs1k0e8w7gidFFATw94ctqahI+mvUJHfOKuke5bQPw=="],
 
-    "@openai/agents-realtime": ["@openai/agents-realtime@0.3.7", "", { "dependencies": { "@openai/agents-core": "0.3.7", "@types/ws": "^8.18.1", "debug": "^4.4.0", "ws": "^8.18.1" }, "peerDependencies": { "zod": "^3.25.40 || ^4.0" } }, "sha512-8zKu33Q8bmXCkReR7UOWQa1rNbIaLwqI4QgjMD20ALaEkuRglRZeaJyfVTIhTcw9COIF35uyiq+GugxFUvPE5A=="],
+    "@openai/agents-realtime": ["@openai/agents-realtime@0.4.0", "", { "dependencies": { "@openai/agents-core": "0.4.0", "@types/ws": "^8.18.1", "debug": "^4.4.0", "ws": "^8.18.1" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-BslUGBvyolSklA1D2IQJejabhGnulvLR8sX505aYlGBBbDM/TJ/fwDdhBd0DgEHo7kI8X3lcByXz4DCCuo1OBg=="],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
 
@@ -231,7 +231,7 @@
 
     "@types/json-schema": ["@types/json-schema@7.0.15", "", {}, "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="],
 
-    "@types/node": ["@types/node@25.0.6", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-NNu0sjyNxpoiW3YuVFfNz7mxSQ+S4X2G28uqg2s+CzoqoQjLPsWSbsFFyztIAqt2vb8kfEAsJNepMGPTxFDx3Q=="],
+    "@types/node": ["@types/node@25.0.9", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-/rpCXHlCWeqClNBwUhDcusJxXYDjZTyE8v5oTO7WbL8eij2nKhUeU89/6xgjU7N4/Vh3He0BtyhJdQbDyhiXAw=="],
 
     "@types/stack-utils": ["@types/stack-utils@2.0.3", "", {}, "sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw=="],
 
