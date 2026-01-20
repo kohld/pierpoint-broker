@@ -21,16 +21,16 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.852,41 € | 85,24% return
+## Portfolio value: 1.836,73 € | 83,67% return
 
 ### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
 | Cash | - | 79,48 € |
-| NVDA | 4 | 639,76 € |
-| RCL | 2 | 474,40 € |
-| AAPL | 3 | 658,77 € |
+| NVDA | 4 | 634,08 € |
+| RCL | 2 | 470,22 € |
+| AAPL | 3 | 652,95 € |
 
 ### Recent trades
 
