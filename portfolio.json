@@ -1,8 +1,8 @@
 {
-  "cash": 79.48,
+  "cash": 309.56,
   "holdings": {
     "NVDA": 4,
-    "RCL": 2,
+    "RCL": 1,
     "AAPL": 3
   },
   "history": [
@@ -149,6 +149,14 @@
       "shares": 3,
       "price": 224.01,
       "total": 672.03
+    },
+    {
+      "date": "2026-01-21T13:44:36.756Z",
+      "type": "sell",
+      "ticker": "RCL",
+      "shares": 1,
+      "price": 230.08,
+      "total": 230.08
     }
   ]
 }

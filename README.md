@@ -21,19 +21,20 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.836,73 € | 83,67% return
+## Portfolio value: 1.777,06 € | 77,71% return
 
 ### Holdings
 
 | Asset | Shares | Value |
 |-------|--------|-------|
-| Cash | - | 79,48 € |
-| NVDA | 4 | 634,08 € |
-| RCL | 2 | 470,22 € |
-| AAPL | 3 | 652,95 € |
+| Cash | - | 309,56 € |
+| NVDA | 4 | 606,88 € |
+| RCL | 1 | 230,05 € |
+| AAPL | 3 | 630,57 € |
 
 ### Recent trades
 
+- **January 21, 2026 at 1:44:36 PM**: SELL 1 RCL @ 230,08€/share (230,08€)
 - **January 14, 2026 at 1:43:36 PM**: BUY 3 AAPL @ 224,01€/share (672,03€)
 - **January 13, 2026 at 1:43:58 PM**: SELL 1 AMZN @ 211,25€/share (211,25€)
 - **January 12, 2026 at 1:43:52 PM**: SELL 1 RCL @ 266,36€/share (266,36€)
