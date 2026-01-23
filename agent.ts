@@ -91,9 +91,23 @@ export const updateReadme = async () => {
 | Cash | - | - | ${portfolio.cash.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | - |
 ${Object.entries(holdings)
   .map(([ticker, data]) => {
-    const pnlSign = data.pnl >= 0 ? "+" : "";
+    const pnlSign = data.pnl > 0 ? "+" : data.pnl < 0 ? "" : "";
     const pnlColor = data.pnl >= 0 ? "📈" : "📉";
-    return `| ${ticker} | ${data.shares} | ${data.avgCost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${data.value.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${pnlColor} ${pnlSign}${data.pnl.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} (${pnlSign}${data.pnlPercent.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%) |`;
+    const pnlValue =
+      Math.abs(data.pnl) < 0.01
+        ? "0,00"
+        : data.pnl.toLocaleString("de-DE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+    const pnlPct =
+      Math.abs(data.pnlPercent) < 0.01
+        ? "0,00"
+        : data.pnlPercent.toLocaleString("de-DE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+    return `| ${ticker} | ${data.shares} | ${data.avgCost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${data.value.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${pnlColor} ${pnlSign}${pnlValue} ${CURRENCY_SYMBOL} (${pnlSign}${pnlPct}%) |`;
   })
   .join("\n")}
 
