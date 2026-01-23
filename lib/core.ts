@@ -70,74 +70,102 @@ export const webSearch = async (query: string): Promise<string> => {
   return response.output_text;
 };
 
-/**
- * Retrieves the current price of a stock ticker.
- *
- * @param {string} ticker - The stock ticker symbol.
- *
- * @returns {Promise<number>} A Promise that resolves to the current price of the stock.
- *
- * @throws If the stock price cannot be retrieved.
- */
-export const getStockPrice = async (ticker: string): Promise<number> => {
+/** Dependencies for getStockPrice (for testing) */
+export interface StockPriceDeps {
+  quoteFn: (ticker: string) => Promise<{ regularMarketPrice?: number }>;
+  convertFn: (price: number, from: string, to: string) => Promise<number>;
+  logFn: (msg: string) => void;
+}
+
+/** Testable version of getStockPrice with dependency injection */
+export const getStockPriceWithDeps = async (
+  ticker: string,
+  deps: StockPriceDeps,
+): Promise<number> => {
   try {
-    const quote = await yahooFinance.quote(ticker);
+    const quote = await deps.quoteFn(ticker);
     const priceUSD = quote.regularMarketPrice;
-
-    if (!priceUSD) {
-      throw new Error("Failed to fetch stock price");
-    }
-    const priceEUR = await convertCurrency(
-      priceUSD,
-      "USD",
-      "EUR",
-      yahooFinance,
-      log,
-    );
-
+    if (!priceUSD) throw new Error("Failed to fetch stock price");
+    const priceEUR = await deps.convertFn(priceUSD, "USD", "EUR");
     console.log(`Price of ${ticker}: $${priceUSD} (€${priceEUR})`);
-
     return priceEUR;
   } catch (error) {
-    log(`⚠️ Failed to get price for ${ticker}: ${error}`);
+    deps.logFn(`⚠️ Failed to get price for ${ticker}: ${error}`);
     throw error;
   }
 };
 
 /**
- * Retrieves the current portfolio data from the portfolio.json file.
- *
- * @returns {Promise<Portfolio>} A Promise that resolves to the current portfolio data.
- *
- * @throws If the portfolio file cannot be read or parsed.
+ * Retrieves the current price of a stock ticker.
  */
-export const getPortfolio = async (): Promise<Portfolio> => {
-  const portfolioData = await readFile("portfolio.json", "utf-8");
-  const portfolio = portfolioSchema.parse(JSON.parse(portfolioData));
-  return portfolio;
+export const getStockPrice = async (ticker: string): Promise<number> => {
+  return getStockPriceWithDeps(ticker, {
+    quoteFn: async (t) => {
+      const quote = await yahooFinance.quote(t);
+      return { regularMarketPrice: quote.regularMarketPrice };
+    },
+    convertFn: (price, from, to) =>
+      convertCurrency(price, from, to, yahooFinance, log),
+    logFn: log,
+  });
+};
+
+/** Dependencies for getPortfolio (for testing) */
+export interface PortfolioDeps {
+  readFileFn: (path: string) => Promise<string>;
+}
+
+/** Testable version of getPortfolio with dependency injection */
+export const getPortfolioWithDeps = async (
+  deps: PortfolioDeps,
+): Promise<Portfolio> => {
+  const portfolioData = await deps.readFileFn("portfolio.json");
+  return portfolioSchema.parse(JSON.parse(portfolioData));
 };
 
 /**
- * Calculates the current net worth (total portfolio value).
- *
- * @returns {Promise<number>} A Promise that resolves to the current net worth.
+ * Retrieves the current portfolio data from the portfolio.json file.
  */
-export const calculateNetWorth = async (): Promise<number> => {
-  const portfolio = await getPortfolio();
+export const getPortfolio = async (): Promise<Portfolio> => {
+  return getPortfolioWithDeps({
+    readFileFn: (path) => readFile(path, "utf-8"),
+  });
+};
+
+/** Dependencies for calculateNetWorth (for testing) */
+export interface NetWorthDeps {
+  getPortfolioFn: () => Promise<Portfolio>;
+  getStockPriceFn: (ticker: string) => Promise<number>;
+  logFn: (msg: string) => void;
+}
+
+/** Testable version of calculateNetWorth with dependency injection */
+export const calculateNetWorthWithDeps = async (
+  deps: NetWorthDeps,
+): Promise<number> => {
+  const portfolio = await deps.getPortfolioFn();
   let totalHoldingsValue = 0;
   for (const [ticker, shares] of Object.entries(portfolio.holdings))
     if (shares > 0) {
       try {
-        const price = await getStockPrice(ticker);
+        const price = await deps.getStockPriceFn(ticker);
         totalHoldingsValue += shares * price;
       } catch (error) {
-        log(`⚠️ Failed to get price for ${ticker}: ${error}`);
+        deps.logFn(`⚠️ Failed to get price for ${ticker}: ${error}`);
       }
     }
+  return Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
+};
 
-  const netWorth =
-    Math.round((portfolio.cash + totalHoldingsValue) * 100) / 100;
-  return netWorth;
+/**
+ * Calculates the current net worth (total portfolio value).
+ */
+export const calculateNetWorth = async (): Promise<number> => {
+  return calculateNetWorthWithDeps({
+    getPortfolioFn: getPortfolio,
+    getStockPriceFn: getStockPrice,
+    logFn: log,
+  });
 };
 
 /**
