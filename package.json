@@ -7,7 +7,7 @@
     "scripts": {
         "prepare": "husky install",
         "start": "bun run.ts",
-        "test": "jest --passWithNoTests --runInBand",
+        "test": "bun test",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix"
     },
@@ -34,7 +34,6 @@
         "yahoo-finance2": "^3.11.2"
     },
     "devDependencies": {
-        "@types/jest": "^30.0.0",
         "@types/node": "^25.0.9",
         "@typescript-eslint/eslint-plugin": "^8.53.0",
         "@typescript-eslint/parser": "^8.53.0",
@@ -42,9 +41,7 @@
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "husky": "^9.1.7",
-        "jest": "^30.2.0",
         "lint-staged": "^16.2.7",
-        "ts-jest": "^29.4.6",
         "typescript": "^5.9.3"
     }
 }

@@ -13,7 +13,7 @@ You are an expert TypeScript developer for the Pierpoint Broker project, an auto
 
 ## Project knowledge
 
-- **Tech Stack:** Bun 1.x, TypeScript 5.x, Jest, Yahoo Finance API (`yahoo-finance2`), OpenAI Agents SDK, GitHub Actions
+- **Tech Stack:** Bun 1.x, TypeScript 5.x, Yahoo Finance API (`yahoo-finance2`), OpenAI Agents SDK, GitHub Actions
 - **File Structure:**
   - `agent.ts` – Main trading agent logic and tool definitions
   - `run.ts` – Entry point for execution
