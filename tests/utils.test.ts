@@ -1,10 +1,11 @@
+import { describe, it, expect, mock } from "bun:test";
 import { convertCurrency, getMarketStatusWithDeps } from "../lib/utils";
 
 /**
  * Tests the convertCurrency function.
  */
 describe("convertCurrency", () => {
-  const mockLog = jest.fn();
+  const mockLog = mock(() => {});
 
   it("returns the same amount if fromCurrency equals toCurrency", async () => {
     const result = await convertCurrency(
@@ -19,8 +20,9 @@ describe("convertCurrency", () => {
   });
 
   it("converts amount using valid exchange rate", async () => {
+    const quoteMock = mock(() => Promise.resolve({ regularMarketPrice: 0.85 }));
     const mockYahooFinance = {
-      quote: jest.fn().mockResolvedValue({ regularMarketPrice: 0.85 }),
+      quote: quoteMock,
     } as unknown as InstanceType<typeof import("yahoo-finance2").default>;
     const result = await convertCurrency(
       200,
@@ -30,7 +32,7 @@ describe("convertCurrency", () => {
       mockLog,
     );
     expect(result).toBe(170);
-    expect(mockYahooFinance.quote).toHaveBeenCalledWith("USDEUR=X");
+    expect(quoteMock).toHaveBeenCalledWith("USDEUR=X");
     expect(mockLog).toHaveBeenCalledWith(
       expect.stringContaining("Exchange rate USD/EUR: 0.85"),
     );
@@ -38,7 +40,7 @@ describe("convertCurrency", () => {
 
   it("throws if exchange rate is invalid (zero)", async () => {
     const mockYahooFinance = {
-      quote: jest.fn().mockResolvedValue({ regularMarketPrice: 0 }),
+      quote: mock(() => Promise.resolve({ regularMarketPrice: 0 })),
     } as unknown as InstanceType<typeof import("yahoo-finance2").default>;
     await expect(
       convertCurrency(50, "USD", "EUR", mockYahooFinance, mockLog),
@@ -50,7 +52,7 @@ describe("convertCurrency", () => {
 
   it("throws if exchange rate is invalid (negative)", async () => {
     const mockYahooFinance = {
-      quote: jest.fn().mockResolvedValue({ regularMarketPrice: -1 }),
+      quote: mock(() => Promise.resolve({ regularMarketPrice: -1 })),
     } as unknown as InstanceType<typeof import("yahoo-finance2").default>;
     await expect(
       convertCurrency(50, "USD", "EUR", mockYahooFinance, mockLog),
@@ -62,7 +64,7 @@ describe("convertCurrency", () => {
 
   it("throws and logs if yahooFinance.quote throws", async () => {
     const mockYahooFinance = {
-      quote: jest.fn().mockRejectedValue(new Error("API error")),
+      quote: mock(() => Promise.reject(new Error("API error"))),
     } as unknown as InstanceType<typeof import("yahoo-finance2").default>;
     await expect(
       convertCurrency(10, "USD", "EUR", mockYahooFinance, mockLog),
@@ -78,7 +80,7 @@ describe("convertCurrency", () => {
  */
 describe("getMarketStatusWithDeps", () => {
   it("returns isOpen true when market state is REGULAR", async () => {
-    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "REGULAR" });
+    const mockQuoteFn = mock(() => Promise.resolve({ marketState: "REGULAR" }));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(true);
@@ -88,7 +90,7 @@ describe("getMarketStatusWithDeps", () => {
   });
 
   it("returns isOpen false with reason for PRE market", async () => {
-    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "PRE" });
+    const mockQuoteFn = mock(() => Promise.resolve({ marketState: "PRE" }));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(false);
@@ -97,7 +99,7 @@ describe("getMarketStatusWithDeps", () => {
   });
 
   it("returns isOpen false with reason for POST market", async () => {
-    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "POST" });
+    const mockQuoteFn = mock(() => Promise.resolve({ marketState: "POST" }));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(false);
@@ -106,7 +108,7 @@ describe("getMarketStatusWithDeps", () => {
   });
 
   it("returns isOpen false with reason for CLOSED market", async () => {
-    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "CLOSED" });
+    const mockQuoteFn = mock(() => Promise.resolve({ marketState: "CLOSED" }));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(false);
@@ -115,7 +117,7 @@ describe("getMarketStatusWithDeps", () => {
   });
 
   it("returns UNKNOWN state when marketState is missing", async () => {
-    const mockQuoteFn = jest.fn().mockResolvedValue({});
+    const mockQuoteFn = mock(() => Promise.resolve({}));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(false);
@@ -123,7 +125,7 @@ describe("getMarketStatusWithDeps", () => {
   });
 
   it("returns isOpen true as fallback when API throws", async () => {
-    const mockQuoteFn = jest.fn().mockRejectedValue(new Error("API error"));
+    const mockQuoteFn = mock(() => Promise.reject(new Error("API error")));
     const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
 
     expect(result.isOpen).toBe(true);
