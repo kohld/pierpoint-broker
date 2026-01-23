@@ -21,19 +21,31 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.806,75 € | 80,68% return
+## Portfolio value: 1.816,87 € | 81,69% return
 
 ### Holdings
 
-| Asset | Shares | Value |
-|-------|--------|-------|
-| Cash | - | 309,56 € |
-| NVDA | 4 | 625,92 € |
-| RCL | 1 | 237,10 € |
-| AAPL | 3 | 634,17 € |
+| Asset | Shares | Avg Cost | Value | P&L |
+|-------|--------|----------|-------|-----|
+| Cash | - | - | 43,74 € | - |
+| NVDA | 4 | 162,01 € | 629,64 € | 📉 -18,40 € (-2,84%) |
+| FNKO | 25 | 3,76 € | 94,00 € | 📈 +0,00 € (+0,00%) |
+| HL | 4 | 26,65 € | 106,60 € | 📈 +0,00 € (+0,00%) |
+| RDW | 34 | 10,20 € | 346,80 € | 📈 +0,00 € (+0,00%) |
+| TSLA | 1 | 382,67 € | 382,67 € | 📈 +0,00 € (+0,00%) |
+| NFLX | 3 | 71,14 € | 213,42 € | 📈 +-0,00 € (+-0,00%) |
 
 ### Recent trades
 
+- **January 23, 2026 at 12:24:22 PM**: BUY 3 NFLX @ 71,14€/share (213,42€)
+- **January 23, 2026 at 12:17:13 PM**: BUY 1 TSLA @ 382,67€/share (382,67€)
+- **January 23, 2026 at 12:17:06 PM**: SELL 3 AAPL @ 211,49€/share (634,47€)
+- **January 23, 2026 at 12:10:30 PM**: BUY 34 RDW @ 10,20€/share (346,80€)
+- **January 23, 2026 at 12:10:20 PM**: SELL 125 BARK @ 0,79€/share (98,75€)
+- **January 23, 2026 at 11:57:41 AM**: BUY 4 HL @ 26,65€/share (106,60€)
+- **January 23, 2026 at 11:57:41 AM**: BUY 125 BARK @ 0,79€/share (98,75€)
+- **January 23, 2026 at 11:25:21 AM**: BUY 25 FNKO @ 3,76€/share (94,00€)
+- **January 23, 2026 at 11:25:15 AM**: SELL 1 RCL @ 243,20€/share (243,20€)
 - **January 21, 2026 at 1:44:36 PM**: SELL 1 RCL @ 230,08€/share (230,08€)
 - **January 14, 2026 at 1:43:36 PM**: BUY 3 AAPL @ 224,01€/share (672,03€)
 - **January 13, 2026 at 1:43:58 PM**: SELL 1 AMZN @ 211,25€/share (211,25€)
@@ -45,14 +57,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 5, 2026 at 1:43:42 PM**: SELL 1 NVDA @ 161,92€/share (161,92€)
 - **December 29, 2025 at 1:42:25 PM**: SELL 1 RCL @ 242,68€/share (242,68€)
 - **December 26, 2025 at 1:40:28 PM**: SELL 1 GOOGL @ 266,19€/share (266,19€)
-- **December 24, 2025 at 1:40:24 PM**: SELL 1 NVDA @ 160,49€/share (160,49€)
-- **December 23, 2025 at 1:41:54 PM**: BUY 1 AMZN @ 193,73€/share (193,73€)
-- **December 22, 2025 at 1:41:28 PM**: SELL 1 NVDA @ 154,00€/share (154,00€)
-- **December 18, 2025 at 1:42:14 PM**: BUY 2 NVDA @ 145,56€/share (291,12€)
-- **December 17, 2025 at 1:41:23 PM**: SELL 1 GOOGL @ 261,38€/share (261,38€)
-- **December 14, 2025 at 1:04:00 PM**: BUY 2 RCL @ 237,45€/share (474,90€)
-- **December 14, 2025 at 1:03:55 PM**: SELL 8 INTC @ 32,20€/share (257,60€)
-- **December 3, 2025 at 3:08:21 PM**: SELL 3 MRVL @ 85,25€/share (255,75€)
 
 <!-- auto end -->
 

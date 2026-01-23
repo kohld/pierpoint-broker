@@ -1,9 +1,12 @@
 {
-  "cash": 309.56,
+  "cash": 43.74,
   "holdings": {
     "NVDA": 4,
-    "RCL": 1,
-    "AAPL": 3
+    "FNKO": 25,
+    "HL": 4,
+    "RDW": 34,
+    "TSLA": 1,
+    "NFLX": 3
   },
   "history": [
     {
@@ -157,6 +160,78 @@
       "shares": 1,
       "price": 230.08,
       "total": 230.08
+    },
+    {
+      "date": "2026-01-23T11:25:15.143Z",
+      "type": "sell",
+      "ticker": "RCL",
+      "shares": 1,
+      "price": 243.2,
+      "total": 243.2
+    },
+    {
+      "date": "2026-01-23T11:25:21.013Z",
+      "type": "buy",
+      "ticker": "FNKO",
+      "shares": 25,
+      "price": 3.76,
+      "total": 94
+    },
+    {
+      "date": "2026-01-23T11:57:41.275Z",
+      "type": "buy",
+      "ticker": "BARK",
+      "shares": 125,
+      "price": 0.79,
+      "total": 98.75
+    },
+    {
+      "date": "2026-01-23T11:57:41.312Z",
+      "type": "buy",
+      "ticker": "HL",
+      "shares": 4,
+      "price": 26.65,
+      "total": 106.6
+    },
+    {
+      "date": "2026-01-23T12:10:20.151Z",
+      "type": "sell",
+      "ticker": "BARK",
+      "shares": 125,
+      "price": 0.79,
+      "total": 98.75
+    },
+    {
+      "date": "2026-01-23T12:10:30.698Z",
+      "type": "buy",
+      "ticker": "RDW",
+      "shares": 34,
+      "price": 10.2,
+      "total": 346.79999999999995
+    },
+    {
+      "date": "2026-01-23T12:17:06.145Z",
+      "type": "sell",
+      "ticker": "AAPL",
+      "shares": 3,
+      "price": 211.49,
+      "total": 634.47
+    },
+    {
+      "date": "2026-01-23T12:17:13.331Z",
+      "type": "buy",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 382.67,
+      "total": 382.67
+    },
+    {
+      "date": "2026-01-23T12:24:22.482Z",
+      "type": "buy",
+      "ticker": "NFLX",
+      "shares": 3,
+      "price": 71.14,
+      "total": 213.42000000000002
     }
   ]
 }
