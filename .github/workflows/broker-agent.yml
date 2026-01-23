@@ -2,7 +2,7 @@ name: Broker agent
 
 on:
   schedule:
-    - cron: "30 13 * * 1-5" # 2:30 PM (winter) | 3:30 PM (summer) CET/CEST (UTC+1/UTC+2) on every weekday (Mon–Fri)
+    - cron: "30 14 * * 1-5" # 9:30 ET (winter) | 10:30 ET (summer) - Always during market hours
 
 permissions:
   contents: write
