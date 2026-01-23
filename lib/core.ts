@@ -34,11 +34,28 @@ export const config = {
   MAX_TURNS: 40,
 };
 
-if (!config.API_KEY) throw new Error("OPENAI_API_KEY is not set");
-if (!config.MODEL_NAME) throw new Error("MODEL_NAME is not set");
 export const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
 
-export const client = new OpenAI();
+let _client: OpenAI | null = null;
+
+/**
+ * Get the OpenAI client (lazy initialization).
+ * Throws if OPENAI_API_KEY is not set.
+ */
+export const getClient = (): OpenAI => {
+  if (!_client) {
+    if (!config.API_KEY) throw new Error("OPENAI_API_KEY is not set");
+    _client = new OpenAI();
+  }
+  return _client;
+};
+
+/** @deprecated Use getClient() instead */
+export const client = {
+  get responses() {
+    return getClient().responses;
+  },
+};
 
 /**
  * Logs a message to the console and appends it to the agent.log file.
