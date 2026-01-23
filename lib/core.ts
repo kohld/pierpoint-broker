@@ -169,17 +169,94 @@ export const calculateNetWorth = async (): Promise<number> => {
 };
 
 /**
- * Calculates the current portfolio value and returns it as a formatted string.
+ * Calculates the average cost basis for each holding using weighted average method.
+ * This analyzes the trade history to determine the average purchase price.
+ * Handles edge cases where sells occur before buys (incomplete history).
  *
- * @returns {Promise<string>} A Promise that resolves to a formatted string containing the current portfolio value.
+ * @param history - The trade history
+ * @param currentHoldings - Optional: current holdings to detect incomplete history
+ */
+export const calculateAverageCost = (
+  history: Portfolio["history"],
+  currentHoldings?: Record<string, number>,
+): Record<string, number> => {
+  const costBasis: Record<string, { totalCost: number; totalShares: number }> =
+    {};
+  const lastBuyPrice: Record<string, number> = {};
+
+  for (const trade of history) {
+    if (!costBasis[trade.ticker]) {
+      costBasis[trade.ticker] = { totalCost: 0, totalShares: 0 };
+    }
+
+    if (trade.type === "buy") {
+      costBasis[trade.ticker].totalCost += trade.shares * trade.price;
+      costBasis[trade.ticker].totalShares += trade.shares;
+      lastBuyPrice[trade.ticker] = trade.price;
+    } else if (trade.type === "sell") {
+      // Only reduce if we have shares to sell (handles incomplete history)
+      if (costBasis[trade.ticker].totalShares > 0) {
+        const currentAvg =
+          costBasis[trade.ticker].totalCost /
+          costBasis[trade.ticker].totalShares;
+        const sharesToReduce = Math.min(
+          trade.shares,
+          costBasis[trade.ticker].totalShares,
+        );
+        costBasis[trade.ticker].totalCost -= sharesToReduce * currentAvg;
+        costBasis[trade.ticker].totalShares -= sharesToReduce;
+      }
+      // If no shares to sell, ignore this sell (pre-history trade)
+    }
+  }
+
+  const avgCosts: Record<string, number> = {};
+  for (const [ticker, data] of Object.entries(costBasis)) {
+    if (data.totalShares > 0) {
+      // Check if history matches current holdings
+      const actualShares = currentHoldings?.[ticker] ?? data.totalShares;
+      if (actualShares !== data.totalShares && lastBuyPrice[ticker]) {
+        // Incomplete history: use last buy price as estimate for missing shares
+        const missingShares = actualShares - data.totalShares;
+        const adjustedCost =
+          data.totalCost + missingShares * lastBuyPrice[ticker];
+        avgCosts[ticker] =
+          Math.round((adjustedCost / actualShares) * 100) / 100;
+      } else {
+        avgCosts[ticker] =
+          Math.round((data.totalCost / data.totalShares) * 100) / 100;
+      }
+    } else if (
+      currentHoldings?.[ticker] &&
+      currentHoldings[ticker] > 0 &&
+      lastBuyPrice[ticker]
+    ) {
+      // We have holdings but history shows 0 - use last buy price
+      avgCosts[ticker] = lastBuyPrice[ticker];
+    }
+  }
+  return avgCosts;
+};
+
+/** Holding data with P&L information */
+export interface HoldingWithPnL {
+  shares: number;
+  value: number;
+  avgCost: number;
+  pnl: number;
+  pnlPercent: number;
+}
+
+/**
+ * Calculates the current portfolio value with P&L for each holding.
  */
 export const calculatePortfolioValue = async (): Promise<{
   totalValue: number;
-  holdings: Record<string, { shares: number; value: number }>;
+  holdings: Record<string, HoldingWithPnL>;
 }> => {
   const portfolio = await getPortfolio();
-  const holdingsWithValues: Record<string, { shares: number; value: number }> =
-    {};
+  const avgCosts = calculateAverageCost(portfolio.history, portfolio.holdings);
+  const holdingsWithValues: Record<string, HoldingWithPnL> = {};
   let totalHoldingsValue = 0;
 
   for (const [ticker, shares] of Object.entries(portfolio.holdings)) {
@@ -187,11 +264,29 @@ export const calculatePortfolioValue = async (): Promise<{
       try {
         const price = await getStockPrice(ticker);
         const value = Math.round(shares * price * 100) / 100;
-        holdingsWithValues[ticker] = { shares, value };
+        const avgCost = avgCosts[ticker] || 0;
+        const costBasis = shares * avgCost;
+        const pnl = Math.round((value - costBasis) * 100) / 100;
+        const pnlPercent =
+          costBasis > 0 ? Math.round((pnl / costBasis) * 10000) / 100 : 0;
+
+        holdingsWithValues[ticker] = {
+          shares,
+          value,
+          avgCost,
+          pnl,
+          pnlPercent,
+        };
         totalHoldingsValue += value;
       } catch (error) {
         log(`⚠️ Failed to get price for ${ticker}: ${error}`);
-        holdingsWithValues[ticker] = { shares, value: 0 };
+        holdingsWithValues[ticker] = {
+          shares,
+          value: 0,
+          avgCost: avgCosts[ticker] || 0,
+          pnl: 0,
+          pnlPercent: 0,
+        };
       }
     }
   }

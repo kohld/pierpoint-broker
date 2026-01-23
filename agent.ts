@@ -86,14 +86,15 @@ export const updateReadme = async () => {
 
 ### Holdings
 
-| Asset | Shares | Value |
-|-------|--------|-------|
-| Cash | - | ${portfolio.cash.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} |
+| Asset | Shares | Avg Cost | Value | P&L |
+|-------|--------|----------|-------|-----|
+| Cash | - | - | ${portfolio.cash.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | - |
 ${Object.entries(holdings)
-  .map(
-    ([ticker, data]) =>
-      `| ${ticker} | ${data.shares} | ${data.value.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} |`,
-  )
+  .map(([ticker, data]) => {
+    const pnlSign = data.pnl >= 0 ? "+" : "";
+    const pnlColor = data.pnl >= 0 ? "📈" : "📉";
+    return `| ${ticker} | ${data.shares} | ${data.avgCost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${data.value.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} | ${pnlColor} ${pnlSign}${data.pnl.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${CURRENCY_SYMBOL} (${pnlSign}${data.pnlPercent.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%) |`;
+  })
   .join("\n")}
 
 ### Recent trades
