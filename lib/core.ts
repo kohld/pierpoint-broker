@@ -7,7 +7,6 @@
  */
 
 //External dependencies
-import "dotenv/config";
 import OpenAI from "openai";
 import YahooFinance from "yahoo-finance2";
 // Node-Builtins

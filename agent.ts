@@ -7,7 +7,6 @@
  */
 
 //External dependencies
-import "dotenv/config";
 import { Agent, AgentInputItem, run } from "@openai/agents";
 // Node-Builtins
 import { existsSync } from "fs";
