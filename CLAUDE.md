@@ -1,6 +1,6 @@
 ---
 name: pierpoint_broker_agent
-description: Autonomous AI-powered stock trading agent ensuring wealth growth through strategic GitHub Actions execution
+description: Autonomous AI-powered stock trading agent for educational portfolio management
 ---
 
 You are an expert TypeScript developer for the Pierpoint Broker project, an autonomous stock trading agent.
@@ -13,12 +13,14 @@ You are an expert TypeScript developer for the Pierpoint Broker project, an auto
 
 ## Project knowledge
 
-- **Tech Stack:** Bun, TypeScript 5.9, Jest, Yahoo Finance API (`yahoo-finance2`), OpenAI Agents SDK, GitHub Actions
+- **Tech Stack:** Bun 1.x, TypeScript 5.x, Jest, Yahoo Finance API (`yahoo-finance2`), OpenAI Agents SDK, GitHub Actions
 - **File Structure:**
   - `agent.ts` – Main trading agent logic and tool definitions
   - `run.ts` – Entry point for execution
-  - `lib/` – Utility functions and type definitions
+  - `lib/` – Utility functions and type definitions (`core.ts`, `definitions.ts`, `tools.ts`, `utils.ts`)
+  - `tests/` – Test files (`agent.test.ts`, `definitions.test.ts`, `utils.test.ts`)
   - `portfolio.json` – Persistent state (cash, holdings, history)
+  - `system-prompt.md` – Trading strategy prompt for the agent
   - `.github/workflows/` – Automation configuration
 - **Key Constraints:**
   - Trades must verify portfolio balance (cash)
@@ -29,10 +31,10 @@ You are an expert TypeScript developer for the Pierpoint Broker project, an auto
 
 ## Commands you can use
 
-**Dev/Run:** `bun start` (executes one trading session)
-**Test:** `bun test` (runs all tests)
-**Type Check:** `npx tsc --noEmit`
-**Install:** `bun install`
+**Dev/Run:** `bun start` (executes one trading session)  
+**Test:** `bun test` (runs all tests)  
+**Type Check:** `bun run typecheck` or `npx tsc --noEmit`  
+**Install:** `bun install` (adds dependencies)  
 **Lint:** `bun run lint`
 
 **Important:** Always use `bun` commands, never `npm`, `yarn`, or `node` directly.
@@ -48,10 +50,16 @@ Follow these rules for all code you write:
 
 **Git commit messages:**
 - Always use prefixes: `[FEATURE]`, `[FIX]`, `[REFACTOR]`, `[DOCS]`, `[TEST]`, `[CHORE]`
-- Format: `[PREFIX] Short description`
-- Example: `[FEATURE] Add stop-loss logic` or `[FIX] Resolve portfolio sync issue`
+- Format: `[PREFIX] Short description` followed directly by detailed bullet points (NO empty line between title and list)
+- Rules: No links in messages, no empty lines between header and body
+- Example:
+```text
+[FEATURE] Add stop-loss logic
+- Implement automatic sell trigger at -10%
+- Add configurable threshold parameter
+```
 
-**Code style & patterns:**
+**Code style example:**
 
 ```typescript
 // ✅ Good - typed, error handled, logs actions, proper formatting
@@ -60,10 +68,7 @@ async function getStockPrice(ticker: string): Promise<number> {
     const quote = await yahooFinance.quoteSummary(ticker, { modules: ["price"] });
     if (!quote.price?.regularMarketPrice) throw new Error("No price data");
     
-    // Use German locale for display
     log(`Price for ${ticker}: ${quote.price.regularMarketPrice.toLocaleString("de-DE")}€`);
-    
-    // Round currency values
     return Math.round(quote.price.regularMarketPrice * 100) / 100;
   } catch (error) {
     log(`Error fetching ${ticker}: ${error}`);
@@ -77,7 +82,7 @@ async function getPrice(t) {
 }
 ```
 
-**Tool Usage Example:**
+**Tool usage example:**
 
 ```typescript
 // ✅ Good - Always think first, then act
@@ -90,11 +95,11 @@ await buyTool.execute({ ticker: "NVDA", shares: 5 });
 
 ## Boundaries
 
-- ✅ **Always do:** Use `think` tool before acting, validate numeric inputs (NaN, infinite), handle API failures gracefully, update `portfolio.json` consistently, use functional patterns, test with `bun test`
-- ⚠️ **Ask first:** Modifying GitHub Actions workflows, adding large dependencies, changing the trading strategy prompts (`system-prompt.md`) significantly, changing fee structures or currency
-- 🚫 **Never do:** Commit secrets/keys, modify `portfolio.json` manually without logic, use Client-side logic (this is a backend agent), use `npm` instead of `bun`, bypass type safety w/ `any`, create fractional share transactions
+- ✅ **Always do:** Use `think` tool before acting, validate numeric inputs (NaN, infinite), handle API failures gracefully, update `portfolio.json` consistently, use functional patterns, test with `bun test`, clean up unused imports.
+- ⚠️ **Ask first:** Modifying GitHub Actions workflows, adding large dependencies, changing the trading strategy prompts (`system-prompt.md`) significantly, changing fee structures or currency.
+- 🚫 **Never do:** Commit secrets/keys, modify `portfolio.json` manually without logic, use client-side logic (this is a backend agent), use `npm` instead of `bun`, bypass type safety with `any`, create fractional share transactions.
 
-## Environment Configuration
+## Environment configuration
 
 Required environment variables:
 - `OPENAI_API_KEY` or `OPEN_ROUTER_API_KEY`
@@ -102,6 +107,10 @@ Required environment variables:
 - `CURRENCY` (default: "EUR")
 - `ORDER_FEE` (default: "1.00")
 
-## Educational Purpose
+## Additional resources
+
+For more information about Bun APIs, read the documentation in `node_modules/bun-types/docs/**.md`.
+
+## Educational purpose
 
 This project is for educational purposes only. Code changes should reflect this nature but maintain professional quality.
