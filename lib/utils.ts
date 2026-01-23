@@ -1,7 +1,9 @@
 import YahooFinance from "yahoo-finance2";
 
-// Create yahoo-finance2 instance for market status checks
-const yahooFinanceInstance = new YahooFinance();
+// Create yahoo-finance2 instance with suppressed notices
+const yahooFinanceInstance = new YahooFinance({
+  suppressNotices: ["yahooSurvey"],
+});
 
 export interface MarketStatus {
   isOpen: boolean;
@@ -9,15 +11,23 @@ export interface MarketStatus {
   reason?: string;
 }
 
+/** Dependencies for getMarketStatus (for testing) */
+export interface MarketStatusDeps {
+  quoteFn: (symbol: string) => Promise<{ marketState?: string }>;
+}
+
 /**
  * Checks if the US stock market (NYSE/NASDAQ) is currently open.
  * Uses Yahoo Finance marketState from SPY ETF.
  *
+ * @param deps - Optional dependencies for testing
  * @returns MarketStatus with isOpen boolean and current state
  */
-export const getMarketStatus = async (): Promise<MarketStatus> => {
+export const getMarketStatusWithDeps = async (
+  deps: MarketStatusDeps,
+): Promise<MarketStatus> => {
   try {
-    const quote = await yahooFinanceInstance.quote("SPY");
+    const quote = await deps.quoteFn("SPY");
     const state = quote.marketState || "UNKNOWN";
 
     return {
@@ -37,6 +47,19 @@ export const getMarketStatus = async (): Promise<MarketStatus> => {
     console.error("Failed to check market status:", error);
     return { isOpen: true, state: "UNKNOWN", reason: "Failed to fetch status" };
   }
+};
+
+/**
+ * Checks if the US stock market is currently open.
+ * Production wrapper using real Yahoo Finance.
+ */
+export const getMarketStatus = async (): Promise<MarketStatus> => {
+  return getMarketStatusWithDeps({
+    quoteFn: async (symbol) => {
+      const quote = await yahooFinanceInstance.quote(symbol);
+      return { marketState: quote.marketState };
+    },
+  });
 };
 
 /**

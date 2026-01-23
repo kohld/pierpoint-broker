@@ -1,4 +1,4 @@
-import { convertCurrency } from "../lib/utils";
+import { convertCurrency, getMarketStatusWithDeps } from "../lib/utils";
 
 /**
  * Tests the convertCurrency function.
@@ -70,5 +70,64 @@ describe("convertCurrency", () => {
     expect(mockLog).toHaveBeenCalledWith(
       expect.stringContaining("Currency conversion failed: API error"),
     );
+  });
+});
+
+/**
+ * Tests the getMarketStatusWithDeps function.
+ */
+describe("getMarketStatusWithDeps", () => {
+  it("returns isOpen true when market state is REGULAR", async () => {
+    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "REGULAR" });
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(true);
+    expect(result.state).toBe("REGULAR");
+    expect(result.reason).toBeUndefined();
+    expect(mockQuoteFn).toHaveBeenCalledWith("SPY");
+  });
+
+  it("returns isOpen false with reason for PRE market", async () => {
+    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "PRE" });
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(false);
+    expect(result.state).toBe("PRE");
+    expect(result.reason).toBe("Pre-market (before 9:30 ET)");
+  });
+
+  it("returns isOpen false with reason for POST market", async () => {
+    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "POST" });
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(false);
+    expect(result.state).toBe("POST");
+    expect(result.reason).toBe("After-hours (after 16:00 ET)");
+  });
+
+  it("returns isOpen false with reason for CLOSED market", async () => {
+    const mockQuoteFn = jest.fn().mockResolvedValue({ marketState: "CLOSED" });
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(false);
+    expect(result.state).toBe("CLOSED");
+    expect(result.reason).toBe("Market closed (weekend/holiday)");
+  });
+
+  it("returns UNKNOWN state when marketState is missing", async () => {
+    const mockQuoteFn = jest.fn().mockResolvedValue({});
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(false);
+    expect(result.state).toBe("UNKNOWN");
+  });
+
+  it("returns isOpen true as fallback when API throws", async () => {
+    const mockQuoteFn = jest.fn().mockRejectedValue(new Error("API error"));
+    const result = await getMarketStatusWithDeps({ quoteFn: mockQuoteFn });
+
+    expect(result.isOpen).toBe(true);
+    expect(result.state).toBe("UNKNOWN");
+    expect(result.reason).toBe("Failed to fetch status");
   });
 });

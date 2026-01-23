@@ -69,8 +69,20 @@ export const updateReadme = async () => {
   try {
     const portfolio = await getPortfolio();
     const { totalValue, holdings } = await calculatePortfolioValue();
-    const readmeContent = await readFile("README.md", "utf-8");
+    let readmeContent = await readFile("README.md", "utf-8");
     const recentTrades = portfolio.history.slice(-20).reverse();
+
+    // Calculate return percentage
+    const returnPercent = ((totalValue - 1000) / 1000) * 100;
+    const badgeColor = returnPercent >= 0 ? "brightgreen" : "red";
+    const badgeValue = returnPercent.toFixed(2).replace(".", "%2E");
+
+    // Update performance badge
+    readmeContent = readmeContent.replace(
+      /!\[Return\]\(https:\/\/img\.shields\.io\/badge\/Return-[^)]+\)/,
+      `![Return](https://img.shields.io/badge/Return-${badgeValue}%25-${badgeColor})`,
+    );
+
     const portfolioSection = `<!-- auto start -->
 
 ## Portfolio value: ${totalValue.toLocaleString("de-DE", {
