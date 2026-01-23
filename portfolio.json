@@ -1,12 +1,11 @@
 {
-  "cash": 43.74,
+  "cash": 34.89,
   "holdings": {
     "NVDA": 4,
     "FNKO": 25,
     "HL": 4,
-    "RDW": 34,
     "TSLA": 1,
-    "NFLX": 3
+    "NFLX": 8
   },
   "history": [
     {
@@ -232,6 +231,22 @@
       "shares": 3,
       "price": 71.14,
       "total": 213.42000000000002
+    },
+    {
+      "date": "2026-01-23T12:35:02.779Z",
+      "type": "sell",
+      "ticker": "RDW",
+      "shares": 34,
+      "price": 10.2,
+      "total": 346.79999999999995
+    },
+    {
+      "date": "2026-01-23T12:35:22.178Z",
+      "type": "buy",
+      "ticker": "NFLX",
+      "shares": 5,
+      "price": 71.13,
+      "total": 355.65
     }
   ]
 }

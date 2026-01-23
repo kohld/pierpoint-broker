@@ -21,22 +21,23 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.816,87 € | 81,69% return
+## Portfolio value: 1.816,68 € | 81,67% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 43,74 € | - |
-| NVDA | 4 | 162,01 € | 629,64 € | 📉 -18,40 € (-2,84%) |
-| FNKO | 25 | 3,76 € | 94,00 € | 📈 +0,00 € (+0,00%) |
-| HL | 4 | 26,65 € | 106,60 € | 📈 +0,00 € (+0,00%) |
-| RDW | 34 | 10,20 € | 346,80 € | 📈 +0,00 € (+0,00%) |
-| TSLA | 1 | 382,67 € | 382,67 € | 📈 +0,00 € (+0,00%) |
-| NFLX | 3 | 71,14 € | 213,42 € | 📈 0,00 € (0,00%) |
+| Cash | - | - | 34,89 € | - |
+| NVDA | 4 | 162,01 € | 629,56 € | 📉 -18,48 € (-2,85%) |
+| FNKO | 25 | 3,76 € | 94,00 € | 📈 0,00 € (0,00%) |
+| HL | 4 | 26,65 € | 106,56 € | 📉 -0,04 € (-0,04%) |
+| TSLA | 1 | 382,67 € | 382,63 € | 📉 -0,04 € (-0,01%) |
+| NFLX | 8 | 71,13 € | 569,04 € | 📈 0,00 € (0,00%) |
 
 ### Recent trades
 
+- **January 23, 2026 at 12:35:22 PM**: BUY 5 NFLX @ 71,13€/share (355,65€)
+- **January 23, 2026 at 12:35:02 PM**: SELL 34 RDW @ 10,20€/share (346,80€)
 - **January 23, 2026 at 12:24:22 PM**: BUY 3 NFLX @ 71,14€/share (213,42€)
 - **January 23, 2026 at 12:17:13 PM**: BUY 1 TSLA @ 382,67€/share (382,67€)
 - **January 23, 2026 at 12:17:06 PM**: SELL 3 AAPL @ 211,49€/share (634,47€)
@@ -55,8 +56,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 8, 2026 at 1:43:42 PM**: BUY 3 NVDA @ 162,01€/share (486,03€)
 - **January 7, 2026 at 1:43:51 PM**: SELL 1 AMZN @ 206,00€/share (206,00€)
 - **January 5, 2026 at 1:43:42 PM**: SELL 1 NVDA @ 161,92€/share (161,92€)
-- **December 29, 2025 at 1:42:25 PM**: SELL 1 RCL @ 242,68€/share (242,68€)
-- **December 26, 2025 at 1:40:28 PM**: SELL 1 GOOGL @ 266,19€/share (266,19€)
 
 <!-- auto end -->
 
