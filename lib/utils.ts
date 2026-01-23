@@ -1,3 +1,54 @@
+import YahooFinance from "yahoo-finance2";
+
+// Create yahoo-finance2 instance for market status checks
+const yahooFinanceInstance = new YahooFinance();
+
+export interface MarketStatus {
+  isOpen: boolean;
+  state: string;
+  reason?: string;
+}
+
+/**
+ * Checks if the US stock market (NYSE/NASDAQ) is currently open.
+ * Uses Yahoo Finance marketState from SPY ETF.
+ *
+ * @returns MarketStatus with isOpen boolean and current state
+ */
+export const getMarketStatus = async (): Promise<MarketStatus> => {
+  try {
+    const quote = await yahooFinanceInstance.quote("SPY");
+    const state = quote.marketState || "UNKNOWN";
+
+    return {
+      isOpen: state === "REGULAR",
+      state,
+      reason:
+        state === "PRE"
+          ? "Pre-market (before 9:30 ET)"
+          : state === "POST"
+            ? "After-hours (after 16:00 ET)"
+            : state === "CLOSED"
+              ? "Market closed (weekend/holiday)"
+              : undefined,
+    };
+  } catch (error) {
+    // Fallback: assume market is open to not block trading
+    console.error("Failed to check market status:", error);
+    return { isOpen: true, state: "UNKNOWN", reason: "Failed to fetch status" };
+  }
+};
+
+/**
+ * Simple check if market is open.
+ *
+ * @returns true if market is in REGULAR trading hours
+ */
+export const isMarketOpen = async (): Promise<boolean> => {
+  const status = await getMarketStatus();
+  return status.isOpen;
+};
+
 /**
  * Converts a monetary amount from one currency to another using real-time exchange rates from Yahoo Finance.
  *
