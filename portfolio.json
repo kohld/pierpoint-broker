@@ -1,8 +1,7 @@
 {
-  "cash": 34.89,
+  "cash": 125.39,
   "holdings": {
     "NVDA": 4,
-    "FNKO": 25,
     "HL": 4,
     "TSLA": 1,
     "NFLX": 8
@@ -247,6 +246,14 @@
       "shares": 5,
       "price": 71.13,
       "total": 355.65
+    },
+    {
+      "date": "2026-01-26T17:33:26.980Z",
+      "type": "sell",
+      "ticker": "FNKO",
+      "shares": 25,
+      "price": 3.62,
+      "total": 90.5
     }
   ]
 }

@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-81.67%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-81%2E47%25-brightgreen)
 
 ## Table of Contents
 
@@ -22,21 +22,21 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.816,68 € | 81,67% return
+## Portfolio value: 1.814,73 € | 81,47% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 34,89 € | - |
-| NVDA | 4 | 162,01 € | 629,56 € | 📉 -18,48 € (-2,85%) |
-| FNKO | 25 | 3,76 € | 94,00 € | 📈 0,00 € (0,00%) |
-| HL | 4 | 26,65 € | 106,56 € | 📉 -0,04 € (-0,04%) |
-| TSLA | 1 | 382,67 € | 382,63 € | 📉 -0,04 € (-0,01%) |
-| NFLX | 8 | 71,13 € | 569,04 € | 📈 0,00 € (0,00%) |
+| Cash | - | - | 125,39 € | - |
+| NVDA | 4 | 162,01 € | 627,92 € | 📉 -20,12 € (-3,10%) |
+| HL | 4 | 26,65 € | 113,04 € | 📈 +6,44 € (+6,04%) |
+| TSLA | 1 | 382,67 € | 369,50 € | 📉 -13,17 € (-3,44%) |
+| NFLX | 8 | 71,13 € | 578,88 € | 📈 +9,84 € (+1,73%) |
 
 ### Recent trades
 
+- **January 26, 2026 at 5:33:26 PM**: SELL 25 FNKO @ 3,62€/share (90,50€)
 - **January 23, 2026 at 12:35:22 PM**: BUY 5 NFLX @ 71,13€/share (355,65€)
 - **January 23, 2026 at 12:35:02 PM**: SELL 34 RDW @ 10,20€/share (346,80€)
 - **January 23, 2026 at 12:24:22 PM**: BUY 3 NFLX @ 71,14€/share (213,42€)
@@ -56,7 +56,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 8, 2026 at 1:43:42 PM**: BUY 2 RCL @ 259,08€/share (518,16€)
 - **January 8, 2026 at 1:43:42 PM**: BUY 3 NVDA @ 162,01€/share (486,03€)
 - **January 7, 2026 at 1:43:51 PM**: SELL 1 AMZN @ 206,00€/share (206,00€)
-- **January 5, 2026 at 1:43:42 PM**: SELL 1 NVDA @ 161,92€/share (161,92€)
 
 <!-- auto end -->
 
