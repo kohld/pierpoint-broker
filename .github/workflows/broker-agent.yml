@@ -1,8 +1,9 @@
 name: Broker agent
 
 on:
-  schedule:
-    - cron: "45 14 * * 1-5" # 9:45 ET (winter) | 10:45 ET (summer) - 15 min after market open
+  # schedule:
+  #   - cron: "45 14 * * 1-5" # Temporarily disabled to clear GitHub Actions cache
+  workflow_dispatch:  # Manual trigger only during cache clear
 
 permissions:
   contents: write
