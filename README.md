@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-76%2E96%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-75%2E75%25-brightgreen)
 
 ## Table of Contents
 
@@ -22,20 +22,21 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.769,62 € | 76,96% return
+## Portfolio value: 1.757,48 € | 75,75% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 125,39 € | - |
-| NVDA | 4 | 162,01 € | 645,40 € | 📉 -2,64 € (-0,41%) |
-| HL | 4 | 26,65 € | 81,76 € | 📉 -24,84 € (-23,30%) |
-| TSLA | 1 | 382,67 € | 357,79 € | 📉 -24,88 € (-6,50%) |
-| NFLX | 8 | 71,13 € | 559,28 € | 📉 -9,76 € (-1,72%) |
+| Cash | - | - | 56,25 € | - |
+| NVDA | 4 | 162,01 € | 631,48 € | 📉 -16,56 € (-2,56%) |
+| TSLA | 1 | 382,67 € | 352,75 € | 📉 -29,92 € (-7,82%) |
+| NFLX | 10 | 71,24 € | 717,00 € | 📈 +4,60 € (+0,65%) |
 
 ### Recent trades
 
+- **February 2, 2026 at 3:01:34 PM**: BUY 2 NFLX @ 71,67€/share (143,34€)
+- **February 2, 2026 at 3:01:20 PM**: SELL 4 HL @ 18,55€/share (74,20€)
 - **January 26, 2026 at 5:33:26 PM**: SELL 25 FNKO @ 3,62€/share (90,50€)
 - **January 23, 2026 at 12:35:22 PM**: BUY 5 NFLX @ 71,13€/share (355,65€)
 - **January 23, 2026 at 12:35:02 PM**: SELL 34 RDW @ 10,20€/share (346,80€)
@@ -54,8 +55,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 12, 2026 at 1:43:52 PM**: SELL 1 RCL @ 266,36€/share (266,36€)
 - **January 9, 2026 at 1:42:25 PM**: SELL 1 AMZN @ 211,34€/share (211,34€)
 - **January 8, 2026 at 1:43:42 PM**: BUY 2 RCL @ 259,08€/share (518,16€)
-- **January 8, 2026 at 1:43:42 PM**: BUY 3 NVDA @ 162,01€/share (486,03€)
-- **January 7, 2026 at 1:43:51 PM**: SELL 1 AMZN @ 206,00€/share (206,00€)
 
 <!-- auto end -->
 
