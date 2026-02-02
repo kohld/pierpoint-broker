@@ -9,7 +9,8 @@
         "start": "bun run.ts",
         "test": "bun test",
         "lint": "eslint . --ext .ts",
-        "lint:fix": "eslint . --ext .ts --fix"
+        "lint:fix": "eslint . --ext .ts --fix",
+        "typecheck": "tsc --noEmit"
     },
     "lint-staged": {
         "*.ts": [

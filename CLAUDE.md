@@ -29,15 +29,19 @@ You are an expert TypeScript developer for the Pierpoint Broker project, an auto
   - €1.00 fee per transaction (`ORDER_FEE`)
   - MUST use `think` tool before any other tool call
 
-## Commands you can use
+## Build/Test Commands
 
-**Dev/Run:** `bun start` (executes one trading session)  
-**Test:** `bun test` (runs all tests)  
-**Type Check:** `bun run typecheck` or `npx tsc --noEmit`  
-**Install:** `bun install` (adds dependencies)  
-**Lint:** `bun run lint`
+- Always use `bun` to run scripts.
 
-**Important:** Always use `bun` commands, never `npm`, `yarn`, or `node` directly.
+- `bun start` - Start one trading session
+- `bun run lint` - Type-aware linting
+- `bun run lint:fix` - Apply fixes for autofixable lint issues
+- `bun run typecheck` - Runs type checking (tsc --noEmit)
+- `bun test` - Run tests
+
+- `bun test path/to/test.test.ts` - Run single test file
+
++ **Do not run:** `npm`, `yarn`, or `node` directly.
 
 ## Standards
 
