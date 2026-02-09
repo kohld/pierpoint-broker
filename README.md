@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-69%2E80%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-71%2E66%25-brightgreen)
 
 ## Table of Contents
 
@@ -22,16 +22,16 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.698,02 € | 69,80% return
+## Portfolio value: 1.716,63 € | 71,66% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
 | Cash | - | - | 193,33 € | - |
-| NVDA | 4 | 162,01 € | 612,08 € | 📉 -35,96 € (-5,55%) |
-| TSLA | 1 | 382,67 € | 344,21 € | 📉 -38,46 € (-10,05%) |
-| NFLX | 8 | 71,24 € | 548,40 € | 📉 -21,52 € (-3,78%) |
+| NVDA | 4 | 162,01 € | 641,56 € | 📉 -6,48 € (-1,00%) |
+| TSLA | 1 | 382,67 € | 345,10 € | 📉 -37,57 € (-9,82%) |
+| NFLX | 8 | 71,24 € | 536,64 € | 📉 -33,28 € (-5,84%) |
 
 ### Recent trades
 
