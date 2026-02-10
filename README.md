@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-71%2E66%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-74%2E84%25-brightgreen)
 
 ## Table of Contents
 
@@ -22,19 +22,20 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.716,63 € | 71,66% return
+## Portfolio value: 1.748,43 € | 74,84% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 193,33 € | - |
-| NVDA | 4 | 162,01 € | 641,56 € | 📉 -6,48 € (-1,00%) |
-| TSLA | 1 | 382,67 € | 345,10 € | 📉 -37,57 € (-9,82%) |
-| NFLX | 8 | 71,24 € | 536,64 € | 📉 -33,28 € (-5,84%) |
+| Cash | - | - | 511,01 € | - |
+| NVDA | 2 | 162,01 € | 317,36 € | 📉 -6,66 € (-2,06%) |
+| TSLA | 1 | 382,67 € | 353,34 € | 📉 -29,33 € (-7,66%) |
+| NFLX | 8 | 71,24 € | 566,72 € | 📉 -3,20 € (-0,56%) |
 
 ### Recent trades
 
+- **February 10, 2026 at 3:07:37 PM**: SELL 2 NVDA @ 158,84€/share (317,68€)
 - **February 6, 2026 at 3:00:41 PM**: SELL 2 NFLX @ 68,54€/share (137,08€)
 - **February 2, 2026 at 3:01:34 PM**: BUY 2 NFLX @ 71,67€/share (143,34€)
 - **February 2, 2026 at 3:01:20 PM**: SELL 4 HL @ 18,55€/share (74,20€)
@@ -54,7 +55,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 14, 2026 at 1:43:36 PM**: BUY 3 AAPL @ 224,01€/share (672,03€)
 - **January 13, 2026 at 1:43:58 PM**: SELL 1 AMZN @ 211,25€/share (211,25€)
 - **January 12, 2026 at 1:43:52 PM**: SELL 1 RCL @ 266,36€/share (266,36€)
-- **January 9, 2026 at 1:42:25 PM**: SELL 1 AMZN @ 211,34€/share (211,34€)
 
 <!-- auto end -->
 
