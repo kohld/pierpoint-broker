@@ -5,7 +5,7 @@
     "": {
       "name": "pierpoint-broker",
       "dependencies": {
-        "@openai/agents": "^0.4.6",
+        "@openai/agents": "^0.4.10",
         "tiny-invariant": "^1.3.3",
         "yahoo-finance2": "^3.13.0",
       },
@@ -57,13 +57,13 @@
 
     "@modelcontextprotocol/sdk": ["@modelcontextprotocol/sdk@1.26.0", "", { "dependencies": { "@hono/node-server": "^1.19.9", "ajv": "^8.17.1", "ajv-formats": "^3.0.1", "content-type": "^1.0.5", "cors": "^2.8.5", "cross-spawn": "^7.0.5", "eventsource": "^3.0.2", "eventsource-parser": "^3.0.0", "express": "^5.2.1", "express-rate-limit": "^8.2.1", "hono": "^4.11.4", "jose": "^6.1.3", "json-schema-typed": "^8.0.2", "pkce-challenge": "^5.0.0", "raw-body": "^3.0.0", "zod": "^3.25 || ^4.0", "zod-to-json-schema": "^3.25.1" }, "peerDependencies": { "@cfworker/json-schema": "^4.1.1" }, "optionalPeers": ["@cfworker/json-schema"] }, "sha512-Y5RmPncpiDtTXDbLKswIJzTqu2hyBKxTNsgKqKclDbhIgg1wgtf1fRuvxgTnRfcnxtvvgbIEcqUOzZrJ6iSReg=="],
 
-    "@openai/agents": ["@openai/agents@0.4.6", "", { "dependencies": { "@openai/agents-core": "0.4.6", "@openai/agents-openai": "0.4.6", "@openai/agents-realtime": "0.4.6", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-U0ONnLTjJQ8So2/unMvj+yPfatR6YxHKuTU506NYFKR6FW8SX4ZjV/s9ovE3UY9XDS42vC9se/HVawdoiqC4cQ=="],
+    "@openai/agents": ["@openai/agents@0.4.10", "", { "dependencies": { "@openai/agents-core": "0.4.10", "@openai/agents-openai": "0.4.10", "@openai/agents-realtime": "0.4.10", "debug": "^4.4.0", "openai": "^6.20.0" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-Hw/1VK4FagUHG3OU3SwcPrHHplSyok/O2w/p8utwGmeOT/uy/21j/JLukCIXBe9WHZf1MtP6YSxJ35OrSebVng=="],
 
-    "@openai/agents-core": ["@openai/agents-core@0.4.6", "", { "dependencies": { "debug": "^4.4.0", "openai": "^6" }, "optionalDependencies": { "@modelcontextprotocol/sdk": "^1.26.0" }, "peerDependencies": { "zod": "^4.0.0" }, "optionalPeers": ["zod"] }, "sha512-ZnrWBRfp7o+OU6j2x1wTgL+AZet8RKQ9PLevhjT0jsEtGnYnegLPYplwJvjZ5/WSM9V1JqLjKS3gkIr50dFlig=="],
+    "@openai/agents-core": ["@openai/agents-core@0.4.10", "", { "dependencies": { "debug": "^4.4.0", "openai": "^6.20.0" }, "optionalDependencies": { "@modelcontextprotocol/sdk": "^1.26.0" }, "peerDependencies": { "zod": "^4.0.0" }, "optionalPeers": ["zod"] }, "sha512-U2uu22OZGFZ53Ogm5Qtzymg1Oc1FFNdkh+fg0QWDJ7mERQU5G4LzhbTiwS/jylVgKPj74e2uBb8oj/X5rHwxDQ=="],
 
-    "@openai/agents-openai": ["@openai/agents-openai@0.4.6", "", { "dependencies": { "@openai/agents-core": "0.4.6", "debug": "^4.4.0", "openai": "^6" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-RH/oZ5piNIhIukH79X51QRFEeivcSM04nxhITGT08PnQlu78FYcp7thahcSOvJr6CKC/etnL2Mc6l1MVrsaGvg=="],
+    "@openai/agents-openai": ["@openai/agents-openai@0.4.10", "", { "dependencies": { "@openai/agents-core": "0.4.10", "debug": "^4.4.0", "openai": "^6.20.0" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-z0HxNpchPRhAugDeO7mwzj7i8QcEEfWppXYTVbyYYbbN6zni5uIFm2N9t7fxbGXtaKCT7s7Io6aKrOsifRXncw=="],
 
-    "@openai/agents-realtime": ["@openai/agents-realtime@0.4.6", "", { "dependencies": { "@openai/agents-core": "0.4.6", "@types/ws": "^8.18.1", "debug": "^4.4.0", "ws": "^8.18.1" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-Kt9qBh8NXZrCSB1lj3AtaXisQCbqb/a+jdS4sz2emKDVY5DIGqG1hDiqSD4d6RavLHw7UYHzWzU2N+QETfB2ZQ=="],
+    "@openai/agents-realtime": ["@openai/agents-realtime@0.4.10", "", { "dependencies": { "@openai/agents-core": "0.4.10", "@types/ws": "^8.18.1", "debug": "^4.4.0", "ws": "^8.18.1" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-cUU7tUgWJEZpewHfK+O4Gi36TMst7AStC1RKBm7uwm2t7WYQRIxY042Ykl6sou1wsLg/dXlY2UM07lZPN7TT5A=="],
 
     "@pkgr/core": ["@pkgr/core@0.2.9", "", {}, "sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA=="],
 
