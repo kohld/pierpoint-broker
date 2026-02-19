@@ -111,6 +111,12 @@ Required environment variables:
 - `CURRENCY` (default: "EUR")
 - `ORDER_FEE` (default: "1.00")
 
+## Development Philosophy
+
+[.agents/skills/karpathy-guidelines/SKILL.md](.agents/skills/karpathy-guidelines/SKILL.md)
+- Meta-principles for avoiding common LLM coding mistakes
+- Think before coding, simplicity first, surgical changes, goal-driven execution
+
 ## Additional resources
 
 For more information about Bun APIs, read the documentation in `node_modules/bun-types/docs/**.md`.
