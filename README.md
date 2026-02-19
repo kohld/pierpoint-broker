@@ -17,6 +17,9 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
   - [Local execution](#local-execution)
   - [Automated execution via GitHub Actions](#automated-execution-via-github-actions)
     - [IMPORTANT: Free model selection for OpenRouter](#important-free-model-selection-for-openrouter)
+- [Development](#development)
+- [Coding Standards](#coding-standards)
+- [Development Philosophy](#development-philosophy)
 - [License](#license)
 - [Legal Notice / Rechtlicher Hinweis](#legal-notice--rechtlicher-hinweis)
 
@@ -134,17 +137,17 @@ This will execute one trading session where the agent will:
 
 ### Automated execution via GitHub Actions
 
-The agent is configured to run automatically on weekdays during stock market hours via GitHub Actions. To enable this:
+The agent is configured to run automatically via GitHub Actions. The workflow configuration is in [`.github/workflows/`](.github/workflows/). To enable this:
 
 1. Fork this repository
 2. Go to Settings → Secrets and variables → Actions
-3. Add a new repository secret named `OPEN_ROUTER_API_KEY` with your OpenRouter API key or OpenAI API key `OPENAI_API_KEY` (e.g. `sk-...`)
-4. Add a new repository secret named `MODEL_NAME` with your model name (e.g. `openai/gpt-4.1`)
-5. Add a new repository secret named `CURRENCY` with your currency (default: `EUR`)
-6. Add a new repository secret named `ORDER_FEE` with your order fee (default: `1.00`)
-7. The agent will now run automatically on weekdays during stock market hours
+3. Add the following repository secrets:
+   - `OPEN_ROUTER_API_KEY` or `OPENAI_API_KEY` (your API key)
+   - `MODEL_NAME` (e.g., `gpt-4o` or `openai/gpt-4.1`)
+   - `CURRENCY` (optional, default: `EUR`)
+   - `ORDER_FEE` (optional, default: `1.00`)
 
-You can also trigger a manual run from the Actions tab in your GitHub repository.
+The agent will now run automatically on weekdays during stock market hours. You can also trigger a manual run from the Actions tab in your GitHub repository.
 
 ---
 
@@ -159,7 +162,48 @@ You can also trigger a manual run from the Actions tab in your GitHub repository
 >
 > Ensure your `MODEL_NAME` matches one of these models.
 
----
+## Development
+
+Additional commands for development and testing:
+
+```bash
+bun run lint         # Type-aware linting
+bun run lint:fix     # Apply fixes for autofixable lint issues
+bun run typecheck    # Runs type checking (tsc --noEmit)
+bun test             # Run all tests
+bun test path/to/test.test.ts  # Run specific test file
+```
+
+## Coding Standards
+
+This project follows specific coding standards:
+
+- **Naming conventions:**
+  - Functions: camelCase (`calculateNetWorth`, `executeTrade`)
+  - Types/Interfaces: PascalCase (`Portfolio`, `TradeResult`)
+  - Constants: UPPER_SNAKE_CASE (`ORDER_FEE`, `MAX_RETRIES`)
+
+- **Git commit messages:**
+  - Use prefixes: `[FEATURE]`, `[FIX]`, `[REFACTOR]`, `[DOCS]`, `[TEST]`, `[CHORE]`
+  - Format: `[PREFIX] Short description` followed by detailed bullet points
+
+- **Tool usage:** Always use the `think` tool before any other tool call
+
+## Development Philosophy
+
+This project follows the Karpathy Guidelines for AI coding:
+- Think before coding
+- Simplicity first
+- Surgical changes
+- Goal-driven execution
+
+See [`.agents/skills/karpathy-guidelines/SKILL.md`](.agents/skills/karpathy-guidelines/SKILL.md) for detailed principles.
+
+## Important Notes
+
+- **Tool Usage:** The agent must use the `think` tool before making any trading decisions
+- **Type Safety:** All code is written in TypeScript with strict type checking
+- **Error Handling:** The agent gracefully handles API failures and market conditions
 
 ## License
 
