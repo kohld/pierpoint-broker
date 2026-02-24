@@ -1,9 +1,8 @@
 {
-  "cash": 836.24,
+  "cash": 1029.29,
   "holdings": {
     "NVDA": 2,
-    "TSLA": 1,
-    "NFLX": 3
+    "TSLA": 1
   },
   "history": [
     {
@@ -301,6 +300,14 @@
       "shares": 1,
       "price": 65.47,
       "total": 65.47
+    },
+    {
+      "date": "2026-02-24T15:05:02.090Z",
+      "type": "sell",
+      "ticker": "NFLX",
+      "shares": 3,
+      "price": 64.35,
+      "total": 193.04999999999998
     }
   ]
 }
