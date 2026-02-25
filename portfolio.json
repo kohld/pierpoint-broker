@@ -1,8 +1,9 @@
 {
-  "cash": 1029.29,
+  "cash": 566.55,
   "holdings": {
     "NVDA": 2,
-    "TSLA": 1
+    "TSLA": 1,
+    "AAPL": 2
   },
   "history": [
     {
@@ -308,6 +309,14 @@
       "shares": 3,
       "price": 64.35,
       "total": 193.04999999999998
+    },
+    {
+      "date": "2026-02-25T15:05:17.668Z",
+      "type": "buy",
+      "ticker": "AAPL",
+      "shares": 2,
+      "price": 231.37,
+      "total": 462.74
     }
   ]
 }
