@@ -1,9 +1,10 @@
 {
-  "cash": 566.55,
+  "cash": 153.71,
   "holdings": {
     "NVDA": 2,
     "TSLA": 1,
-    "AAPL": 2
+    "AAPL": 2,
+    "JNJ": 2
   },
   "history": [
     {
@@ -317,6 +318,14 @@
       "shares": 2,
       "price": 231.37,
       "total": 462.74
+    },
+    {
+      "date": "2026-02-26T15:03:32.315Z",
+      "type": "buy",
+      "ticker": "JNJ",
+      "shares": 2,
+      "price": 206.42,
+      "total": 412.84
     }
   ]
 }

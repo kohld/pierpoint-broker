@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-71%2E40%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-69%2E91%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,19 +25,21 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.714,02 € | 71,40% return
+## Portfolio value: 1.699,05 € | 69,91% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 566,55 € | - |
-| NVDA | 2 | 162,01 € | 332,76 € | 📈 +8,74 € (+2,70%) |
-| TSLA | 1 | 382,67 € | 351,95 € | 📉 -30,72 € (-8,03%) |
-| AAPL | 2 | 231,37 € | 462,76 € | 📈 +0,02 € (+0,00%) |
+| Cash | - | - | 153,71 € | - |
+| NVDA | 2 | 162,01 € | 319,52 € | 📉 -4,50 € (-1,39%) |
+| TSLA | 1 | 382,67 € | 349,56 € | 📉 -33,11 € (-8,65%) |
+| AAPL | 2 | 231,37 € | 463,28 € | 📈 +0,54 € (+0,12%) |
+| JNJ | 2 | 206,42 € | 412,98 € | 📈 +0,14 € (+0,03%) |
 
 ### Recent trades
 
+- **February 26, 2026 at 3:03:32 PM**: BUY 2 JNJ @ 206,42€/share (412,84€)
 - **February 25, 2026 at 3:05:17 PM**: BUY 2 AAPL @ 231,37€/share (462,74€)
 - **February 24, 2026 at 3:05:02 PM**: SELL 3 NFLX @ 64,35€/share (193,05€)
 - **February 20, 2026 at 3:00:39 PM**: SELL 1 NFLX @ 65,47€/share (65,47€)
@@ -57,7 +59,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 23, 2026 at 11:57:41 AM**: BUY 4 HL @ 26,65€/share (106,60€)
 - **January 23, 2026 at 11:57:41 AM**: BUY 125 BARK @ 0,79€/share (98,75€)
 - **January 23, 2026 at 11:25:21 AM**: BUY 25 FNKO @ 3,76€/share (94,00€)
-- **January 23, 2026 at 11:25:15 AM**: SELL 1 RCL @ 243,20€/share (243,20€)
 
 <!-- auto end -->
 
