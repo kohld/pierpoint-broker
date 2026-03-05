@@ -1,9 +1,11 @@
 {
-  "cash": 578.01,
+  "cash": 95.42,
   "holdings": {
     "NVDA": 2,
     "TSLA": 1,
-    "AAPL": 2
+    "AAPL": 2,
+    "AMD": 2,
+    "PLTR": 1
   },
   "history": [
     {
@@ -333,6 +335,22 @@
       "shares": 2,
       "price": 212.15,
       "total": 424.3
+    },
+    {
+      "date": "2026-03-05T15:03:17.897Z",
+      "type": "buy",
+      "ticker": "AMD",
+      "shares": 2,
+      "price": 174.12,
+      "total": 348.24
+    },
+    {
+      "date": "2026-03-05T15:03:17.914Z",
+      "type": "buy",
+      "ticker": "PLTR",
+      "shares": 1,
+      "price": 134.35,
+      "total": 134.35
     }
   ]
 }

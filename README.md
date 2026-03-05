@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-68%2E15%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-68%2E86%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,19 +25,23 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.681,52 € | 68,15% return
+## Portfolio value: 1.688,55 € | 68,86% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 578,01 € | - |
-| NVDA | 2 | 162,01 € | 310,66 € | 📉 -13,36 € (-4,12%) |
-| TSLA | 1 | 382,67 € | 341,77 € | 📉 -40,90 € (-10,69%) |
-| AAPL | 2 | 231,37 € | 451,08 € | 📉 -11,66 € (-2,52%) |
+| Cash | - | - | 95,42 € | - |
+| NVDA | 2 | 162,01 € | 314,06 € | 📉 -9,96 € (-3,07%) |
+| TSLA | 1 | 382,67 € | 349,48 € | 📉 -33,19 € (-8,67%) |
+| AAPL | 2 | 231,37 € | 447,02 € | 📉 -15,72 € (-3,40%) |
+| AMD | 2 | 174,12 € | 348,16 € | 📉 -0,08 € (-0,02%) |
+| PLTR | 1 | 134,35 € | 134,41 € | 📈 +0,06 € (+0,04%) |
 
 ### Recent trades
 
+- **March 5, 2026 at 3:03:17 PM**: BUY 1 PLTR @ 134,35€/share (134,35€)
+- **March 5, 2026 at 3:03:17 PM**: BUY 2 AMD @ 174,12€/share (348,24€)
 - **March 3, 2026 at 3:03:00 PM**: SELL 2 JNJ @ 212,15€/share (424,30€)
 - **February 26, 2026 at 3:03:32 PM**: BUY 2 JNJ @ 206,42€/share (412,84€)
 - **February 25, 2026 at 3:05:17 PM**: BUY 2 AAPL @ 231,37€/share (462,74€)
@@ -56,8 +60,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 23, 2026 at 12:17:06 PM**: SELL 3 AAPL @ 211,49€/share (634,47€)
 - **January 23, 2026 at 12:10:30 PM**: BUY 34 RDW @ 10,20€/share (346,80€)
 - **January 23, 2026 at 12:10:20 PM**: SELL 125 BARK @ 0,79€/share (98,75€)
-- **January 23, 2026 at 11:57:41 AM**: BUY 4 HL @ 26,65€/share (106,60€)
-- **January 23, 2026 at 11:57:41 AM**: BUY 125 BARK @ 0,79€/share (98,75€)
 
 <!-- auto end -->
 
