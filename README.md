@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-68%2E12%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-67%2E64%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,18 +25,18 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.681,19 € | 68,12% return
+## Portfolio value: 1.676,41 € | 67,64% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
 | Cash | - | - | 95,42 € | - |
-| NVDA | 2 | 162,01 € | 319,94 € | 📉 -4,08 € (-1,26%) |
-| TSLA | 1 | 382,67 € | 348,05 € | 📉 -34,62 € (-9,05%) |
-| AAPL | 2 | 231,37 € | 441,18 € | 📉 -21,56 € (-4,66%) |
-| AMD | 2 | 174,12 € | 344,70 € | 📉 -3,54 € (-1,02%) |
-| PLTR | 1 | 134,35 € | 131,90 € | 📉 -2,45 € (-1,82%) |
+| NVDA | 2 | 162,01 € | 316,62 € | 📉 -7,40 € (-2,28%) |
+| TSLA | 1 | 382,67 € | 345,66 € | 📉 -37,01 € (-9,67%) |
+| AAPL | 2 | 231,37 € | 440,78 € | 📉 -21,96 € (-4,75%) |
+| AMD | 2 | 174,12 € | 342,30 € | 📉 -5,94 € (-1,71%) |
+| PLTR | 1 | 134,35 € | 135,63 € | 📈 +1,28 € (+0,95%) |
 
 ### Recent trades
 
