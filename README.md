@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-68%2E12%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-65%2E14%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,21 +25,23 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.681,19 € | 68,12% return
+## Portfolio value: 1.651,36 € | 65,14% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 95,42 € | - |
-| NVDA | 2 | 162,01 € | 319,94 € | 📉 -4,08 € (-1,26%) |
-| TSLA | 1 | 382,67 € | 348,05 € | 📉 -34,62 € (-9,05%) |
-| AAPL | 2 | 231,37 € | 441,18 € | 📉 -21,56 € (-4,66%) |
-| AMD | 2 | 174,12 € | 344,70 € | 📉 -3,54 € (-1,02%) |
-| PLTR | 1 | 134,35 € | 131,90 € | 📉 -2,45 € (-1,82%) |
+| Cash | - | - | 5,78 € | - |
+| NVDA | 2 | 162,01 € | 307,98 € | 📉 -16,04 € (-4,95%) |
+| TSLA | 1 | 382,67 € | 329,83 € | 📉 -52,84 € (-13,81%) |
+| AAPL | 2 | 231,37 € | 428,80 € | 📉 -33,94 € (-7,33%) |
+| AMD | 2 | 174,12 € | 355,32 € | 📈 +7,08 € (+2,03%) |
+| PLTR | 1 | 134,35 € | 134,01 € | 📉 -0,34 € (-0,25%) |
+| AI | 12 | 7,47 € | 89,64 € | 📈 0,00 € (0,00%) |
 
 ### Recent trades
 
+- **March 19, 2026 at 7:46:49 PM**: BUY 12 AI @ 7,47€/share (89,64€)
 - **March 5, 2026 at 3:03:17 PM**: BUY 1 PLTR @ 134,35€/share (134,35€)
 - **March 5, 2026 at 3:03:17 PM**: BUY 2 AMD @ 174,12€/share (348,24€)
 - **March 3, 2026 at 3:03:00 PM**: SELL 2 JNJ @ 212,15€/share (424,30€)
@@ -59,7 +61,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 23, 2026 at 12:17:13 PM**: BUY 1 TSLA @ 382,67€/share (382,67€)
 - **January 23, 2026 at 12:17:06 PM**: SELL 3 AAPL @ 211,49€/share (634,47€)
 - **January 23, 2026 at 12:10:30 PM**: BUY 34 RDW @ 10,20€/share (346,80€)
-- **January 23, 2026 at 12:10:20 PM**: SELL 125 BARK @ 0,79€/share (98,75€)
 
 <!-- auto end -->
 

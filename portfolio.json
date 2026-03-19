@@ -1,11 +1,12 @@
 {
-  "cash": 95.42,
+  "cash": 5.78,
   "holdings": {
     "NVDA": 2,
     "TSLA": 1,
     "AAPL": 2,
     "AMD": 2,
-    "PLTR": 1
+    "PLTR": 1,
+    "AI": 12
   },
   "history": [
     {
@@ -351,6 +352,14 @@
       "shares": 1,
       "price": 134.35,
       "total": 134.35
+    },
+    {
+      "date": "2026-03-19T19:46:49.416Z",
+      "type": "buy",
+      "ticker": "AI",
+      "shares": 12,
+      "price": 7.47,
+      "total": 89.64
     }
   ]
 }

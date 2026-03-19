@@ -79,12 +79,21 @@ export const log = (message: string) => {
  * @throws If the web search fails.
  */
 export const webSearch = async (query: string): Promise<string> => {
-  const response = await client.responses.create({
-    model: config.MODEL_NAME,
-    input: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
-    tools: [{ type: "web_search_preview" }],
-  });
-  return response.output_text;
+  try {
+    const response = await client.responses.create({
+      model: config.MODEL_NAME,
+      input: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
+      tools: [{ type: "web_search_preview" }],
+    });
+    if (!response.output_text) {
+      log(`⚠️ Web search returned empty result for: ${query}`);
+      return "Web search returned no results.";
+    }
+    return response.output_text;
+  } catch (error) {
+    log(`❌ Web search failed for "${query}": ${error}`);
+    return `Web search failed: ${error}`;
+  }
 };
 
 /** Dependencies for getStockPrice (for testing) */
