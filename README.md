@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-64%2E97%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-63%2E37%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,22 +25,24 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.649,69 € | 64,97% return
+## Portfolio value: 1.633,70 € | 63,37% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 5,78 € | - |
-| NVDA | 2 | 162,01 € | 307,60 € | 📉 -16,42 € (-5,07%) |
-| TSLA | 1 | 382,67 € | 329,98 € | 📉 -52,69 € (-13,77%) |
-| AAPL | 2 | 231,37 € | 428,94 € | 📉 -33,80 € (-7,30%) |
-| AMD | 2 | 174,12 € | 354,14 € | 📈 +5,90 € (+1,69%) |
-| PLTR | 1 | 134,35 € | 133,85 € | 📉 -0,50 € (-0,37%) |
-| AI | 12 | 7,47 € | 89,40 € | 📉 -0,24 € (-0,27%) |
+| Cash | - | - | 45,82 € | - |
+| NVDA | 2 | 162,01 € | 305,08 € | 📉 -18,94 € (-5,85%) |
+| TSLA | 1 | 382,67 € | 323,28 € | 📉 -59,39 € (-15,52%) |
+| AAPL | 1 | 231,37 € | 215,00 € | 📉 -16,37 € (-7,08%) |
+| AMD | 3 | 174,47 € | 524,85 € | 📈 +1,44 € (+0,28%) |
+| PLTR | 1 | 134,35 € | 131,59 € | 📉 -2,76 € (-2,05%) |
+| AI | 12 | 7,47 € | 88,08 € | 📉 -1,56 € (-1,74%) |
 
 ### Recent trades
 
+- **March 20, 2026 at 3:01:40 PM**: BUY 1 AMD @ 175,18€/share (175,18€)
+- **March 20, 2026 at 3:01:27 PM**: SELL 1 AAPL @ 215,22€/share (215,22€)
 - **March 19, 2026 at 7:46:49 PM**: BUY 12 AI @ 7,47€/share (89,64€)
 - **March 5, 2026 at 3:03:17 PM**: BUY 1 PLTR @ 134,35€/share (134,35€)
 - **March 5, 2026 at 3:03:17 PM**: BUY 2 AMD @ 174,12€/share (348,24€)
@@ -59,8 +61,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **January 23, 2026 at 12:35:02 PM**: SELL 34 RDW @ 10,20€/share (346,80€)
 - **January 23, 2026 at 12:24:22 PM**: BUY 3 NFLX @ 71,14€/share (213,42€)
 - **January 23, 2026 at 12:17:13 PM**: BUY 1 TSLA @ 382,67€/share (382,67€)
-- **January 23, 2026 at 12:17:06 PM**: SELL 3 AAPL @ 211,49€/share (634,47€)
-- **January 23, 2026 at 12:10:30 PM**: BUY 34 RDW @ 10,20€/share (346,80€)
 
 <!-- auto end -->
 
