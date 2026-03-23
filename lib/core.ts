@@ -36,6 +36,8 @@ export const config = {
 
 export const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
 
+const RATE_LIMIT_WAIT_MS = 65_000;
+
 let _client: OpenAI | null = null;
 
 /**
@@ -73,24 +75,42 @@ export const log = (message: string) => {
  * Performs a web search to answer a user query.
  *
  * @param {string} query - The user query to answer.
+ * @param {number} retries - Number of retries left on rate limit errors.
  *
  * @returns {Promise<string>} A Promise that resolves to a short summary in markdown of what was found.
  *
  * @throws If the web search fails.
  */
-export const webSearch = async (query: string): Promise<string> => {
+export const webSearch = async (
+  query: string,
+  retries = 2,
+): Promise<string> => {
   try {
     const response = await client.responses.create({
       model: config.MODEL_NAME,
       input: `Please use web search to answer this query from the user and respond with a short summary in markdown of what you found:\n\n${query}`,
       tools: [{ type: "web_search_preview" }],
     });
+
     if (!response.output_text) {
       log(`⚠️ Web search returned empty result for: ${query}`);
       return "Web search returned no results.";
     }
+
     return response.output_text;
-  } catch (error) {
+  } catch (error: unknown) {
+    if (
+      error instanceof OpenAI.APIError &&
+      error.status === 429 &&
+      retries > 0
+    ) {
+      log(
+        `⏳ Rate limit hit, retrying in ${RATE_LIMIT_WAIT_MS / 1000}s... (${retries} retries left)`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, RATE_LIMIT_WAIT_MS));
+      return webSearch(query, retries - 1);
+    }
+
     log(`❌ Web search failed for "${query}": ${error}`);
     return `Web search failed: ${error}`;
   }
