@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-65%2E31%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-71%2E77%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,22 +25,22 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.653,08 € | 65,31% return
+## Portfolio value: 1.717,68 € | 71,77% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 0,04 € | - |
-| NVDA | 2 | 162,01 € | 300,48 € | 📉 -23,54 € (-7,26%) |
-| TSLA | 1 | 382,67 € | 291,77 € | 📉 -90,90 € (-23,75%) |
-| AAPL | 1 | 231,37 € | 212,72 € | 📉 -18,65 € (-8,06%) |
-| AMD | 2 | 174,47 € | 374,22 € | 📈 +25,28 € (+7,24%) |
-| PLTR | 1 | 134,35 € | 126,10 € | 📉 -8,25 € (-6,14%) |
-| BW | 25 | 12,96 € | 347,75 € | 📈 +23,75 € (+7,33%) |
+| Cash | - | - | 111,23 € | - |
+| NVDA | 2 | 162,01 € | 313,00 € | 📉 -11,02 € (-3,40%) |
+| TSLA | 1 | 382,67 € | 293,53 € | 📉 -89,14 € (-23,29%) |
+| AAPL | 1 | 231,37 € | 220,44 € | 📉 -10,93 € (-4,72%) |
+| AMD | 2 | 174,47 € | 401,48 € | 📈 +52,54 € (+15,06%) |
+| BW | 25 | 12,96 € | 378,00 € | 📈 +54,00 € (+16,67%) |
 
 ### Recent trades
 
+- **April 9, 2026 at 3:11:22 PM**: SELL 1 PLTR @ 111,19€/share (111,19€)
 - **March 25, 2026 at 3:08:46 PM**: BUY 25 BW @ 12,96€/share (324,00€)
 - **March 25, 2026 at 3:08:00 PM**: SELL 1 AMD @ 188,82€/share (188,82€)
 - **March 23, 2026 at 4:21:06 PM**: SELL 12 AI @ 7,45€/share (89,40€)
@@ -60,7 +60,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **February 2, 2026 at 3:01:34 PM**: BUY 2 NFLX @ 71,67€/share (143,34€)
 - **February 2, 2026 at 3:01:20 PM**: SELL 4 HL @ 18,55€/share (74,20€)
 - **January 26, 2026 at 5:33:26 PM**: SELL 25 FNKO @ 3,62€/share (90,50€)
-- **January 23, 2026 at 12:35:22 PM**: BUY 5 NFLX @ 71,13€/share (355,65€)
 
 <!-- auto end -->
 

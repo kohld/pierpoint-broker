@@ -1,11 +1,10 @@
 {
-  "cash": 0.04,
+  "cash": 111.23,
   "holdings": {
     "NVDA": 2,
     "TSLA": 1,
     "AAPL": 1,
     "AMD": 2,
-    "PLTR": 1,
     "BW": 25
   },
   "history": [
@@ -400,6 +399,14 @@
       "shares": 25,
       "price": 12.96,
       "total": 324
+    },
+    {
+      "date": "2026-04-09T15:11:22.554Z",
+      "type": "sell",
+      "ticker": "PLTR",
+      "shares": 1,
+      "price": 111.19,
+      "total": 111.19
     }
   ]
 }
