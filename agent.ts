@@ -8,6 +8,7 @@
 
 //External dependencies
 import { Agent, AgentInputItem, run } from "@openai/agents";
+import OpenAI from "openai";
 // Node-Builtins
 import { existsSync } from "fs";
 import { readFile, writeFile } from "node:fs/promises";
@@ -180,24 +181,65 @@ export const createAgent = async (): Promise<Agent> => {
   });
 };
 
+const MAX_RUN_RETRIES = 3;
+const DEFAULT_RATE_LIMIT_WAIT_MS = 65_000;
+
+/**
+ * Extracts the suggested retry delay in milliseconds from a 429 error message.
+ * Falls back to DEFAULT_RATE_LIMIT_WAIT_MS if the value cannot be parsed.
+ */
+const parseRetryAfterMs = (message: string): number => {
+  const match = message.match(/try again in ([\d.]+)s/i);
+  if (match) {
+    const seconds = parseFloat(match[1]);
+    if (isFinite(seconds) && seconds > 0) {
+      return Math.ceil(seconds * 1000) + 1_000; // add 1s buffer
+    }
+  }
+  return DEFAULT_RATE_LIMIT_WAIT_MS;
+};
+
 export const runAgent = async () => {
   log("Starting agent");
 
   const agent = await createAgent();
   const thread = await loadThread();
-  const result = await run(
-    agent,
-    thread.concat({
-      role: "user",
-      content: `It's ${new Date().toLocaleString(
-        "en-US",
-      )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial $1,000 investment. Good luck! 📈`,
-    }),
-    { maxTurns: config.MAX_TURNS },
-  );
 
-  log(`🎉 Agent finished: ${result.finalOutput}`);
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= MAX_RUN_RETRIES; attempt++) {
+    try {
+      const result = await run(
+        agent,
+        thread.concat({
+          role: "user",
+          content: `It's ${new Date().toLocaleString(
+            "en-US",
+          )}. Time for your trading analysis! Review your portfolio, scan the markets for opportunities, and make strategic trades to grow your initial $1,000 investment. Good luck! 📈`,
+        }),
+        { maxTurns: config.MAX_TURNS },
+      );
 
-  await saveThread(result.history);
-  await updateReadme();
+      log(`🎉 Agent finished: ${result.finalOutput}`);
+      await saveThread(result.history);
+      await updateReadme();
+      return;
+    } catch (error: unknown) {
+      if (
+        error instanceof OpenAI.APIError &&
+        error.status === 429 &&
+        attempt < MAX_RUN_RETRIES
+      ) {
+        const waitMs = parseRetryAfterMs(error.message);
+        log(
+          `⏳ Rate limit hit during agent run, retrying in ${waitMs / 1000}s... (${MAX_RUN_RETRIES - attempt} retries left)`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, waitMs));
+        lastError = error;
+        continue;
+      }
+      throw error;
+    }
+  }
+
+  throw lastError;
 };
