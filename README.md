@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-71%2E77%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-82%2E31%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,21 +25,24 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.717,68 € | 71,77% return
+## Portfolio value: 1.823,07 € | 82,31% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 111,23 € | - |
-| NVDA | 2 | 162,01 € | 313,00 € | 📉 -11,02 € (-3,40%) |
-| TSLA | 1 | 382,67 € | 293,53 € | 📉 -89,14 € (-23,29%) |
-| AAPL | 1 | 231,37 € | 220,44 € | 📉 -10,93 € (-4,72%) |
-| AMD | 2 | 174,47 € | 401,48 € | 📈 +52,54 € (+15,06%) |
-| BW | 25 | 12,96 € | 378,00 € | 📈 +54,00 € (+16,67%) |
+| Cash | - | - | 71,21 € | - |
+| NVDA | 2 | 162,01 € | 338,26 € | 📈 +14,24 € (+4,39%) |
+| TSLA | 2 | 352,87 € | 645,74 € | 📉 -60,00 € (-8,50%) |
+| AAPL | 1 | 231,37 € | 222,86 € | 📉 -8,51 € (-3,68%) |
+| AMD | 2 | 174,47 € | 434,30 € | 📈 +85,36 € (+24,46%) |
+| NINE | 15 | 7,38 € | 110,70 € | 📈 0,00 € (0,00%) |
 
 ### Recent trades
 
+- **April 15, 2026 at 3:10:17 PM**: BUY 15 NINE @ 7,38€/share (110,70€)
+- **April 15, 2026 at 3:07:44 PM**: BUY 1 TSLA @ 323,07€/share (323,07€)
+- **April 15, 2026 at 3:07:40 PM**: SELL 25 BW @ 15,75€/share (393,75€)
 - **April 9, 2026 at 3:11:22 PM**: SELL 1 PLTR @ 111,19€/share (111,19€)
 - **March 25, 2026 at 3:08:46 PM**: BUY 25 BW @ 12,96€/share (324,00€)
 - **March 25, 2026 at 3:08:00 PM**: SELL 1 AMD @ 188,82€/share (188,82€)
@@ -57,9 +60,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **February 12, 2026 at 3:04:05 PM**: SELL 4 NFLX @ 64,94€/share (259,76€)
 - **February 10, 2026 at 3:07:37 PM**: SELL 2 NVDA @ 158,84€/share (317,68€)
 - **February 6, 2026 at 3:00:41 PM**: SELL 2 NFLX @ 68,54€/share (137,08€)
-- **February 2, 2026 at 3:01:34 PM**: BUY 2 NFLX @ 71,67€/share (143,34€)
-- **February 2, 2026 at 3:01:20 PM**: SELL 4 HL @ 18,55€/share (74,20€)
-- **January 26, 2026 at 5:33:26 PM**: SELL 25 FNKO @ 3,62€/share (90,50€)
 
 <!-- auto end -->
 

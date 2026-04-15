@@ -1,11 +1,11 @@
 {
-  "cash": 111.23,
+  "cash": 71.21,
   "holdings": {
     "NVDA": 2,
-    "TSLA": 1,
+    "TSLA": 2,
     "AAPL": 1,
     "AMD": 2,
-    "BW": 25
+    "NINE": 15
   },
   "history": [
     {
@@ -407,6 +407,30 @@
       "shares": 1,
       "price": 111.19,
       "total": 111.19
+    },
+    {
+      "date": "2026-04-15T15:07:40.083Z",
+      "type": "sell",
+      "ticker": "BW",
+      "shares": 25,
+      "price": 15.75,
+      "total": 393.75
+    },
+    {
+      "date": "2026-04-15T15:07:44.901Z",
+      "type": "buy",
+      "ticker": "TSLA",
+      "shares": 1,
+      "price": 323.07,
+      "total": 323.07
+    },
+    {
+      "date": "2026-04-15T15:10:17.122Z",
+      "type": "buy",
+      "ticker": "NINE",
+      "shares": 15,
+      "price": 7.38,
+      "total": 110.7
     }
   ]
 }
