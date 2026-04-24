@@ -31,7 +31,7 @@ export const config = {
   API_KEY: process.env.OPENAI_API_KEY,
   MODEL_NAME: process.env.MODEL_NAME || "gpt-4.1",
   CURRENCY: process.env.CURRENCY || "EUR",
-  MAX_TURNS: 40,
+  MAX_TURNS: 20,
 };
 
 export const CURRENCY_SYMBOL = config.CURRENCY === "EUR" ? "€" : "$";
