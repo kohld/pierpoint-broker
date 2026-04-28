@@ -1,14 +1,14 @@
 {
-  "cash": 147.56,
+  "cash": 44.46,
   "holdings": {
     "NVDA": 2,
     "TSLA": 2,
-    "AAPL": 1,
     "AMD": 1,
     "NINE": 15,
     "XNDU": 4,
     "DNN": 15,
-    "PATH": 7
+    "PATH": 7,
+    "APA": 10
   },
   "history": [
     {
@@ -466,6 +466,22 @@
       "shares": 7,
       "price": 8.91,
       "total": 62.370000000000005
+    },
+    {
+      "date": "2026-04-28T15:45:51.526Z",
+      "type": "sell",
+      "ticker": "AAPL",
+      "shares": 1,
+      "price": 230.5,
+      "total": 230.5
+    },
+    {
+      "date": "2026-04-28T15:48:14.959Z",
+      "type": "buy",
+      "ticker": "APA",
+      "shares": 10,
+      "price": 33.36,
+      "total": 333.6
     }
   ]
 }

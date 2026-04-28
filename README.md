@@ -5,7 +5,7 @@
 An autonomous AI-powered stock trading agent that executes trades on GitHub Actions.
 
 [![CI](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kohld/pierpoint-broker/actions/workflows/test.yml)
-![Return](https://img.shields.io/badge/Return-96%2E88%25-brightgreen)
+![Return](https://img.shields.io/badge/Return-95%2E99%25-brightgreen)
 
 ## Table of Contents
 
@@ -25,24 +25,26 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 
 <!-- auto start -->
 
-## Portfolio value: 1.968,83 € | 96,88% return
+## Portfolio value: 1.959,87 € | 95,99% return
 
 ### Holdings
 
 | Asset | Shares | Avg Cost | Value | P&L |
 |-------|--------|----------|-------|-----|
-| Cash | - | - | 147,56 € | - |
-| NVDA | 2 | 162,01 € | 357,42 € | 📈 +33,40 € (+10,31%) |
-| TSLA | 2 | 352,87 € | 622,54 € | 📉 -83,20 € (-11,79%) |
-| AAPL | 1 | 231,37 € | 227,60 € | 📉 -3,77 € (-1,63%) |
-| AMD | 1 | 174,47 € | 284,37 € | 📈 +109,90 € (+62,99%) |
-| NINE | 15 | 7,38 € | 120,75 € | 📈 +10,05 € (+9,08%) |
-| XNDU | 4 | 24,30 € | 97,40 € | 📈 +0,20 € (+0,21%) |
-| DNN | 15 | 3,23 € | 48,75 € | 📈 +0,30 € (+0,62%) |
-| PATH | 7 | 8,91 € | 62,44 € | 📈 +0,07 € (+0,11%) |
+| Cash | - | - | 44,46 € | - |
+| NVDA | 2 | 162,01 € | 356,98 € | 📈 +32,96 € (+10,17%) |
+| TSLA | 2 | 352,87 € | 638,88 € | 📉 -66,86 € (-9,47%) |
+| AMD | 1 | 174,47 € | 271,54 € | 📈 +97,07 € (+55,64%) |
+| NINE | 15 | 7,38 € | 118,80 € | 📈 +8,10 € (+7,32%) |
+| XNDU | 4 | 24,30 € | 85,88 € | 📉 -11,32 € (-11,65%) |
+| DNN | 15 | 3,23 € | 47,25 € | 📉 -1,20 € (-2,48%) |
+| PATH | 7 | 8,91 € | 62,58 € | 📈 +0,21 € (+0,34%) |
+| APA | 10 | 33,36 € | 333,50 € | 📉 -0,10 € (-0,03%) |
 
 ### Recent trades
 
+- **April 28, 2026 at 3:48:14 PM**: BUY 10 APA @ 33,36€/share (333,60€)
+- **April 28, 2026 at 3:45:51 PM**: SELL 1 AAPL @ 230,50€/share (230,50€)
 - **April 27, 2026 at 3:25:36 PM**: BUY 7 PATH @ 8,91€/share (62,37€)
 - **April 27, 2026 at 3:25:36 PM**: BUY 15 DNN @ 3,23€/share (48,45€)
 - **April 27, 2026 at 3:25:36 PM**: BUY 4 XNDU @ 24,30€/share (97,20€)
@@ -61,8 +63,6 @@ An autonomous AI-powered stock trading agent that executes trades on GitHub Acti
 - **March 5, 2026 at 3:03:17 PM**: BUY 2 AMD @ 174,12€/share (348,24€)
 - **March 3, 2026 at 3:03:00 PM**: SELL 2 JNJ @ 212,15€/share (424,30€)
 - **February 26, 2026 at 3:03:32 PM**: BUY 2 JNJ @ 206,42€/share (412,84€)
-- **February 25, 2026 at 3:05:17 PM**: BUY 2 AAPL @ 231,37€/share (462,74€)
-- **February 24, 2026 at 3:05:02 PM**: SELL 3 NFLX @ 64,35€/share (193,05€)
 
 <!-- auto end -->
 
