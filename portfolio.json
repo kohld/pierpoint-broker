@@ -1,14 +1,13 @@
 {
-  "cash": 44.46,
+  "cash": 81.67,
   "holdings": {
     "NVDA": 2,
     "TSLA": 2,
-    "AMD": 1,
     "NINE": 15,
     "XNDU": 4,
     "DNN": 15,
-    "PATH": 7,
-    "APA": 10
+    "APA": 10,
+    "GOOGL": 1
   },
   "history": [
     {
@@ -482,6 +481,30 @@
       "shares": 10,
       "price": 33.36,
       "total": 333.6
+    },
+    {
+      "date": "2026-04-30T15:26:12.702Z",
+      "type": "sell",
+      "ticker": "AMD",
+      "shares": 1,
+      "price": 296.07,
+      "total": 296.07
+    },
+    {
+      "date": "2026-04-30T15:28:59.669Z",
+      "type": "sell",
+      "ticker": "PATH",
+      "shares": 7,
+      "price": 8.82,
+      "total": 61.74
+    },
+    {
+      "date": "2026-04-30T15:29:04.032Z",
+      "type": "buy",
+      "ticker": "GOOGL",
+      "shares": 1,
+      "price": 320.6,
+      "total": 320.6
     }
   ]
 }
